@@ -10,6 +10,14 @@ title: LX6 — Управление файловыми системами в Lin
 
 <p class="meta-line">Подготовка: 5 минут · Практика: 70–90 минут · Среда: учебная Linux Mint VM · Результат: безопасно созданная и проверенная ext4-файловая система внутри image-файла, без изменения реального диска VM</p>
 
+{% include learning-deck.html lab="lx6" %}
+
+<div class="lab-journey" aria-label="Маршрут лабораторной">
+  <span><strong>Разобраться</strong></span><span>Попробовать</span><span>Выполнить</span><span>Проверить</span><span>Собрать отчёт</span>
+</div>
+
+{% include output-inspector.html lab="lx6" %}
+
 {% include lab-start.html lab="lx6" %}
 
 ## Зачем это нужно
@@ -425,3 +433,27 @@ rmdir "$MNT" 2>/dev/null || true
 - NFS client model: <https://man7.org/linux/man-pages/man5/nfs.5.html>
 
 <p class="next-lab-link"><a href="{{ '/labs/lx7.html' | relative_url }}">Следующая лабораторная: LX7 · Основы скриптов на Bash →</a></p>
+
+
+<aside class="retrieval-thread"><strong>Связь с правами</strong><p>После монтирования файловая система видна, но пользователь не может создать файл. Какой предыдущий слой знаний стоит проверить?</p><details><summary>Если мысль не приходит</summary><p>Вернитесь к владельцу, группе и правам каталога.</p></details></aside>
+
+<section class="field-guide" data-field-guide>
+  <div class="field-guide-head"><span>Когда что-то идёт не по плану</span><h3>Если файловая система «исчезла»</h3></div>
+  <div class="hint-ladder">
+    <details><summary>Сначала</summary><p>Разделите три вещи: существует ли image, подключено ли loop-устройство, смонтирована ли файловая система.</p></details><details><summary>Проверьте</summary><p>Используйте lsblk/findmnt, а не догадки по содержимому каталога.</p></details><details><summary>Если всё ещё неясно</summary><p>Вернитесь по цепочке image → loop → filesystem → mount point и найдите первый отсутствующий слой.</p></details>
+  </div>
+  <details class="diagnostic-moment">
+    <summary>Быстрая диагностика: Каталог mount point существует, но findmnt его не показывает. Что это означает?</summary>
+    <p>Сам каталог есть, но файловая система сейчас туда не смонтирована.</p>
+  </details>
+</section>
+
+
+<details class="lab-reflection"><summary>Одна мысль перед отчётом</summary><p>Если mount point пуст, какие два разных состояния системы это может означать?</p><p class="lab-reflection-note">Ответьте себе или добавьте короткое наблюдение в отчёт, если это помогает показать ход вашей работы.</p></details>
+
+<section class="completion-summary" data-completion-summary aria-live="polite"></section>
+
+<section class="finish-line"><span>Финишная проверка</span><p>Хранилище считается понятным, когда вы можете проследить всю цепочку от image-файла до точки монтирования и обратно.</p></section>
+
+<div class="report-review-strip" data-report-review aria-live="polite"><strong>Перед отчётом</strong><span>По мере выполнения здесь появится быстрая проверка ваших записей.</span></div>
+

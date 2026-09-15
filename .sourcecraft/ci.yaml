@@ -1,8 +1,8 @@
 on:
   push:
-    workflows: build-site
-    filter:
-      branches: main
+    - workflows: [build-site]
+      filter:
+        branches: [main]
 
 workflows:
   build-site:
@@ -32,6 +32,10 @@ workflows:
               - test -s site/labs/lx7.html
               - test -s site/assessments/foundation.html
               - test -s site/assets/js/report-builder.js
+              - test -s site/assets/js/completion-summary.js
+              - test -s site/assets/js/report-review.js
+              - test -s site/assets/js/output-inspector.js
+              - test -s site/assets/js/learning-deck.js
               - test -s site/assets/js/quiz.js
               - test -s site/assets/js/evidence-pad.js
               - test -s site/assets/js/progress.js

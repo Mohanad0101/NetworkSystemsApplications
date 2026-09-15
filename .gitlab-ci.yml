@@ -27,6 +27,10 @@ deploy-course:
     - test -s public/labs/lx6.html
     - test -s public/labs/lx7.html
     - test -s public/assets/js/report-builder.js
+    - test -s public/assets/js/completion-summary.js
+    - test -s public/assets/js/report-review.js
+    - test -s public/assets/js/output-inspector.js
+    - test -s public/assets/js/learning-deck.js
     - test -s public/assets/js/quiz.js
     - test -s public/assets/js/evidence-pad.js
     - test -s public/assets/js/progress.js

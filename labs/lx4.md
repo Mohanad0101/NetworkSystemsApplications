@@ -10,6 +10,14 @@ title: LX4 — Процессы и пакеты в Linux
 
 <p class="meta-line">Подготовка: 5 минут · Практика: 70–90 минут · Среда: учебная Linux Mint VM с Интернетом · Результат: проверенное управление пакетами и контролируемыми процессами</p>
 
+{% include learning-deck.html lab="lx4" %}
+
+<div class="lab-journey" aria-label="Маршрут лабораторной">
+  <span><strong>Разобраться</strong></span><span>Попробовать</span><span>Выполнить</span><span>Проверить</span><span>Собрать отчёт</span>
+</div>
+
+{% include output-inspector.html lab="lx4" %}
+
 {% include lab-start.html lab="lx4" %}
 
 ## Зачем это нужно
@@ -382,3 +390,27 @@ done
 - GNU Bash Job Control: <https://www.gnu.org/software/bash/manual/bash.html#Job-Control-Basics>
 
 <p class="next-lab-link"><a href="{{ '/labs/lx5.html' | relative_url }}">Следующая лабораторная: LX5 · Управление загрузкой и службами →</a></p>
+
+
+<aside class="retrieval-thread"><strong>Связь с терминалом</strong><p>Когда вы запускаете `sleep 300 &amp;`, что из LX1 помогает объяснить символ `&amp;` и почему shell сразу возвращает приглашение?</p><details><summary>Если мысль не приходит</summary><p>Сформулируйте разницу между командой, процессом и управлением shell.</p></details></aside>
+
+<section class="field-guide" data-field-guide>
+  <div class="field-guide-head"><span>Когда что-то идёт не по плану</span><h3>Если процесс ведёт себя неожиданно</h3></div>
+  <div class="hint-ladder">
+    <details><summary>Сначала</summary><p>Убедитесь, что наблюдаете именно свой тестовый процесс и знаете его PID.</p></details><details><summary>Проверьте</summary><p>Состояние, PPID и команду процесса перед отправкой сигнала.</p></details><details><summary>Если всё ещё неясно</summary><p>Создайте новый безопасный тестовый процесс и повторите наблюдение с известным начальным состоянием.</p></details>
+  </div>
+  <details class="diagnostic-moment">
+    <summary>Быстрая диагностика: Процесс завершён. Нужно ли заново устанавливать пакет?</summary>
+    <p>Нет. Установка пакета и существование конкретного процесса — разные состояния.</p>
+  </details>
+</section>
+
+
+<details class="lab-reflection"><summary>Одна мысль перед отчётом</summary><p>Какой факт нужно знать перед отправкой сигнала процессу, чтобы не воздействовать на неправильный объект?</p><p class="lab-reflection-note">Ответьте себе или добавьте короткое наблюдение в отчёт, если это помогает показать ход вашей работы.</p></details>
+
+<section class="completion-summary" data-completion-summary aria-live="polite"></section>
+
+<section class="finish-line"><span>Финишная проверка</span><p>Вы завершаете работу, когда можете отличить установленную программу от конкретного процесса и управлять безопасным тестовым экземпляром.</p></section>
+
+<div class="report-review-strip" data-report-review aria-live="polite"><strong>Перед отчётом</strong><span>По мере выполнения здесь появится быстрая проверка ваших записей.</span></div>
+

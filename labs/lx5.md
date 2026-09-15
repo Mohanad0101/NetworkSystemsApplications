@@ -10,6 +10,14 @@ title: LX5 — Управление загрузкой Linux и службами
 
 <p class="meta-line">Подготовка: 5 минут · Практика: 70–90 минут · Среда: учебная Linux Mint VM · Результат: собственная systemd-служба, которую вы умеете проверить, запустить, включить в автозапуск и диагностировать</p>
 
+{% include learning-deck.html lab="lx5" %}
+
+<div class="lab-journey" aria-label="Маршрут лабораторной">
+  <span><strong>Разобраться</strong></span><span>Попробовать</span><span>Выполнить</span><span>Проверить</span><span>Собрать отчёт</span>
+</div>
+
+{% include output-inspector.html lab="lx5" %}
+
 {% include lab-start.html lab="lx5" %}
 
 ## Зачем это нужно
@@ -410,3 +418,27 @@ fi
 - `systemd.exec(5)` security settings: <https://man7.org/linux/man-pages/man5/systemd.exec.5.html>
 
 <p class="next-lab-link"><a href="{{ '/labs/lx6.html' | relative_url }}">Следующая лабораторная: LX6 · Файловые системы →</a></p>
+
+
+<aside class="retrieval-thread"><strong>Связь с процессами</strong><p>systemd сообщает Main PID. Почему одного имени программы недостаточно для управления конкретной службой?</p><details><summary>Если мысль не приходит</summary><p>Используйте идею PID из предыдущей лабораторной.</p></details></aside>
+
+<section class="field-guide" data-field-guide>
+  <div class="field-guide-head"><span>Когда что-то идёт не по плану</span><h3>Если служба не запускается</h3></div>
+  <div class="hint-ladder">
+    <details><summary>Сначала</summary><p>Не повторяйте start вслепую: посмотрите status и журнал.</p></details><details><summary>Проверьте</summary><p>ExecStart, путь к файлу, права, пользователя службы и последние сообщения journalctl.</p></details><details><summary>Если всё ещё неясно</summary><p>Исправьте одну причину, выполните daemon-reload при изменении unit и снова проверьте status.</p></details>
+  </div>
+  <details class="diagnostic-moment">
+    <summary>Быстрая диагностика: Unit изменён, но systemd будто использует старую версию. Что забыли?</summary>
+    <p>После изменения unit-файла обычно нужен systemctl daemon-reload.</p>
+  </details>
+</section>
+
+
+<details class="lab-reflection"><summary>Одна мысль перед отчётом</summary><p>Как журнал помогает отличить «служба не запущена» от «служба попыталась запуститься и завершилась с ошибкой»?</p><p class="lab-reflection-note">Ответьте себе или добавьте короткое наблюдение в отчёт, если это помогает показать ход вашей работы.</p></details>
+
+<section class="completion-summary" data-completion-summary aria-live="polite"></section>
+
+<section class="finish-line"><span>Финишная проверка</span><p>Служба готова, когда её состояние воспроизводимо, а журнал позволяет объяснить, что с ней происходит.</p></section>
+
+<div class="report-review-strip" data-report-review aria-live="polite"><strong>Перед отчётом</strong><span>По мере выполнения здесь появится быстрая проверка ваших записей.</span></div>
+

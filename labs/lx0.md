@@ -20,6 +20,14 @@ title: "LX0 — Установка Linux в виртуальную машину"
 <a href="#vm-containers">Как начать</a><a href="#install">Установка</a><a href="#verify">Проверка и OVA</a><a href="#quiz">10 вопросов</a><a href="#submit">Что сдавать</a><a href="#extras">По желанию</a>
 </nav>
 
+{% include learning-deck.html lab="lx0" %}
+
+<div class="lab-journey" aria-label="Маршрут лабораторной">
+  <span><strong>Разобраться</strong></span><span>Попробовать</span><span>Выполнить</span><span>Проверить</span><span>Собрать отчёт</span>
+</div>
+
+{% include output-inspector.html lab="lx0" %}
+
 {% include lab-start.html lab="lx0" %}
 
 <h2 id="vm-containers">1. Как начать пользоваться Linux</h2>
@@ -760,4 +768,26 @@ Dual boot — две установленные ОС, выбор одной пр
 **Результат:** Mint загружается, NTFS-раздел и `keep.txt` сохранены. На настоящем ПК разметка сложнее: учитываются UEFI, шифрование, восстановление и уже установленные ОС. [Исходное задание](https://koroteev.site/text/os00-1/).
 
 </details>
+
+
+
+<section class="field-guide" data-field-guide>
+  <div class="field-guide-head"><span>Когда что-то идёт не по плану</span><h3>Если VM не стартует</h3></div>
+  <div class="hint-ladder">
+    <details><summary>Сначала</summary><p>Прочитайте сообщение VirtualBox и определите: проблема возникает до загрузки ISO или уже внутри гостевой ОС.</p></details><details><summary>Проверьте</summary><p>Есть ли подключённый ISO, достаточно ли памяти и включена ли аппаратная виртуализация.</p></details><details><summary>Если всё ещё неясно</summary><p>Сохраните точный текст ошибки. Он полезнее, чем «не работает».</p></details>
+  </div>
+  <details class="diagnostic-moment">
+    <summary>Быстрая диагностика: После перезапуска Mint снова показывает установщик. Какое предположение проверить первым?</summary>
+    <p>ISO всё ещё подключён как загрузочный носитель.</p>
+  </details>
+</section>
+
+
+<details class="lab-reflection"><summary>Одна мысль перед отчётом</summary><p>Какой один признак лучше всего убеждает вас, что эта VM готова стать рабочим стендом для следующих лабораторных?</p><p class="lab-reflection-note">Ответьте себе или добавьте короткое наблюдение в отчёт, если это помогает показать ход вашей работы.</p></details>
+
+<section class="completion-summary" data-completion-summary aria-live="polite"></section>
+
+<section class="finish-line"><span>Финишная проверка</span><p>Среда создана и проверена — теперь зафиксируйте результаты так, чтобы её можно было уверенно использовать дальше.</p></section>
+
+<div class="report-review-strip" data-report-review aria-live="polite"><strong>Перед отчётом</strong><span>По мере выполнения здесь появится быстрая проверка ваших записей.</span></div>
 

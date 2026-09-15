@@ -8,6 +8,14 @@ title: "LX2 — Удалённый доступ: SSH и tmux"
 
 Подключитесь к своей Linux Mint VM с хостовой системы, убедитесь, что команды действительно выполняются **на удалённой машине**, передайте файл в обоих направлениях, настройте вход по ключу и восстановите рабочую сессию после разрыва SSH.
 
+{% include learning-deck.html lab="lx2" %}
+
+<div class="lab-journey" aria-label="Маршрут лабораторной">
+  <span><strong>Разобраться</strong></span><span>Попробовать</span><span>Выполнить</span><span>Проверить</span><span>Собрать отчёт</span>
+</div>
+
+{% include output-inspector.html lab="lx2" %}
+
 {% include lab-start.html lab="lx2" %}
 
 ## Зачем это нужно
@@ -809,3 +817,25 @@ ssh -v mint-lab
 <h2 id="submit">Что сдавать преподавателю</h2>
 
 {% include submission.html lab="lx2" %}
+
+
+<section class="field-guide" data-field-guide>
+  <div class="field-guide-head"><span>Когда что-то идёт не по плану</span><h3>Если SSH не подключается</h3></div>
+  <div class="hint-ladder">
+    <details><summary>Сначала</summary><p>Разделите симптомы: timeout, connection refused и authentication failure означают разные классы проблем.</p></details><details><summary>Проверьте</summary><p>Адрес → доступность → порт/sshd → пользователя → способ аутентификации.</p></details><details><summary>Если всё ещё неясно</summary><p>Запустите ssh с подробным выводом и сохраните только безопасный диагностический фрагмент — без закрытых ключей.</p></details>
+  </div>
+  <details class="diagnostic-moment">
+    <summary>Быстрая диагностика: Получен timeout. Что это говорит точнее всего?</summary>
+    <p>Соединение не получило ответа вовремя; сначала исследуйте адрес/маршрут/доступность, а не пароль.</p>
+  </details>
+</section>
+
+
+<details class="lab-reflection"><summary>Одна мысль перед отчётом</summary><p>Как по сообщению SSH отличить проблему сети от проблемы аутентификации?</p><p class="lab-reflection-note">Ответьте себе или добавьте короткое наблюдение в отчёт, если это помогает показать ход вашей работы.</p></details>
+
+<section class="completion-summary" data-completion-summary aria-live="polite"></section>
+
+<section class="finish-line"><span>Финишная проверка</span><p>Удалённый доступ должен быть не только настроен, но и объясним: соединение, аутентификация, передача и устойчивый сеанс.</p></section>
+
+<div class="report-review-strip" data-report-review aria-live="polite"><strong>Перед отчётом</strong><span>По мере выполнения здесь появится быстрая проверка ваших записей.</span></div>
+

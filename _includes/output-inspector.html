@@ -1,0 +1,17 @@
+{% assign item = site.data.output_inspectors[include.lab] %}
+{% if item %}
+<section class="output-inspector" data-output-inspector data-correct="{{ item.correct }}">
+  <div class="output-inspector-copy">
+    <span>Посмотрите на реальный вывод</span>
+    <h3>{{ item.title }}</h3>
+    <p>{{ item.lead }}</p>
+  </div>
+  <div class="output-lines" role="group" aria-label="Строки терминала">
+    {% for line in item.lines %}
+    <button type="button" data-line-index="{{ forloop.index0 }}"><code>{{ line }}</code></button>
+    {% endfor %}
+  </div>
+  <p class="output-explain" data-output-explain aria-live="polite">Выберите строку и объясните себе, какой факт она подтверждает.</p>
+  <template data-correct-explanation>{{ item.why }}</template>
+</section>
+{% endif %}

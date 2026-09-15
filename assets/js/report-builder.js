@@ -227,7 +227,7 @@
     if (!text) return {state: 'missing', label: 'Можно добавить', reason: 'Когда шаг будет готов, вставьте сюда основной результат.'};
     if (looksSensitive(text)) return {state: 'fix', label: 'Небольшая проверка безопасности', reason: 'Похоже, в поле есть пароль, токен, закрытый ключ или защищённый хеш. Удалите чувствительные данные и оставьте только учебный результат.'};
     if (/^(?:asdf|qwerty|test|testing|random|тест|текст|ответ|готово|123|abc|[\s.,;:_-])+$/i.test(text)) {
-      return {state: 'fix', label: 'Добавьте результат шага', reason: 'Здесь лучше вставить фактический вывод команды — так вы и преподаватель сможете быстро проверить работу.'};
+      return {state: 'fix', label: 'Добавьте результат шага', reason: 'Похоже на заполнитель, а не результат лабораторной. Такие записи преподаватель может не принять. Вернитесь к шагу и вставьте фактический вывод или наблюдаемый результат — это не штраф, а возможность завершить работу содержательно.'};
     }
     const lines = text.split(/\n/).filter(function (x) { return x.trim(); });
     const tokens = textTokens(text);
@@ -455,17 +455,25 @@
     const imageRels = [];
     const imageDefaults = new Set();
     let body = '';
-    body += p('Сетевые системы и приложения', 'Title');
-    body += p(data.labCode + ' — ' + data.labTitle, 'Heading1');
-    body += p('Отчёт по лабораторной работе');
-    body += infoTable([
-      ['Студент', data.studentName], ['Группа', data.group], ['№ по списку', data.listNumber], ['Дата', data.date],
-      ['Рабочая папка', '~/NSA/' + data.labCode]
-    ]);
-    body += p('Прогресс и комплектность', 'Heading1');
     const completion = data.completion || {percent: 0, complete: 0, total: 0, verified: 0, review: 0, issues: []};
     const learning = data.learningProgress || {done: 0, total: 0, percent: 0};
-    body += resultBox('Учебный прогресс: ' + learning.done + ' / ' + learning.total + ' этапов (' + learning.percent + '%) отмечено студентом. Комплектность материалов: ' + completion.percent + '% (' + completion.complete + ' / ' + completion.total + '). Оба показателя помогают организовать работу и не являются оценкой.');
+    const ready = completion.percent === 100 && (!completion.issues || completion.issues.length === 0) && learning.total > 0 && learning.done >= learning.total;
+    body += p('Сетевые системы и приложения', 'Title');
+    body += p(data.labCode + ' — ' + data.labTitle, 'Heading1');
+    body += resultBox(ready ? 'ГОТОВО К ПРОВЕРКЕ ПРЕПОДАВАТЕЛЕМ' : 'РАБОЧИЙ ОТЧЁТ · ЕСТЬ ЧТО ДОПОЛНИТЬ');
+    body += infoTable([
+      ['Студент', data.studentName || '—'], ['Группа', data.group || '—'], ['№ по списку', data.listNumber || '—'], ['Дата', data.date],
+      ['Маршрут практики', learning.done + ' / ' + learning.total + ' этапов'],
+      ['Результаты', completion.complete + ' / ' + completion.total + ' обязательных материалов'],
+      ['Маршрут', 'Подготовка → практика → проверка → отчёт'],
+      ['Рабочая папка', '~/NSA/' + data.labCode],
+      ['Идентификатор отчёта', data.reportId || '—']
+    ]);
+    body += p(ready
+      ? 'Маршрут лабораторной пройден, обязательные материалы представлены. Этот статус показывает комплектность учебной работы, а не академическую оценку.'
+      : 'Документ можно использовать как рабочую версию. Перед отправкой завершите отмеченные ниже части маршрута.', '', false);
+    body += p('Лабораторная работа · карточка выполнения', 'Heading1');
+    body += resultBox('Практика ' + learning.done + '/' + learning.total + '  ·  Результаты ' + completion.complete + '/' + completion.total + '  ·  Проверяемые признаки ' + completion.verified + '  ·  Требует внимания ' + completion.review);
     if (completion.issues && completion.issues.length) {
       body += p('Нужно проверить или дополнить', 'Heading2');
       completion.issues.forEach(function (issue) { body += p('• ' + issue); });
@@ -564,6 +572,14 @@
     const imageInputs = qsa(builder, '[data-report-image]');
     const shortAnswers = qsa(builder, '[data-short-answer]');
     const quizPreview = qs(builder, '[data-report-quiz-preview]');
+    const preflight = qs(builder, '[data-report-preflight]');
+    const preflightMark = qs(builder, '[data-preflight-mark]');
+    const preflightTitle = qs(builder, '[data-preflight-title]');
+    const preflightNote = qs(builder, '[data-preflight-note]');
+    const preflightIdentity = qs(builder, '[data-preflight-identity]');
+    const preflightPractice = qs(builder, '[data-preflight-practice]');
+    const preflightEvidence = qs(builder, '[data-preflight-evidence]');
+    const preflightCheck = qs(builder, '[data-preflight-check]');
     const extraFileInput = qs(builder, '[data-extra-file-check]');
     const extraFileBadge = qs(builder, '[data-extra-file-validation]');
     const imageStates = {};
@@ -793,6 +809,36 @@
       return summary;
     }
 
+    function updatePreflight(snapshot) {
+      if (!preflight) return;
+      const identityOk = !!(studentName && studentName.value.trim().length >= 3 && group && group.value.trim() && number && number.value.trim());
+      const learning = (window.NSALearningProgress && typeof window.NSALearningProgress.get === 'function')
+        ? window.NSALearningProgress.get(labId, document.querySelectorAll('.lab-route-item[data-progress-step]').length)
+        : {done:0,total:0,percent:0};
+      let conceptReady = false;
+      try { conceptReady = localStorage.getItem('nsa:deck-complete:' + labId) === 'yes'; } catch (e) {}
+      const practiceOk = learning.total > 0 && learning.done >= learning.total;
+      const evidenceOk = snapshot.total > 0 && snapshot.complete >= snapshot.total && (!snapshot.issues || snapshot.issues.length === 0);
+      const quiz = quizResult();
+      const checkOk = !!(quiz && !/ещ[её] не|не заверш/i.test(quiz));
+      if (preflightIdentity) preflightIdentity.textContent = (conceptReady ? 'Подготовка · готово' : 'Подготовка · вернитесь к введению') + ' · Данные · ' + (identityOk ? 'готово' : 'добавьте');
+      if (preflightPractice) preflightPractice.textContent = 'Практика · ' + (practiceOk ? learning.done + '/' + learning.total : learning.done + '/' + learning.total);
+      if (preflightEvidence) preflightEvidence.textContent = 'Результаты · ' + (evidenceOk ? 'готово' : snapshot.complete + '/' + snapshot.total);
+      if (preflightCheck) preflightCheck.textContent = 'Проверка понимания · ' + (checkOk ? 'готово' : 'ещё впереди');
+      const ready = conceptReady && identityOk && practiceOk && evidenceOk && checkOk;
+      const readyLabel = ready ? 'Готово к отправке' : (practiceOk ? 'Нужно завершить проверку отчёта' : 'Продолжайте лабораторную');
+      const nearly = !ready && (snapshot.percent >= 75 || (learning.percent || 0) >= 75);
+      preflight.classList.toggle('is-ready', ready);
+      preflight.classList.toggle('is-nearly', nearly);
+      if (preflightMark) preflightMark.textContent = ready ? '✓' : (nearly ? '↗' : '○');
+      if (preflightTitle) preflightTitle.textContent = ready ? 'Лабораторная собрана' : (nearly ? 'Почти готово к отправке' : 'Собираем картину работы');
+      if (preflightNote) preflightNote.textContent = ready
+        ? 'Все обязательные части маршрута представлены. Просмотрите DOCX перед отправкой преподавателю.'
+        : (snapshot.issues && snapshot.issues.length
+          ? 'Осталось уточнить: ' + snapshot.issues.slice(0,2).join(' · ') + (snapshot.issues.length > 2 ? '…' : '')
+          : 'Продолжайте практику: сводка обновляется автоматически.');
+    }
+
     function updateProgress(forcePersist) {
       updateQuizPreview();
       const snapshot = validationSnapshot();
@@ -805,9 +851,10 @@
       });
       if (status) {
         status.textContent = snapshot.percent === 100
-          ? 'Все обязательные материалы представлены. Отлично — комплект готов к проверке. Это не оценка: преподаватель отдельно проверит корректность выполнения, понимание и снимки.'
+          ? 'Маршрут лабораторной собран: обязательные шаги и результаты представлены. Перед отправкой просмотрите отчёт: преподавателю должно быть понятно, что именно вы сделали и что наблюдали. Это карточка выполнения, а не автоматическая оценка.'
           : 'Комплектность материалов ' + snapshot.percent + '%. Хороший прогресс — можно продолжать в своём темпе. Ещё можно добавить: ' + snapshot.issues.slice(0, 3).join(' · ') + (snapshot.issues.length > 3 ? '…' : '') + '. Текущий отчёт уже можно скачать и использовать как рабочую версию.';
       }
+      updatePreflight(snapshot);
       publishCompleteness(snapshot, !!forcePersist);
       return snapshot;
     }
@@ -818,6 +865,7 @@
     window.addEventListener('nsa:quiz-complete', function () { updateProgress(true); });
     window.addEventListener('nsa:quiz-reset', function () { updateProgress(true); });
     window.addEventListener('nsa:evidence-change', function () { updateProgress(true); });
+    window.addEventListener('nsa:deck-complete', function () { updateProgress(true); });
 
     async function downloadReport() {
       const snapshot = updateProgress(true);
@@ -847,6 +895,7 @@
           courseId: courseId, labCode: labCode, labTitle: labTitle,
           studentName: studentName ? studentName.value.trim() : '', group: group ? group.value.trim() : '', listNumber: number ? number.value.trim() : '', date: date, dateIso: dateIso,
           publicBoardConsent: !!(publicBoardConsent && publicBoardConsent.checked),
+          reportId: labCode + '-' + dateIso.replace(/-/g,'') + '-' + String(number && number.value ? number.value : 'NA').replace(/\D/g,'').slice(0,4) + '-' + Math.random().toString(36).slice(2,6).toUpperCase(),
           evidence: evidence, answers: answers, completion: snapshot,
           learningProgress: (window.NSALearningProgress && typeof window.NSALearningProgress.get === 'function') ? window.NSALearningProgress.get(labId, document.querySelectorAll('.lab-route-item[data-progress-step]').length) : {done: 0, total: 0, percent: 0}
         });

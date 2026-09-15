@@ -1,0 +1,42 @@
+[
+  {
+    "lab": "LX0",
+    "questions": 10,
+    "answer_indices_valid": true
+  },
+  {
+    "lab": "LX1",
+    "questions": 12,
+    "answer_indices_valid": true
+  },
+  {
+    "lab": "LX2",
+    "questions": 12,
+    "answer_indices_valid": true
+  },
+  {
+    "lab": "LX3",
+    "questions": 12,
+    "answer_indices_valid": true
+  },
+  {
+    "lab": "LX4",
+    "questions": 12,
+    "answer_indices_valid": true
+  },
+  {
+    "lab": "LX5",
+    "questions": 12,
+    "answer_indices_valid": true
+  },
+  {
+    "lab": "LX6",
+    "questions": 12,
+    "answer_indices_valid": true
+  },
+  {
+    "lab": "LX7",
+    "questions": 12,
+    "answer_indices_valid": true
+  }
+]

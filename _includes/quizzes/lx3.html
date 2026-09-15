@@ -1,3 +1,4 @@
+<!-- QA: single-best-answer formative MCQ; distractors should be plausible but unambiguously inferior under stated lab assumptions. -->
 <section class="quiz-shell" data-quiz-shell="lx3">
   <div class="quiz-intro-row">
     <div>
@@ -131,7 +132,7 @@
         <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Бит 1 шифрует содержимое всех файлов</button>
         <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Режим 1777 запрещает создание новых файлов</button>
         <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Sticky bit меняет владельцев файлов на root</button>
-        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Sticky bit ограничивает удаление чужих имён, даже при w и x на каталог</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Sticky bit ограничивает удаление/переименование чужих записей в общем каталоге даже при w и x, кроме владельца файла/каталога и привилегированных случаев</button>
       </div>
       <div class="feedback" data-feedback aria-live="polite">
         <p><strong data-feedback-prefix></strong><span data-feedback-explain>При обычных условиях удалить такой файл может его владелец, владелец каталога или привилегированный процесс. User_3 к ним не относится.</span></p>

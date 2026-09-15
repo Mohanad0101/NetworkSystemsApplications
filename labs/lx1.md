@@ -12,6 +12,14 @@ LX1 знакомит не просто с набором команд, а с **�
 
 <p class="meta-line">Подготовка: 5–10 минут · Основная практика: 65–80 минут · Закрепление: 20–30 минут · Среда: Linux Mint VM · Итог: аккуратно организованная папка <code>~/NSA/LX1</code>, заполненные поля результатов, пройденный MCQ и готовый к отправке DOCX-отчёт</p>
 
+{% include learning-deck.html lab="lx1" %}
+
+<div class="lab-journey" aria-label="Маршрут лабораторной">
+  <span><strong>Разобраться</strong></span><span>Попробовать</span><span>Выполнить</span><span>Проверить</span><span>Собрать отчёт</span>
+</div>
+
+{% include output-inspector.html lab="lx1" %}
+
 {% include lab-start.html lab="lx1" %}
 
 <section class="lab-workflow-board" aria-label="Как работать с LX1">
@@ -1033,3 +1041,25 @@ test -f ~/NSA/LX1/archive/src.tar.gz && echo 'ARCHIVE=OK'; test -f ~/NSA/LX1/bac
 </section>
 
 {% include submission.html lab="lx1" %}
+
+
+<section class="field-guide" data-field-guide>
+  <div class="field-guide-head"><span>Когда что-то идёт не по плану</span><h3>Если команда работает «не там»</h3></div>
+  <div class="hint-ladder">
+    <details><summary>Сначала</summary><p>Выполните pwd и сформулируйте полный путь к объекту, с которым хотите работать.</p></details><details><summary>Проверьте</summary><p>Сравните ls текущего каталога и родительского. Не исправляйте путь наугад.</p></details><details><summary>Если всё ещё неясно</summary><p>Используйте абсолютный путь один раз, затем объясните, почему относительный путь был неверным.</p></details>
+  </div>
+  <details class="diagnostic-moment">
+    <summary>Быстрая диагностика: touch notes.txt создал файл, но вы его «не находите». Что проверить первым?</summary>
+    <p>Текущий каталог через pwd и список файлов через ls.</p>
+  </details>
+</section>
+
+
+<details class="lab-reflection"><summary>Одна мысль перед отчётом</summary><p>Как изменилась бы ваша диагностика ошибки файла, если бы вы не могли использовать `pwd`?</p><p class="lab-reflection-note">Ответьте себе или добавьте короткое наблюдение в отчёт, если это помогает показать ход вашей работы.</p></details>
+
+<section class="completion-summary" data-completion-summary aria-live="polite"></section>
+
+<section class="finish-line"><span>Финишная проверка</span><p>Вы не просто выполнили команды: вы показали, где работаете, как движутся данные и чем отличаются ссылки.</p></section>
+
+<div class="report-review-strip" data-report-review aria-live="polite"><strong>Перед отчётом</strong><span>По мере выполнения здесь появится быстрая проверка ваших записей.</span></div>
+

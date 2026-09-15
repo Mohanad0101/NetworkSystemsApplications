@@ -1,3 +1,4 @@
+<!-- QA: single-best-answer formative MCQ; distractors should be plausible but unambiguously inferior under stated lab assumptions. -->
 <section class="quiz-shell" data-quiz-shell="lx5">
   <div class="quiz-shell-head">
     <div><p class="eyebrow">Проверка понимания</p><h3>LX5 · 12 вопросов</h3></div>
@@ -8,7 +9,7 @@
       <p class="quiz-question" id="lx5-q-0">1. Что точнее всего описывает роль default.target в systemd?</p>
       <div class="quiz-options" role="group" aria-labelledby="lx5-q-0">
         <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Это файл с паролями пользователей</button>
-        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Это основная цель загрузки, зависимости которой systemd активирует при обычном старте</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Это target, выбранный как цель загрузки по умолчанию; systemd запускает его и необходимые зависимости</button>
         <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Это PID первого пользовательского процесса</button>
         <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Это журнал предыдущей загрузки</button>
       </div>
@@ -21,7 +22,7 @@
       <p class="quiz-question" id="lx5-q-1">2. Что показывает systemctl get-default?</p>
       <div class="quiz-options" role="group" aria-labelledby="lx5-q-1">
         <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Текущую версию kernel</button>
-        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Unit/target, выбранную как default target для обычной загрузки</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Target, настроенный как цель загрузки по умолчанию</button>
         <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Все failed services</button>
         <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Только службы текущего пользователя</button>
       </div>
@@ -151,7 +152,7 @@
       <p class="quiz-question" id="lx5-q-11">12. Почему в учебной unit полезно сочетание User=обычный_пользователь и NoNewPrivileges=yes?</p>
       <div class="quiz-options" role="group" aria-labelledby="lx5-q-11">
         <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Чтобы процесс автоматически получил root после запуска</button>
-        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Чтобы уменьшить привилегии службы и запретить ей получать новые привилегии через execve()</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Чтобы запускать службу от непривилегированного пользователя и не позволять процессу/потомкам получать новые привилегии через execve(), например setuid/setgid</button>
         <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Чтобы отключить journal</button>
         <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Чтобы разрешить службу только при graphical.target</button>
       </div>

@@ -30,6 +30,18 @@
           <button type="button" class="template-download report-download" data-build-report>Скачать текущий отчёт (.docx)</button>
           <a class="template-download secondary" href="{{ submission.template | relative_url }}" download>Скачать пустой шаблон</a>
         </div>
+        <div class="report-preflight" data-report-preflight aria-live="polite">
+          <div class="report-preflight-head">
+            <span class="report-preflight-mark" data-preflight-mark>○</span>
+            <div><strong data-preflight-title>Собираем картину работы</strong><small data-preflight-note>По мере выполнения здесь появится короткая проверка перед отправкой.</small></div>
+          </div>
+          <div class="report-preflight-items">
+            <span data-preflight-identity>Данные студента · —</span>
+            <span data-preflight-practice>Практика · —</span>
+            <span data-preflight-evidence>Результаты · —</span>
+            <span data-preflight-check>Проверка понимания · —</span>
+          </div>
+        </div>
       </div>
     </div>
 

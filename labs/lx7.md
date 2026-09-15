@@ -10,6 +10,14 @@ title: LX7 — Основы скриптов на Bash
 
 <p class="meta-line">Подготовка: 5 минут · Практика: 65–85 минут · Среда: учебная Linux Mint VM · Результат: четыре небольших проверяемых сценария/эксперимента без изменения системных пользователей, паролей и чужих cron-задач</p>
 
+{% include learning-deck.html lab="lx7" %}
+
+<div class="lab-journey" aria-label="Маршрут лабораторной">
+  <span><strong>Разобраться</strong></span><span>Попробовать</span><span>Выполнить</span><span>Проверить</span><span>Собрать отчёт</span>
+</div>
+
+{% include output-inspector.html lab="lx7" %}
+
 {% include lab-start.html lab="lx7" %}
 
 ## Зачем это нужно
@@ -525,3 +533,27 @@ find ~/NSA/LX7 -maxdepth 2 -type f -printf '%P\n' | sort
 - ShellCheck documentation: <https://www.shellcheck.net/>
 
 <p class="next-lab-link"><a href="{{ '/' | relative_url }}#program">Следующая тема: LX8 · Средства обработки текста →</a> <small>LX8 станет активной после отдельной разработки и академической проверки.</small></p>
+
+
+<aside class="retrieval-thread"><strong>Связь со всей системой</strong><p>Скрипт должен проверить состояние службы и вернуть код результата. Какие две предыдущие лаборатории здесь соединяются?</p><details><summary>Если мысль не приходит</summary><p>Процессы/systemd дают наблюдаемый объект, Bash превращает проверку в повторяемую процедуру.</p></details></aside>
+
+<section class="field-guide" data-field-guide>
+  <div class="field-guide-head"><span>Когда что-то идёт не по плану</span><h3>Если сценарий даёт странный результат</h3></div>
+  <div class="hint-ladder">
+    <details><summary>Сначала</summary><p>Проверьте синтаксис отдельно от выполнения: bash -n.</p></details><details><summary>Проверьте</summary><p>Посмотрите реальные аргументы, кавычки и exit status. Не добавляйте sudo как универсальное исправление.</p></details><details><summary>Если всё ещё неясно</summary><p>Упростите вход до одного известного значения и проследите сценарий по шагам.</p></details>
+  </div>
+  <details class="diagnostic-moment">
+    <summary>Быстрая диагностика: Сценарий работает с `file.txt`, но ломается с `my file.txt`. Где искать причину?</summary>
+    <p>В обработке аргументов и кавычках вокруг переменных.</p>
+  </details>
+</section>
+
+
+<details class="lab-reflection"><summary>Одна мысль перед отчётом</summary><p>Что делает ваш сценарий пригодным для повторного использования другим человеком, а не только для одного успешного запуска?</p><p class="lab-reflection-note">Ответьте себе или добавьте короткое наблюдение в отчёт, если это помогает показать ход вашей работы.</p></details>
+
+<section class="completion-summary" data-completion-summary aria-live="polite"></section>
+
+<section class="finish-line"><span>Финишная проверка</span><p>Автоматизация готова, когда сценарий повторяем, проверяем и сообщает результат и человеку, и вызывающей программе.</p></section>
+
+<div class="report-review-strip" data-report-review aria-live="polite"><strong>Перед отчётом</strong><span>По мере выполнения здесь появится быстрая проверка ваших записей.</span></div>
+

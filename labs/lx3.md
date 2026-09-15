@@ -10,6 +10,14 @@ title: LX3 — Права и пользователи
 
 <p class="meta-line">Подготовка: 5–10 минут · Практика: 70–90 минут · Среда: отдельная учебная VM · Результат: проверенная модель пользователей, групп и прав доступа</p>
 
+{% include learning-deck.html lab="lx3" %}
+
+<div class="lab-journey" aria-label="Маршрут лабораторной">
+  <span><strong>Разобраться</strong></span><span>Попробовать</span><span>Выполнить</span><span>Проверить</span><span>Собрать отчёт</span>
+</div>
+
+{% include output-inspector.html lab="lx3" %}
+
 {% include lab-start.html lab="lx3" %}
 
 ## Зачем это нужно
@@ -378,3 +386,27 @@ rm -rf umask-dir
 <h2 id="submit">Что сдавать преподавателю</h2>
 
 {% include submission.html lab="lx3" %}
+
+
+<aside class="retrieval-thread"><strong>Вспомните SSH</strong><p>Почему права файла `authorized_keys` имеют значение для удалённого входа?</p><details><summary>Если мысль не приходит</summary><p>Свяжите ответ с тем, кто может изменять список разрешённых ключей.</p></details></aside>
+
+<section class="field-guide" data-field-guide>
+  <div class="field-guide-head"><span>Когда что-то идёт не по плану</span><h3>Если доступ неожиданно запрещён</h3></div>
+  <div class="hint-ladder">
+    <details><summary>Сначала</summary><p>Определите, от имени какого пользователя выполняется действие: id.</p></details><details><summary>Проверьте</summary><p>Сопоставьте владельца, группу и rwx у файла и всех каталогов пути.</p></details><details><summary>Если всё ещё неясно</summary><p>Переключитесь на тестового пользователя и проверьте ровно одно действие, чтобы не смешивать причины.</p></details>
+  </div>
+  <details class="diagnostic-moment">
+    <summary>Быстрая диагностика: Пользователь состоит в нужной группе, но каталог всё равно недоступен. Что ещё важно?</summary>
+    <p>Права прохода x на каталогах пути и фактическая группа/сессия пользователя.</p>
+  </details>
+</section>
+
+
+<details class="lab-reflection"><summary>Одна мысль перед отчётом</summary><p>Как бы вы объяснили правило доступа к общему каталогу новому участнику группы одной фразой?</p><p class="lab-reflection-note">Ответьте себе или добавьте короткое наблюдение в отчёт, если это помогает показать ход вашей работы.</p></details>
+
+<section class="completion-summary" data-completion-summary aria-live="polite"></section>
+
+<section class="finish-line"><span>Финишная проверка</span><p>Хороший результат здесь — когда разрешённые и запрещённые действия совпадают с вашей моделью прав.</p></section>
+
+<div class="report-review-strip" data-report-review aria-live="polite"><strong>Перед отчётом</strong><span>По мере выполнения здесь появится быстрая проверка ваших записей.</span></div>
+

@@ -1,0 +1,46 @@
+{% assign deck = site.data.learning_decks[include.lab] %}
+{% if deck %}
+<section class="learning-deck deck-{{ deck.variant }}" data-learning-deck="{{ include.lab }}" aria-label="Интерактивное введение в лабораторную">
+  <div class="deck-topline">
+    <div><span class="deck-kicker">{{ deck.kicker }}</span><strong>Разберитесь перед практикой</strong></div>
+    <span class="deck-count" aria-live="polite"><span data-deck-current>1</span> / {{ deck.slides | size }}</span>
+  </div>
+  <div class="deck-track">
+  {% for slide in deck.slides %}
+    <article class="deck-slide{% if forloop.first %} is-active{% endif %}" data-deck-slide="{{ forloop.index0 }}" {% unless forloop.first %}hidden{% endunless %}>
+      <div class="deck-slide-number">0{{ forloop.index }}</div>
+      <div class="deck-copy">
+        <h2>{{ slide.title }}</h2>
+        <p>{{ slide.body }}</p>
+        {% if slide.choice %}
+          <div class="deck-choice" data-deck-choice data-answer="{{ slide.answer | escape }}">
+            {% assign choices = slide.choice | split: "|" %}
+            {% for choice in choices %}<button type="button" data-choice="{{ choice | escape }}">{{ choice }}</button>{% endfor %}
+            <p class="deck-feedback" data-deck-feedback aria-live="polite"></p>
+          </div>
+        {% endif %}
+        {% if slide.note %}<p class="deck-note">{{ slide.note }}</p>{% endif %}
+      </div>
+      {% if slide.visual %}
+      <div class="deck-visual-wrap">
+        <pre class="deck-visual" aria-label="Схема">{{ slide.visual }}</pre>
+        {% if slide.hotspots %}
+        <div class="deck-hotspots" aria-label="Исследовать схему">
+          {% for spot in slide.hotspots %}
+          <button type="button" class="deck-hotspot" data-hotspot-text="{{ spot.text | escape }}">{{ spot.term }}</button>
+          {% endfor %}
+          <p class="deck-hotspot-note" data-hotspot-note aria-live="polite">Нажмите на элемент схемы, чтобы увидеть его роль.</p>
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+    </article>
+  {% endfor %}
+  </div>
+  <div class="deck-controls">
+    <button type="button" class="deck-prev" data-deck-prev disabled>← Назад</button>
+    <div class="deck-dots" aria-hidden="true">{% for slide in deck.slides %}<span{% if forloop.first %} class="is-active"{% endif %}></span>{% endfor %}</div>
+    <button type="button" class="deck-next" data-deck-next>Далее →</button>
+  </div>
+</section>
+{% endif %}

@@ -10,7 +10,7 @@ if [ "$SOURCECRAFT_COMMIT_REF_NAME" != main ]; then
   exit 1
 fi
 for page in index.html labs/lx0.html labs/lx1.html labs/lx2.html labs/lx3.html labs/lx4.html labs/lx5.html labs/lx6.html labs/lx7.html assessments/foundation.html \
-  assets/js/report-builder.js assets/js/quiz.js assets/js/evidence-pad.js assets/js/progress.js assets/css/style.css \
+  assets/js/report-builder.js assets/js/learning-deck.js assets/js/output-inspector.js assets/js/report-review.js assets/js/completion-summary.js assets/js/quiz.js assets/js/evidence-pad.js assets/js/progress.js assets/css/style.css \
   assets/templates/NSA_LX0_Report_Template.docx assets/templates/NSA_LX1_Report_Template.docx \
   assets/templates/NSA_LX2_Report_Template.docx assets/templates/NSA_LX3_Report_Template.docx \
   assets/templates/NSA_LX4_Report_Template.docx assets/templates/NSA_LX5_Report_Template.docx assets/templates/NSA_LX6_Report_Template.docx assets/templates/NSA_LX7_Report_Template.docx; do
