@@ -30,11 +30,26 @@ workflows:
               - test -s site/labs/lx5.html
               - test -s site/labs/lx6.html
               - test -s site/labs/lx7.html
+              - test "$(grep -c 'data-deck-slide=' site/labs/lx7.html)" -eq 7
+              - grep -q 'data-learning-deck="lx7"' site/labs/lx7.html
+              - test "$(grep -c 'data-deck-slide=' site/labs/lx6.html)" -eq 7
+              - grep -q 'data-learning-deck="lx6"' site/labs/lx6.html
+              - test "$(grep -c 'data-deck-slide=' site/labs/lx5.html)" -eq 7
+              - grep -q 'data-learning-deck="lx5"' site/labs/lx5.html
+              - test "$(grep -c 'data-deck-slide=' site/labs/lx4.html)" -eq 7
+              - grep -q 'data-learning-deck="lx4"' site/labs/lx4.html
+              - test "$(grep -c 'data-deck-slide=' site/labs/lx3.html)" -eq 7
+              - grep -q 'data-learning-deck="lx3"' site/labs/lx3.html
+              - test "$(grep -c 'data-deck-slide=' site/labs/lx2.html)" -eq 7
+              - grep -q 'data-learning-deck="lx2"' site/labs/lx2.html
+              - test "$(grep -c 'data-deck-slide=' site/labs/lx1.html)" -eq 7
+              - grep -q 'data-learning-deck="lx1"' site/labs/lx1.html
+              - test "$(grep -c 'data-deck-slide=' site/labs/lx0.html)" -eq 7
+              - grep -q 'data-learning-deck="lx0"' site/labs/lx0.html
               - test -s site/assessments/foundation.html
               - test -s site/assets/js/report-builder.js
               - test -s site/assets/js/completion-summary.js
               - test -s site/assets/js/report-review.js
-              - test -s site/assets/js/output-inspector.js
               - test -s site/assets/js/learning-deck.js
               - test -s site/assets/js/quiz.js
               - test -s site/assets/js/evidence-pad.js

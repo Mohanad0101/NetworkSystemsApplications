@@ -10,12 +10,30 @@ if [ "$SOURCECRAFT_COMMIT_REF_NAME" != main ]; then
   exit 1
 fi
 for page in index.html labs/lx0.html labs/lx1.html labs/lx2.html labs/lx3.html labs/lx4.html labs/lx5.html labs/lx6.html labs/lx7.html assessments/foundation.html \
-  assets/js/report-builder.js assets/js/learning-deck.js assets/js/output-inspector.js assets/js/report-review.js assets/js/completion-summary.js assets/js/quiz.js assets/js/evidence-pad.js assets/js/progress.js assets/css/style.css \
+  assets/js/report-builder.js assets/js/learning-deck.js assets/js/report-review.js assets/js/completion-summary.js assets/js/quiz.js assets/js/evidence-pad.js assets/js/progress.js assets/css/style.css \
   assets/templates/NSA_LX0_Report_Template.docx assets/templates/NSA_LX1_Report_Template.docx \
   assets/templates/NSA_LX2_Report_Template.docx assets/templates/NSA_LX3_Report_Template.docx \
   assets/templates/NSA_LX4_Report_Template.docx assets/templates/NSA_LX5_Report_Template.docx assets/templates/NSA_LX6_Report_Template.docx assets/templates/NSA_LX7_Report_Template.docx; do
   test -s "site/$page"
 done
+
+# Inline web decks must be rendered before publication.
+grep -q 'data-learning-deck="lx0"' site/labs/lx0.html
+test "$(grep -c 'data-deck-slide=' site/labs/lx0.html)" -eq 7
+grep -q 'data-learning-deck="lx1"' site/labs/lx1.html
+test "$(grep -c 'data-deck-slide=' site/labs/lx1.html)" -eq 7
+grep -q 'data-learning-deck="lx2"' site/labs/lx2.html
+test "$(grep -c 'data-deck-slide=' site/labs/lx2.html)" -eq 7
+grep -q 'data-learning-deck="lx3"' site/labs/lx3.html
+test "$(grep -c 'data-deck-slide=' site/labs/lx3.html)" -eq 7
+grep -q 'data-learning-deck="lx4"' site/labs/lx4.html
+test "$(grep -c 'data-deck-slide=' site/labs/lx4.html)" -eq 7
+grep -q 'data-learning-deck="lx5"' site/labs/lx5.html
+test "$(grep -c 'data-deck-slide=' site/labs/lx5.html)" -eq 7
+grep -q 'data-learning-deck="lx6"' site/labs/lx6.html
+test "$(grep -c 'data-deck-slide=' site/labs/lx6.html)" -eq 7
+grep -q 'data-learning-deck="lx7"' site/labs/lx7.html
+test "$(grep -c 'data-deck-slide=' site/labs/lx7.html)" -eq 7
 
 # Evidence fields are rendered statically, so a student can paste results even
 # if JavaScript fails or is cached. Fail the publication if they disappear.

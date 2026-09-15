@@ -12,13 +12,15 @@ LX1 знакомит не просто с набором команд, а с **�
 
 <p class="meta-line">Подготовка: 5–10 минут · Основная практика: 65–80 минут · Закрепление: 20–30 минут · Среда: Linux Mint VM · Итог: аккуратно организованная папка <code>~/NSA/LX1</code>, заполненные поля результатов, пройденный MCQ и готовый к отправке DOCX-отчёт</p>
 
+<section class="student-environment" aria-label="Среда курса">
+  <div><span>Ваша учебная среда</span><strong>Windows PC → Oracle VirtualBox → Linux Mint 22.3 “Zena”</strong></div>
+  <p>Администратор Windows <strong>не требуется для обычной работы курса</strong>. Команды Linux с <code>sudo</code> выполняются внутри Mint VM под вашим учебным Linux-пользователем.</p>
+</section>
+
 {% include learning-deck.html lab="lx1" %}
 
-<div class="lab-journey" aria-label="Маршрут лабораторной">
-  <span><strong>Разобраться</strong></span><span>Попробовать</span><span>Выполнить</span><span>Проверить</span><span>Собрать отчёт</span>
-</div>
+{% include lab-compass.html lab="lx1" %}
 
-{% include output-inspector.html lab="lx1" %}
 
 {% include lab-start.html lab="lx1" %}
 
@@ -1054,6 +1056,8 @@ test -f ~/NSA/LX1/archive/src.tar.gz && echo 'ARCHIVE=OK'; test -f ~/NSA/LX1/bac
   </details>
 </section>
 
+
+{% include peer-moment.html lab="lx1" %}
 
 <details class="lab-reflection"><summary>Одна мысль перед отчётом</summary><p>Как изменилась бы ваша диагностика ошибки файла, если бы вы не могли использовать `pwd`?</p><p class="lab-reflection-note">Ответьте себе или добавьте короткое наблюдение в отчёт, если это помогает показать ход вашей работы.</p></details>
 

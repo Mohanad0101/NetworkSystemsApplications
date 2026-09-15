@@ -10,13 +10,15 @@ title: LX5 — Управление загрузкой Linux и службами
 
 <p class="meta-line">Подготовка: 5 минут · Практика: 70–90 минут · Среда: учебная Linux Mint VM · Результат: собственная systemd-служба, которую вы умеете проверить, запустить, включить в автозапуск и диагностировать</p>
 
+<section class="student-environment" aria-label="Среда курса">
+  <div><span>Ваша учебная среда</span><strong>Windows PC → Oracle VirtualBox → Linux Mint 22.3 “Zena”</strong></div>
+  <p>Администратор Windows <strong>не требуется для обычной работы курса</strong>. Команды Linux с <code>sudo</code> выполняются внутри Mint VM под вашим учебным Linux-пользователем.</p>
+</section>
+
 {% include learning-deck.html lab="lx5" %}
 
-<div class="lab-journey" aria-label="Маршрут лабораторной">
-  <span><strong>Разобраться</strong></span><span>Попробовать</span><span>Выполнить</span><span>Проверить</span><span>Собрать отчёт</span>
-</div>
+{% include lab-compass.html lab="lx5" %}
 
-{% include output-inspector.html lab="lx5" %}
 
 {% include lab-start.html lab="lx5" %}
 
@@ -433,6 +435,8 @@ fi
   </details>
 </section>
 
+
+{% include peer-moment.html lab="lx5" %}
 
 <details class="lab-reflection"><summary>Одна мысль перед отчётом</summary><p>Как журнал помогает отличить «служба не запущена» от «служба попыталась запуститься и завершилась с ошибкой»?</p><p class="lab-reflection-note">Ответьте себе или добавьте короткое наблюдение в отчёт, если это помогает показать ход вашей работы.</p></details>
 

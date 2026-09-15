@@ -20,13 +20,15 @@ title: "LX0 — Установка Linux в виртуальную машину"
 <a href="#vm-containers">Как начать</a><a href="#install">Установка</a><a href="#verify">Проверка и OVA</a><a href="#quiz">10 вопросов</a><a href="#submit">Что сдавать</a><a href="#extras">По желанию</a>
 </nav>
 
+<section class="student-environment" aria-label="Среда курса">
+  <div><span>Ваша учебная среда</span><strong>Windows PC → Oracle VirtualBox → Linux Mint 22.3 “Zena”</strong></div>
+  <p>Администратор Windows <strong>не требуется для обычной работы курса</strong>. Команды Linux с <code>sudo</code> выполняются внутри Mint VM под вашим учебным Linux-пользователем.</p>
+</section>
+
 {% include learning-deck.html lab="lx0" %}
 
-<div class="lab-journey" aria-label="Маршрут лабораторной">
-  <span><strong>Разобраться</strong></span><span>Попробовать</span><span>Выполнить</span><span>Проверить</span><span>Собрать отчёт</span>
-</div>
+{% include lab-compass.html lab="lx0" %}
 
-{% include output-inspector.html lab="lx0" %}
 
 {% include lab-start.html lab="lx0" %}
 
@@ -782,6 +784,8 @@ Dual boot — две установленные ОС, выбор одной пр
   </details>
 </section>
 
+
+{% include peer-moment.html lab="lx0" %}
 
 <details class="lab-reflection"><summary>Одна мысль перед отчётом</summary><p>Какой один признак лучше всего убеждает вас, что эта VM готова стать рабочим стендом для следующих лабораторных?</p><p class="lab-reflection-note">Ответьте себе или добавьте короткое наблюдение в отчёт, если это помогает показать ход вашей работы.</p></details>
 

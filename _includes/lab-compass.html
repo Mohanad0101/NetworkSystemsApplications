@@ -1,0 +1,8 @@
+{% assign item = site.data.lab_compass[include.lab] %}
+{% if item %}
+<section class="lab-compass">
+  <div><span>Цель</span><strong>{{ item.goal }}</strong></div>
+  <div><span>Работаем в</span><strong>{{ item.where }}</strong></div>
+  <div><span>Финиш</span><strong>{{ item.finish }}</strong></div>
+</section>
+{% endif %}

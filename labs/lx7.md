@@ -10,13 +10,15 @@ title: LX7 — Основы скриптов на Bash
 
 <p class="meta-line">Подготовка: 5 минут · Практика: 65–85 минут · Среда: учебная Linux Mint VM · Результат: четыре небольших проверяемых сценария/эксперимента без изменения системных пользователей, паролей и чужих cron-задач</p>
 
+<section class="student-environment" aria-label="Среда курса">
+  <div><span>Ваша учебная среда</span><strong>Windows PC → Oracle VirtualBox → Linux Mint 22.3 “Zena”</strong></div>
+  <p>Администратор Windows <strong>не требуется для обычной работы курса</strong>. Команды Linux с <code>sudo</code> выполняются внутри Mint VM под вашим учебным Linux-пользователем.</p>
+</section>
+
 {% include learning-deck.html lab="lx7" %}
 
-<div class="lab-journey" aria-label="Маршрут лабораторной">
-  <span><strong>Разобраться</strong></span><span>Попробовать</span><span>Выполнить</span><span>Проверить</span><span>Собрать отчёт</span>
-</div>
+{% include lab-compass.html lab="lx7" %}
 
-{% include output-inspector.html lab="lx7" %}
 
 {% include lab-start.html lab="lx7" %}
 
@@ -548,6 +550,8 @@ find ~/NSA/LX7 -maxdepth 2 -type f -printf '%P\n' | sort
   </details>
 </section>
 
+
+{% include peer-moment.html lab="lx7" %}
 
 <details class="lab-reflection"><summary>Одна мысль перед отчётом</summary><p>Что делает ваш сценарий пригодным для повторного использования другим человеком, а не только для одного успешного запуска?</p><p class="lab-reflection-note">Ответьте себе или добавьте короткое наблюдение в отчёт, если это помогает показать ход вашей работы.</p></details>
 

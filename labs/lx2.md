@@ -8,13 +8,15 @@ title: "LX2 — Удалённый доступ: SSH и tmux"
 
 Подключитесь к своей Linux Mint VM с хостовой системы, убедитесь, что команды действительно выполняются **на удалённой машине**, передайте файл в обоих направлениях, настройте вход по ключу и восстановите рабочую сессию после разрыва SSH.
 
+<section class="student-environment" aria-label="Среда курса">
+  <div><span>Ваша учебная среда</span><strong>Windows PC → Oracle VirtualBox → Linux Mint 22.3 “Zena”</strong></div>
+  <p>Администратор Windows <strong>не требуется для обычной работы курса</strong>. Команды Linux с <code>sudo</code> выполняются внутри Mint VM под вашим учебным Linux-пользователем.</p>
+</section>
+
 {% include learning-deck.html lab="lx2" %}
 
-<div class="lab-journey" aria-label="Маршрут лабораторной">
-  <span><strong>Разобраться</strong></span><span>Попробовать</span><span>Выполнить</span><span>Проверить</span><span>Собрать отчёт</span>
-</div>
+{% include lab-compass.html lab="lx2" %}
 
-{% include output-inspector.html lab="lx2" %}
 
 {% include lab-start.html lab="lx2" %}
 
@@ -55,7 +57,7 @@ title: "LX2 — Удалённый доступ: SSH и tmux"
 Обычная форма подключения:
 
 ```bash
-ssh your_user@vm_ip
+ssh your_user@VM_IP
 ```
 
 Здесь:
@@ -76,7 +78,76 @@ ssh -p 2222 your_user@127.0.0.1
 
 <span id="practice-ssh"></span>
 
+
+## Перед SSH: выберите способ подключения
+
+В этой лабораторной роли всегда одинаковы:
+
+```text
+Windows PowerShell  ──SSH──>  Linux Mint VM
+      клиент                    сервер
+```
+
+Сначала в **обычном PowerShell** на Windows выполните:
+
+```powershell
+ssh -V
+```
+
+Если видите версию OpenSSH, клиент готов. Запускать PowerShell «от имени администратора» не нужно.
+
+### Вариант A — NAT + Port Forwarding (рекомендуется для курса)
+
+Используйте его, если преподаватель/ИТ уже настроил правило VirtualBox:
+
+```text
+Windows 127.0.0.1:2222  →  VirtualBox NAT  →  Mint VM :22
+```
+
+Тогда команда из PowerShell будет:
+
+```powershell
+ssh -p 2222 your_user@127.0.0.1
+```
+
+`2222` — порт на стороне Windows, а `22` — SSH-порт внутри Mint. NAT сам по себе не делает SSH-сервис гостевой VM доступным через `127.0.0.1`; для этой команды необходимо правило port forwarding.
+
+<div class="callout safe-note" markdown="1">
+<strong>Если настройки VirtualBox недоступны.</strong> Не пытайтесь обходить ограничения Windows или менять установку VirtualBox. Используйте сетевой вариант, который подготовил преподаватель, или покажите преподавателю экран Network Settings.
+</div>
+
+### Вариант B — Bridged Adapter
+
+Если VM уже настроена как **Bridged Adapter** и локальная сеть разрешает такой режим, в Mint узнайте адрес:
+
+```bash
+hostname -I
+```
+
+Например, если VM получила `192.168.1.84`, из PowerShell:
+
+```powershell
+ssh your_user@192.168.1.84
+```
+
+Bridge удобен тем, что не требует port forwarding, но зависит от локальной сети. Поэтому лабораторная не считает его гарантированно «проще».
+
+### Быстрая проверка перед продолжением
+
+Вы должны знать только три значения:
+
+| Что | Пример | Где узнать |
+|---|---|---|
+| Linux user | `student` | `whoami` в Mint |
+| SSH host | `127.0.0.1` или IP VM | зависит от NAT/Bridge |
+| SSH port | `2222` или `22` | зависит от NAT/Bridge |
+
+Не продолжайте с догадками: сначала определите эти три значения.
+
+
 ## Часть 1. Подготовьте Mint VM как SSH-сервер
+
+<p class="where-type"><strong>Сейчас:</strong> команды выполняются в <strong>терминале Linux Mint VM</strong>. PowerShell понадобится после того, как SSH-сервер будет готов.</p>
 
 <p class="stage-goal"><strong>Готово, когда:</strong> пакет OpenSSH Server установлен, служба <code>ssh</code> активна, а вы знаете пользователя, адрес и порт подключения.</p>
 
@@ -181,6 +252,8 @@ printf 'SSH_SERVICE=%s\nUSER=%s\nHOST=%s\n' "$(systemctl is-active ssh)" "$(whoa
 
 ## Часть 2. Выполните первый SSH-вход и проверьте контекст
 
+<p class="where-type"><strong>Сейчас:</strong> переключитесь на <strong>обычный Windows PowerShell</strong>. Команды <code>ssh</code> и <code>scp</code> ниже запускаются на Windows.</p>
+
 <p class="stage-goal"><strong>Готово, когда:</strong> вы вошли с хоста в Mint VM и можете объяснить по выводу <code>whoami</code>, <code>hostname</code> и <code>pwd</code>, где выполняются команды.</p>
 
 Откройте **терминал на хостовой системе**. Для Windows подойдёт PowerShell с установленным OpenSSH Client.
@@ -190,7 +263,7 @@ printf 'SSH_SERVICE=%s\nUSER=%s\nHOST=%s\n' "$(systemctl is-active ssh)" "$(whoa
 Для прямого IP VM:
 
 ```bash
-ssh your_user@vm_ip
+ssh your_user@VM_IP
 ```
 
 Для NAT + Port Forwarding:
@@ -395,7 +468,7 @@ cat ./remote-copy.txt
 Прямое подключение:
 
 ```bash
-ssh your_user@vm_ip 'printf "REMOTE_USER=%s\nREMOTE_HOST=%s\nREMOTE_HOME=%s\nUPLOAD=%s\n" "$(whoami)" "$(hostname)" "$HOME" "$(cat ~/NSA/LX2/ssh/lx2-local.txt)"'
+ssh your_user@VM_IP 'printf "REMOTE_USER=%s\nREMOTE_HOST=%s\nREMOTE_HOME=%s\nUPLOAD=%s\n" "$(whoami)" "$(hostname)" "$HOME" "$(cat ~/NSA/LX2/ssh/lx2-local.txt)"'
 ```
 
 NAT:
@@ -830,6 +903,8 @@ ssh -v mint-lab
   </details>
 </section>
 
+
+{% include peer-moment.html lab="lx2" %}
 
 <details class="lab-reflection"><summary>Одна мысль перед отчётом</summary><p>Как по сообщению SSH отличить проблему сети от проблемы аутентификации?</p><p class="lab-reflection-note">Ответьте себе или добавьте короткое наблюдение в отчёт, если это помогает показать ход вашей работы.</p></details>
 
