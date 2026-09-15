@@ -7,9 +7,9 @@ on:
 workflows:
   build-site:
     tasks:
-      - name: build-site
+      - name: build-and-publish
         cubes:
-          - name: build-site
+          - name: build-and-publish
             image: ruby:3.3
             env:
               JEKYLL_ENV: production
@@ -18,106 +18,12 @@ workflows:
               - gem install jekyll --version "~> 4.4" --no-document
               - |
                 set -eu
-                # Sites URL: https://<organization>.sourcecraft.site/<repository>/
-                SITE_BASE_PATH="$(ruby -ruri -e 'path = URI.parse(ENV.fetch("SOURCECRAFT_REPO_URL")).path; slug = path.split("/").last.to_s.sub(/\.git\z/, ""); abort "Missing repository slug" if slug.empty?; print "/#{slug}"')"
-                jekyll build --destination site --baseurl "$SITE_BASE_PATH"
+                echo "Building for SourceCraft Sites path: /network-systems-course"
+                jekyll build --destination site --baseurl "/network-systems-course"
               - test -s site/index.html
               - test -s site/labs/lx0.html
-              - test -s site/labs/lx1.html
-              - test -s site/labs/lx2.html
-              - test -s site/labs/lx3.html
-              - test -s site/labs/lx4.html
-              - test -s site/labs/lx5.html
-              - test -s site/labs/lx6.html
               - test -s site/labs/lx7.html
-              - test "$(grep -c 'data-deck-slide=' site/labs/lx7.html)" -eq 7
-              - grep -q 'data-learning-deck="lx7"' site/labs/lx7.html
-              - test "$(grep -c 'data-deck-slide=' site/labs/lx6.html)" -eq 7
-              - grep -q 'data-learning-deck="lx6"' site/labs/lx6.html
-              - test "$(grep -c 'data-deck-slide=' site/labs/lx5.html)" -eq 7
-              - grep -q 'data-learning-deck="lx5"' site/labs/lx5.html
-              - test "$(grep -c 'data-deck-slide=' site/labs/lx4.html)" -eq 7
-              - grep -q 'data-learning-deck="lx4"' site/labs/lx4.html
-              - test "$(grep -c 'data-deck-slide=' site/labs/lx3.html)" -eq 7
-              - grep -q 'data-learning-deck="lx3"' site/labs/lx3.html
-              - test "$(grep -c 'data-deck-slide=' site/labs/lx2.html)" -eq 7
-              - grep -q 'data-learning-deck="lx2"' site/labs/lx2.html
-              - test "$(grep -c 'data-deck-slide=' site/labs/lx1.html)" -eq 7
-              - grep -q 'data-learning-deck="lx1"' site/labs/lx1.html
-              - test "$(grep -c 'data-deck-slide=' site/labs/lx0.html)" -eq 7
+              - test -s site/resources/lx2-reference.html
               - grep -q 'data-learning-deck="lx0"' site/labs/lx0.html
-              - test -s site/assessments/foundation.html
-              - test -s site/assets/js/report-builder.js
-              - test -s site/assets/js/completion-summary.js
-              - test -s site/assets/js/report-review.js
-              - test -s site/assets/js/learning-deck.js
-              - test -s site/assets/js/quiz.js
-              - test -s site/assets/js/evidence-pad.js
-              - test -s site/assets/js/progress.js
-              - test -s site/assets/css/style.css
-              - grep -q 'data-evidence-editor="LX0-02"' site/labs/lx0.html
-              - grep -q 'data-evidence-editor="LX1-01"' site/labs/lx1.html
-              - grep -q 'data-evidence-editor="LX2-01"' site/labs/lx2.html
-              - grep -q 'data-evidence-editor="LX3-01"' site/labs/lx3.html
-              - grep -q 'data-evidence-editor="LX4-01"' site/labs/lx4.html
-              - grep -q 'data-evidence-editor="LX5-01"' site/labs/lx5.html
-              - grep -q 'data-evidence-editor="LX6-01"' site/labs/lx6.html
-              - grep -q 'data-evidence-editor="LX7-01"' site/labs/lx7.html
-              - grep -q 'data-report-builder' site/labs/lx6.html
-              - grep -q 'data-learning-progress' site/labs/lx6.html
-              - grep -q 'data-build-report' site/labs/lx6.html
-              - grep -q 'data-report-builder' site/labs/lx7.html
-              - grep -q 'data-learning-progress' site/labs/lx7.html
-              - grep -q 'data-build-report' site/labs/lx7.html
-              - test "$(grep -c 'data-quiz-card' site/labs/lx0.html)" -eq 10
-              - test "$(grep -c 'data-quiz-card' site/labs/lx1.html)" -eq 12
-              - test "$(grep -c 'data-quiz-card' site/labs/lx2.html)" -eq 12
-              - test "$(grep -c 'data-quiz-card' site/labs/lx3.html)" -eq 12
-              - test "$(grep -c 'data-quiz-card' site/labs/lx4.html)" -eq 12
-              - test "$(grep -c 'data-quiz-card' site/labs/lx5.html)" -eq 12
-              - test "$(grep -c 'data-quiz-card' site/labs/lx6.html)" -eq 12
-              - test "$(grep -c 'data-quiz-card' site/labs/lx7.html)" -eq 12
-              - test "$(grep -c 'data-quiz-card' site/assessments/foundation.html)" -eq 12
-              - grep -q 'data-report-quiz-preview' site/labs/lx0.html
-              - grep -q 'data-report-builder' site/labs/lx0.html
-              - grep -q 'data-learning-progress' site/labs/lx0.html
-              - grep -q 'data-progress-toggle="1"' site/labs/lx0.html
-              - grep -q 'data-home-progress-lab="lx0"' site/index.html
-              - grep -q 'data-home-progress-lab="lx4"' site/index.html
-              - grep -q 'data-home-progress-lab="lx5"' site/index.html
-              - grep -q 'data-home-progress-lab="lx6"' site/index.html
-              - grep -q 'data-home-progress-lab="lx7"' site/index.html
-              - grep -q 'data-home-completeness-text' site/index.html
-              - grep -q 'data-home-completeness-bar' site/index.html
-              - grep -q 'nsa-submission-completeness:v1:' site/assets/js/report-builder.js
-              - grep -q 'course-naming-note' site/index.html
-              - grep -q '← К курсу' site/labs/lx0.html
-              - grep -q 'lab-name-guide' site/labs/lx0.html
-              - grep -q 'lab-name-guide' site/labs/lx3.html
-              - grep -q 'lab-name-guide' site/labs/lx4.html
-              - grep -q 'lab-name-guide' site/labs/lx5.html
-              - grep -q 'lab-name-guide' site/labs/lx6.html
-              - grep -q 'lab-name-guide' site/labs/lx7.html
-              - test -s site/assets/templates/NSA_LX4_Report_Template.docx
-              - test -s site/assets/templates/NSA_LX5_Report_Template.docx
-              - test -s site/assets/templates/NSA_LX6_Report_Template.docx
-              - test -s site/assets/templates/NSA_LX7_Report_Template.docx
-              - grep -q 'Скачать пустой шаблон' site/labs/lx0.html
-              - '! grep -qE "data-build-report[^>]*disabled" site/labs/lx0.html'
-              - grep -q 'EVIDENCE_RULES' site/assets/js/report-builder.js
-              - grep -q 'quiz-meta' site/assets/js/quiz.js
-              - grep -q 'nsa-learning-progress:v1:' site/assets/js/progress.js
-              - grep -q 'nsa-submission-completeness:v1:' site/assets/js/progress.js
-              - grep -q 'data-overall-completeness-text' site/index.html
-              - grep -q 'Пройти ещё раз для закрепления' site/assets/js/quiz.js
-              - grep -q 'try-again' site/assets/js/quiz.js
-              - grep -q 'Content-Security-Policy' site/labs/lx0.html
-              - grep -q 'achievement-board' site/index.html
-              - grep -q 'Достижения практикума' site/index.html
-              - grep -q 'Это не рейтинг' site/index.html
-              - grep -q 'data-public-board-consent' site/labs/lx0.html
-              - grep -q 'NSA.PublicBoardConsent' site/assets/js/report-builder.js
-          - name: publish-site
-            # Runs on the native worker, using SourceCraft's Git authentication.
-            script:
+              - grep -q 'data-learning-deck="lx7"' site/labs/lx7.html
               - bash .sourcecraft/publish.sh

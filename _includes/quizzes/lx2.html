@@ -19,7 +19,7 @@
       </div>
       <div class="feedback" data-feedback aria-live="polite">
         <p><strong data-feedback-prefix></strong><span data-feedback-explain>Клиент инициирует соединение, а сервер принимает его и запускает удалённую оболочку после аутентификации.</span></p>
-        <p class="quiz-reading"><a href="#ssh-concept">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-1/" rel="noopener">Исходная тема</a></p>
+        <p class="quiz-reading"><a href="#ssh-concept">Разобрать в материалах курса</a><a href="{{ '/resources/lx2-reference.html' | relative_url }}">Локальная справка</a></p>
       </div>
     </section>
     <section class="quiz-card" data-quiz-card data-answer="3" data-topic="Диагностика соединения" data-review="#ssh-errors">
@@ -32,7 +32,7 @@
       </div>
       <div class="feedback" data-feedback aria-live="polite">
         <p><strong data-feedback-prefix></strong><span data-feedback-explain>Соединение отвергнуто до аутентификации. Причиной может быть отсутствие слушающего сервиса, неверный порт или активное отклонение фильтром.</span></p>
-        <p class="quiz-reading"><a href="#ssh-errors">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-1/" rel="noopener">Исходная тема</a></p>
+        <p class="quiz-reading"><a href="#ssh-errors">Разобрать в материалах курса</a><a href="{{ '/resources/lx2-reference.html' | relative_url }}">Локальная справка</a></p>
       </div>
     </section>
     <section class="quiz-card" data-quiz-card data-answer="3" data-topic="Диагностика службы" data-review="#practice-ssh">
@@ -45,7 +45,7 @@
       </div>
       <div class="feedback" data-feedback aria-live="polite">
         <p><strong data-feedback-prefix></strong><span data-feedback-explain>Работающий сервис — одно условие. Сеть и аутентификация проверяются отдельно реальным подключением.</span></p>
-        <p class="quiz-reading"><a href="#practice-ssh">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-1/" rel="noopener">Исходная тема</a></p>
+        <p class="quiz-reading"><a href="#practice-ssh">Разобрать в материалах курса</a><a href="{{ '/resources/lx2-reference.html' | relative_url }}">Локальная справка</a></p>
       </div>
     </section>
     <section class="quiz-card" data-quiz-card data-answer="0" data-topic="Передача файлов" data-review="#ssh-transfer">
@@ -58,7 +58,7 @@
       </div>
       <div class="feedback" data-feedback aria-live="polite">
         <p><strong data-feedback-prefix></strong><span data-feedback-explain>Локальный относительный путь берётся из текущего каталога клиента. Часть user@vm: у второго аргумента обозначает удалённое назначение.</span></p>
-        <p class="quiz-reading"><a href="#ssh-transfer">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-1/" rel="noopener">Исходная тема</a></p>
+        <p class="quiz-reading"><a href="#ssh-transfer">Разобрать в материалах курса</a><a href="{{ '/resources/lx2-reference.html' | relative_url }}">Локальная справка</a></p>
       </div>
     </section>
     <section class="quiz-card" data-quiz-card data-answer="0" data-topic="Пара ключей" data-review="#ssh-keys">
@@ -71,7 +71,7 @@
       </div>
       <div class="feedback" data-feedback aria-live="polite">
         <p><strong data-feedback-prefix></strong><span data-feedback-explain>На сервер добавляют открытый ключ. Закрытая часть и её passphrase остаются под контролем владельца и не включаются в отчёт.</span></p>
-        <p class="quiz-reading"><a href="#ssh-keys">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-1/" rel="noopener">Исходная тема</a></p>
+        <p class="quiz-reading"><a href="#ssh-keys">Разобрать в материалах курса</a><a href="{{ '/resources/lx2-reference.html' | relative_url }}">Локальная справка</a></p>
       </div>
     </section>
     <section class="quiz-card" data-quiz-card data-answer="3" data-topic="Пароль и passphrase" data-review="#ssh-config">
@@ -84,7 +84,7 @@
       </div>
       <div class="feedback" data-feedback aria-live="polite">
         <p><strong data-feedback-prefix></strong><span data-feedback-explain>Passphrase защищает закрытый ключ. Она может требоваться и при полностью успешной аутентификации по открытому ключу.</span></p>
-        <p class="quiz-reading"><a href="#ssh-config">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-1/" rel="noopener">Исходная тема</a></p>
+        <p class="quiz-reading"><a href="#ssh-config">Разобрать в материалах курса</a><a href="{{ '/resources/lx2-reference.html' | relative_url }}">Локальная справка</a></p>
       </div>
     </section>
     <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Конфигурация клиента" data-review="#ssh-config">
@@ -97,7 +97,7 @@
       </div>
       <div class="feedback" data-feedback aria-live="polite">
         <p><strong data-feedback-prefix></strong><span data-feedback-explain>Config хранит клиентские параметры подключения. Authorized_keys разрешает ключи, а hostname задаёт имя машины.</span></p>
-        <p class="quiz-reading"><a href="#ssh-config">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-1/" rel="noopener">Исходная тема</a></p>
+        <p class="quiz-reading"><a href="#ssh-config">Разобрать в материалах курса</a><a href="{{ '/resources/lx2-reference.html' | relative_url }}">Локальная справка</a></p>
       </div>
     </section>
     <section class="quiz-card" data-quiz-card data-answer="3" data-topic="Порт SSH и SCP" data-review="#ssh-transfer">
@@ -110,7 +110,7 @@
       </div>
       <div class="feedback" data-feedback aria-live="polite">
         <p><strong data-feedback-prefix></strong><span data-feedback-explain>У scp порт задаётся заглавной -P; у ssh — строчной -p. Часть после двоеточия в обычном синтаксисе scp является путём, а не портом.</span></p>
-        <p class="quiz-reading"><a href="#ssh-transfer">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-1/" rel="noopener">Исходная тема</a></p>
+        <p class="quiz-reading"><a href="#ssh-transfer">Разобрать в материалах курса</a><a href="{{ '/resources/lx2-reference.html' | relative_url }}">Локальная справка</a></p>
       </div>
     </section>
     <section class="quiz-card" data-quiz-card data-answer="2" data-topic="Сохранение удалённой работы" data-review="#practice-tmux">
@@ -123,7 +123,7 @@
       </div>
       <div class="feedback" data-feedback aria-live="polite">
         <p><strong data-feedback-prefix></strong><span data-feedback-explain>Сеанс и его процессы живут там, где запущен tmux. Локальный tmux не переносит в себя процессы удалённой оболочки.</span></p>
-        <p class="quiz-reading"><a href="#practice-tmux">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-2/" rel="noopener">Исходная тема</a></p>
+        <p class="quiz-reading"><a href="#practice-tmux">Разобрать в материалах курса</a><a href="{{ '/resources/lx2-reference.html' | relative_url }}">Локальная справка</a></p>
       </div>
     </section>
     <section class="quiz-card" data-quiz-card data-answer="3" data-topic="Ограничения tmux" data-review="#practice-tmux">
@@ -136,7 +136,7 @@
       </div>
       <div class="feedback" data-feedback aria-live="polite">
         <p><strong data-feedback-prefix></strong><span data-feedback-explain>Tmux отделяет жизнь сеанса от клиентского подключения, но сам остаётся процессом ОС. Перезапуск VM отличается от разрыва SSH.</span></p>
-        <p class="quiz-reading"><a href="#practice-tmux">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-2/" rel="noopener">Исходная тема</a></p>
+        <p class="quiz-reading"><a href="#practice-tmux">Разобрать в материалах курса</a><a href="{{ '/resources/lx2-reference.html' | relative_url }}">Локальная справка</a></p>
       </div>
     </section>
     <section class="quiz-card" data-quiz-card data-answer="3" data-topic="Проверка ключа сервера" data-review="#ssh-errors">
@@ -149,7 +149,7 @@
       </div>
       <div class="feedback" data-feedback aria-live="polite">
         <p><strong data-feedback-prefix></strong><span data-feedback-explain>Предупреждение возможно после переустановки, смены адреса или при подмене. Удаление записи без проверки не устанавливает доверие к новому серверу.</span></p>
-        <p class="quiz-reading"><a href="#ssh-errors">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-1/" rel="noopener">Исходная тема</a></p>
+        <p class="quiz-reading"><a href="#ssh-errors">Разобрать в материалах курса</a><a href="{{ '/resources/lx2-reference.html' | relative_url }}">Локальная справка</a></p>
       </div>
     </section>
     <section class="quiz-card" data-quiz-card data-answer="0" data-topic="Доступ после входа" data-review="#ssh-transfer">
@@ -162,7 +162,7 @@
       </div>
       <div class="feedback" data-feedback aria-live="polite">
         <p><strong data-feedback-prefix></strong><span data-feedback-explain>Успешный вход не даёт права писать в любой каталог. Авторизация файловых операций проверяется отдельно от аутентификации SSH.</span></p>
-        <p class="quiz-reading"><a href="#ssh-transfer">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-1/" rel="noopener">Исходная тема</a></p>
+        <p class="quiz-reading"><a href="#ssh-transfer">Разобрать в материалах курса</a><a href="{{ '/resources/lx2-reference.html' | relative_url }}">Локальная справка</a></p>
       </div>
     </section>
     <noscript><p class="callout warning"><strong>Вопросы доступны.</strong> Для мгновенной проверки ответа и подсчёта результата включите JavaScript для этого сайта.</p></noscript>

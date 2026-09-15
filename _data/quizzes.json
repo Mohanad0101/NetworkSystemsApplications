@@ -404,7 +404,7 @@
       "topic": "Клиент и сервер SSH",
       "review": "#ssh-concept",
       "skill": "application",
-      "source": "https://koroteev.site/text/os12-1/",
+      "source": "/resources/lx2-reference.html",
       "basis": "reference-and-lab",
       "id": "LX2-01"
     },
@@ -421,7 +421,7 @@
       "topic": "Диагностика соединения",
       "review": "#ssh-errors",
       "skill": "diagnosis",
-      "source": "https://koroteev.site/text/os12-1/",
+      "source": "/resources/lx2-reference.html",
       "basis": "reference-and-lab",
       "id": "LX2-03",
       "technical_source": "https://man7.org/linux/man-pages/man2/connect.2.html"
@@ -439,7 +439,7 @@
       "topic": "Диагностика службы",
       "review": "#practice-ssh",
       "skill": "interpretation",
-      "source": "https://koroteev.site/text/os12-1/",
+      "source": "/resources/lx2-reference.html",
       "basis": "reference-and-lab",
       "id": "LX2-05"
     },
@@ -456,7 +456,7 @@
       "topic": "Передача файлов",
       "review": "#ssh-transfer",
       "skill": "interpretation",
-      "source": "https://koroteev.site/text/os12-1/",
+      "source": "/resources/lx2-reference.html",
       "basis": "reference-and-lab",
       "id": "LX2-07"
     },
@@ -473,7 +473,7 @@
       "topic": "Пара ключей",
       "review": "#ssh-keys",
       "skill": "application",
-      "source": "https://koroteev.site/text/os12-1/",
+      "source": "/resources/lx2-reference.html",
       "basis": "reference-and-lab",
       "id": "LX2-10"
     },
@@ -490,7 +490,7 @@
       "topic": "Пароль и passphrase",
       "review": "#ssh-config",
       "skill": "diagnosis",
-      "source": "https://koroteev.site/text/os12-1/",
+      "source": "/resources/lx2-reference.html",
       "basis": "reference-and-lab",
       "id": "LX2-12"
     },
@@ -507,7 +507,7 @@
       "topic": "Конфигурация клиента",
       "review": "#ssh-config",
       "skill": "application",
-      "source": "https://koroteev.site/text/os12-1/",
+      "source": "/resources/lx2-reference.html",
       "basis": "reference-and-lab",
       "id": "LX2-14"
     },
@@ -524,7 +524,7 @@
       "topic": "Порт SSH и SCP",
       "review": "#ssh-transfer",
       "skill": "application",
-      "source": "https://koroteev.site/text/os12-1/",
+      "source": "/resources/lx2-reference.html",
       "basis": "lab-extension",
       "id": "LX2-16"
     },
@@ -541,7 +541,7 @@
       "topic": "Сохранение удалённой работы",
       "review": "#practice-tmux",
       "skill": "application",
-      "source": "https://koroteev.site/text/os12-2/",
+      "source": "/resources/lx2-reference.html",
       "basis": "reference-and-lab",
       "id": "LX2-19"
     },
@@ -558,7 +558,7 @@
       "topic": "Ограничения tmux",
       "review": "#practice-tmux",
       "skill": "diagnosis",
-      "source": "https://koroteev.site/text/os12-2/",
+      "source": "/resources/lx2-reference.html",
       "basis": "reference-and-lab",
       "id": "LX2-23"
     },
@@ -575,7 +575,7 @@
       "topic": "Проверка ключа сервера",
       "review": "#ssh-errors",
       "skill": "diagnosis",
-      "source": "https://koroteev.site/text/os12-1/",
+      "source": "/resources/lx2-reference.html",
       "basis": "reference-and-lab",
       "id": "LX2-26",
       "technical_source": "https://man.openbsd.org/ssh"
@@ -593,7 +593,7 @@
       "topic": "Доступ после входа",
       "review": "#ssh-transfer",
       "skill": "diagnosis",
-      "source": "https://koroteev.site/text/os12-1/",
+      "source": "/resources/lx2-reference.html",
       "basis": "reference-and-lab",
       "id": "LX2-30"
     }

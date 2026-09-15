@@ -1,13 +1,13 @@
 {% assign deck = site.data.learning_decks[include.lab] %}
 {% if deck %}
-<section class="learning-deck web-slide-deck deck-{{ deck.variant }}" data-learning-deck="{{ include.lab }}" aria-label="Интерактивное введение в лабораторную">
+<section class="learning-deck web-slide-deck deck-{{ deck.variant }}" data-learning-deck="{{ include.lab }}" aria-label="Интерактивное введение в лабораторную" tabindex="0">
   <div class="deck-topline">
     <div><span class="deck-kicker">Веб-слайды · {{ deck.slides | size }}</span><strong>{{ deck.kicker }}</strong></div>
     <span class="deck-count" aria-live="polite"><span data-deck-current>1</span> / {{ deck.slides | size }}</span>
   </div>
   <div class="deck-track">
   {% for slide in deck.slides %}
-    <article class="deck-slide{% if forloop.first %} is-active{% endif %}" data-deck-slide="{{ forloop.index0 }}" {% unless forloop.first %}hidden{% endunless %}>
+    <article class="deck-slide{% if forloop.first %} is-active{% endif %}" data-deck-slide="{{ forloop.index0 }}"{% if slide.feedback %} data-feedback="{{ slide.feedback | escape }}"{% endif %}{% unless forloop.first %} hidden aria-hidden="true"{% endunless %}>
       <div class="deck-slide-number">0{{ forloop.index }}</div>
       <div class="deck-copy">
         <h2>{{ slide.title }}</h2>

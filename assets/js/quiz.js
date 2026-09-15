@@ -1,16 +1,19 @@
 (function () {
   'use strict';
 
+  // Persist across tab closes — matches the course's "progress saved in browser" promise.
+  const NS = 'nsa:quiz:v1:';
+
   function safeStore(key, value) {
-    try { sessionStorage.setItem(key, value); } catch (e) {}
+    try { localStorage.setItem(NS + key, value); } catch (e) {}
   }
 
   function safeRead(key) {
-    try { return sessionStorage.getItem(key) || ''; } catch (e) { return ''; }
+    try { return localStorage.getItem(NS + key) || ''; } catch (e) { return ''; }
   }
 
   function safeRemove(key) {
-    try { sessionStorage.removeItem(key); } catch (e) {}
+    try { localStorage.removeItem(NS + key); } catch (e) {}
   }
 
   function enhanceQuiz(root) {
@@ -44,8 +47,8 @@
 
     function clearSavedQuiz() {
       if (id === 'foundation') return;
-      safeRemove('nsa:' + id + ':quiz');
-      safeRemove('nsa:' + id + ':quiz-meta');
+      safeRemove(id + ':quiz');
+      safeRemove(id + ':quiz-meta');
       const saved = root.parentElement && root.parentElement.querySelector('.quiz-saved-result');
       if (saved) saved.remove();
     }
@@ -82,9 +85,9 @@
         jump.remove();
       }
       updateScore();
-      if (id !== 'foundation') window.dispatchEvent(new CustomEvent('nsa:quiz-reset', {detail: {labId: id}}));
+      if (id !== 'foundation') window.dispatchEvent(new CustomEvent('nsa:quiz-reset', { detail: { labId: id } }));
       const first = cards[0];
-      if (first) first.scrollIntoView({behavior: 'smooth', block: 'start'});
+      if (first) first.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     function finish() {
@@ -93,15 +96,15 @@
 
       if (id !== 'foundation') {
         if (window.NSAEvidencePad && typeof window.NSAEvidencePad.saveQuiz === 'function') window.NSAEvidencePad.saveQuiz(resultLine);
-        else safeStore('nsa:' + id + ':quiz', resultLine);
-        safeStore('nsa:' + id + ':quiz-meta', JSON.stringify({
+        else safeStore(id + ':quiz', resultLine);
+        safeStore(id + ':quiz-meta', JSON.stringify({
           total: cards.length,
           answered: completed,
           mastered: completed,
           retries: retryCount,
           completed: completed === cards.length
         }));
-        window.dispatchEvent(new CustomEvent('nsa:quiz-complete', {detail: {
+        window.dispatchEvent(new CustomEvent('nsa:quiz-complete', { detail: {
           labId: id,
           result: resultLine,
           total: cards.length,
@@ -241,11 +244,11 @@
     updateScore();
 
     if (id !== 'foundation') {
-      const previous = safeRead('nsa:' + id + ':quiz').trim();
+      const previous = safeRead(id + ':quiz').trim();
       if (previous && scoreBox) {
         const saved = document.createElement('div');
         saved.className = 'quiz-saved-result';
-        saved.textContent = 'В этой вкладке уже есть завершённая самопроверка: ' + previous + '. Можно пройти тест ещё раз для закрепления.';
+        saved.textContent = 'В этом браузере уже есть завершённая самопроверка: ' + previous + '. Можно пройти тест ещё раз для закрепления.';
         scoreBox.insertAdjacentElement('afterend', saved);
       }
     }
