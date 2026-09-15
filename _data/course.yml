@@ -1,0 +1,642 @@
+modules:
+- id: linux
+  number: '01'
+  title: Основы Linux
+  codes: LX0–LX4
+  goal: Понимать среду, в которой работает программа.
+  description: Установка, командная строка, удалённый доступ, права, процессы и пакеты.
+- id: admin
+  number: '02'
+  title: Администрирование Linux
+  codes: LX5–LX9
+  goal: Настраивать систему и автоматизировать повторяющиеся действия.
+  description: Загрузка и службы, файловые системы, Bash, обработка текста и диагностика сети.
+- id: network
+  number: '03'
+  title: Сетевое программирование
+  codes: DO0–DO1 · NP1–NP4 · DO2
+  goal: Создавать, проверять и развёртывать сетевые приложения.
+  description: Среда Python, Git, сокеты, конкурентность, безопасность, веб-сервисы и развёртывание.
+lessons:
+- code: LX0
+  id: lx0
+  module: linux
+  title: Введение в ОС Linux
+  source: https://koroteev.site/os/1/0-vm_installation/
+  outcome: Собственная Linux-машина и проверенная переносимая копия.
+  idea: Выберем способ запуска Linux, установим Mint в VirtualBox и проверим переносимость стенда через экспорт и импорт OVA.
+    Общие понятия Linux и роль курса в подготовке разработчика разобраны во введении на главной странице.
+  concepts:
+  - хост и гость
+  - виртуальное оборудование
+  - VM, WSL 2, Docker и VPS
+  - ISO и OVA
+  practice:
+  - Linux Mint в VirtualBox; первые команды и паспорт среды.
+  - 'Экспорт и импорт OVA. Дополнительно: WSL, Docker и установка на оборудование.'
+  question: Почему установленная программа и запущенный процесс — не одно и то же?
+  answer: Программа хранится в файлах. Процесс — выполняющийся экземпляр программы, которому ОС выделяет ресурсы. Одну программу
+    можно запустить несколько раз.
+  ready: true
+  lab: /labs/lx0.html
+  quiz: /labs/lx0.html#quiz
+  quiz_count: 10
+  practicals:
+  - title: 'Лабораторная: Установка Linux в виртуальную машину'
+    source: https://koroteev.site/text/os00-1/
+    source_label: Оригинал задания
+    local: /labs/lx0.html#install
+- code: LX1
+  id: lx1
+  module: linux
+  title: Основы командной строки
+  source: https://koroteev.site/os/1/1-cli/
+  outcome: Понимание структуры команды, уверенная навигация по путям и безопасная работа с файлами, потоками, ссылками и архивами.
+  idea: Bash интерпретирует командную строку и запускает встроенные команды или программы. Текущий каталог определяет смысл
+    относительного пути; опции изменяют поведение команды, а аргументы указывают объект работы. Небольшие команды можно
+    связывать потоками, но сначала студент должен понимать каждую операцию отдельно.
+  concepts:
+  - терминал, Bash и структура команды
+  - справка man / --help / help
+  - абсолютные и относительные пути
+  - файловые операции и безопасное удаление
+  - потоки, ссылки и архивы
+  practice:
+  - 10 основных команд с пошаговым объяснением путей и файловых операций.
+  - Служебные команды, перенаправление, каналы, ссылки и проверяемое восстановление архива.
+  question: Почему команда может работать в одном каталоге и не находить файл в другом?
+  answer: Относительный путь отсчитывается от текущего каталога. Проверьте pwd и используйте корректный относительный либо
+    абсолютный путь.
+  ready: true
+  lab: /labs/lx1.html
+  quiz: /labs/lx1.html#quiz
+  quiz_count: 12
+  practicals:
+  - title: 'Практика: 10 основных команд'
+    source: https://koroteev.site/text/os11-1/
+    source_label: Оригинал задания
+    local: /labs/lx1.html#practice-basic
+  - title: 'Практика: Служебные команды'
+    source: https://koroteev.site/text/os11-2/
+    source_label: Оригинал задания
+    local: /labs/lx1.html#practice-service
+  - title: 'Практика: Работа с файлами'
+    source: https://koroteev.site/text/os11-4/
+    source_label: Оригинал задания
+    local: /labs/lx1.html#practice-files
+- code: LX2
+  id: lx2
+  module: linux
+  title: Использование удалённого доступа по SSH
+  source: https://koroteev.site/os/1/2-ssh/
+  outcome: Удалённая работа с сервером и устойчивый терминальный сеанс.
+  idea: 'SSH создаёт защищённое соединение между клиентом и сервером. После входа команды выполняются на удалённой машине.
+    tmux управляет терминальными сеансами на этой машине: отсоединение клиента не обязано завершать запущенную в tmux работу.'
+  concepts:
+  - клиент и сервер
+  - порт
+  - ключи SSH
+  - сеанс tmux
+  practice:
+  - SSH-подключение, передача файлов и вход по ключу.
+  - Создание, отсоединение и восстановление сеанса tmux.
+  question: Сохраняет ли tmux задачу после перезагрузки сервера?
+  answer: Нет. Он помогает пережить разрыв подключения, но обычные процессы завершаются при перезагрузке. Для автоматического
+    запуска служб применяются другие средства.
+  ready: true
+  lab: /labs/lx2.html
+  quiz: /labs/lx2.html#quiz
+  quiz_count: 12
+  practicals:
+  - title: 'Практика: SSH'
+    source: https://koroteev.site/text/os12-1/
+    source_label: Оригинал задания
+    local: /labs/lx2.html#practice-ssh
+  - title: 'Практика: Tmux'
+    source: https://koroteev.site/text/os12-2/
+    source_label: Оригинал задания
+    local: /labs/lx2.html#practice-tmux
+- code: LX3
+  id: lx3
+  module: linux
+  title: Права и пользователи
+  source: https://koroteev.site/os/1/3-users/
+  outcome: Общий рабочий каталог с осмысленно настроенным доступом.
+  idea: Доступ определяется учётной записью, группами и правами объектов. Значение r, w и x зависит от того, файл это или
+    каталог. Административные права стоит применять к конкретному действию, а не использовать как универсальный способ убрать
+    ошибку доступа.
+  concepts:
+  - UID и GID
+  - владелец и группа
+  - rwx
+  - sudo и umask
+  practice:
+  - Пользователи и группы; владельцы и права.
+  - Общий каталог, проверка доступа и специальные биты.
+  question: Почему право записи в файл не всегда позволяет удалить его?
+  answer: Удаление имени связано с правами на родительский каталог; дополнительные ограничения, например sticky bit, тоже
+    могут влиять на результат.
+  ready: true
+  lab: /labs/lx3.html
+  quiz: /labs/lx3.html#quiz
+  quiz_count: 12
+  practicals:
+  - title: 'Практика: Управление пользователями'
+    source: https://koroteev.site/text/os13-1/
+    source_label: Оригинал задания
+    local: /labs/lx3.html#practice-users
+  - title: 'Практика: Права доступа'
+    source: https://koroteev.site/text/os13-2/
+    source_label: Оригинал задания
+    local: /labs/lx3.html#practice-permissions
+- code: LX4
+  id: lx4
+  module: linux
+  title: Процессы и пакеты в Linux
+  source: https://koroteev.site/os/1/4-processes/
+  outcome: Установка и проверка пакета, наблюдение за процессом и безопасное управление его состоянием.
+  idea: Пакет описывает установленные файлы, версию и зависимости программы. Процесс — конкретный работающий экземпляр с PID,
+    состоянием и ресурсами. Установка пакета и запуск процесса — разные этапы; завершение процесса не удаляет программу.
+  concepts:
+  - пакеты и зависимости
+  - APT и dpkg
+  - PID, PPID и /proc
+  - сигналы и состояния
+  - nice и job control
+  practice:
+  - Симуляция, установка, проверка и безопасная очистка учебного пакета.
+  - Наблюдение за собственным процессом и управление STOP/CONT/TERM и nice.
+  question: Почему после завершения процесса программу можно запустить снова?
+  answer: Исполняемые файлы остаются установленными. Завершение процесса освобождает ресурсы конкретного запуска, а не удаляет
+    пакет.
+  ready: true
+  lab: /labs/lx4.html
+  quiz: /labs/lx4.html#quiz
+  quiz_count: 12
+  practicals:
+  - title: 'Практика: Пакеты и зависимости'
+    source: https://koroteev.site/os/1/4-processes/
+    source_label: Структура исходной темы
+    local: /labs/lx4.html#packages-environment
+  - title: 'Практика: Процессы и сигналы'
+    source: https://koroteev.site/os/1/4-processes/
+    source_label: Структура исходной темы
+    local: /labs/lx4.html#process-observe
+- code: LX5
+  id: lx5
+  module: admin
+  title: Управление загрузкой Linux и службами systemd
+  source: https://koroteev.site/os/2/1-init/
+  outcome: Собственная systemd-служба с проверенным unit-файлом, автозапуском, журналом и понятным lifecycle.
+  idea: В Linux с systemd загрузка организуется через targets и зависимости units. Описание службы, её текущее состояние и
+    политика автозапуска — разные уровни. Хорошая диагностика сначала проверяет программу, затем unit, runtime state и journal.
+  concepts:
+  - загрузка Linux и default.target
+  - systemd units и targets
+  - Type=exec и ExecStart
+  - enable/start/restart
+  - journalctl и диагностика
+  - базовый sandbox службы
+  practice:
+  - Наблюдение за загрузкой и текущими systemd targets.
+  - Создание безопасной Python heartbeat-службы и unit-файла.
+  - Проверка enable/start, MainPID, journal и restart с последующей очисткой.
+  question: Почему systemctl enable не равен systemctl start?
+  answer: enable настраивает связи автозапуска согласно [Install], а start активирует unit сейчас. Для совместного действия
+    можно использовать --now, когда это осознанно нужно.
+  ready: true
+  lab: /labs/lx5.html
+  quiz: /labs/lx5.html#quiz
+  quiz_count: 12
+  practicals:
+  - title: 'Практика: Создание и управление службами'
+    source: https://koroteev.site/text/os21-1/
+    source_label: Оригинал задания
+    local: /labs/lx5.html#service-program
+  - title: 'Практика: Автозапуск и диагностика systemd'
+    source: https://koroteev.site/os/2/1-init/
+    source_label: Структура исходной темы
+    local: /labs/lx5.html#service-lifecycle
+- code: LX6
+  id: lx6
+  module: admin
+  title: Управление файловыми системами в Linux
+  source: https://koroteev.site/os/2/2-filesystems/
+  outcome: Безопасно созданная ext4-файловая система в loop-образе, проверенное монтирование и UUID-based конфигурация без
+    изменения реального диска.
+  idea: 'Файловая система организует данные на блочном устройстве, а mount присоединяет её к единому дереву каталогов. В LX6
+    опасные операции изолированы в обычном image-файле через /dev/loopN: студент получает реальный опыт mkfs/mount/fstab без
+    риска для основного диска VM.'
+  concepts:
+  - block device, раздел и файловая система
+  - df, du, lsblk и findmnt
+  - loop device и ext4
+  - mount/umount и mount point
+  - UUID/LABEL и fstab
+  - сетевая файловая система NFS
+  practice:
+  - Наблюдение за storage map и безопасная работа с dd только в обычный файл.
+  - Создание ext4 внутри loop image; mount/umount и сохранность данных.
+  - Проверка отдельного UUID-based fstab; знакомство с моделью NFS.
+  question: Почему в LX6 можно безопасно выполнить mkfs.ext4, хотя форматирование настоящего диска опасно?
+  answer: Перед mkfs студент проверяет, что выбранное устройство имеет вид /dev/loopN и его backing file точно совпадает с
+    ~/NSA/LX6/lx6-ext4.img. Реальные диски и разделы в обязательном пути не форматируются.
+  ready: true
+  lab: /labs/lx6.html
+  quiz: /labs/lx6.html#quiz
+  quiz_count: 12
+  practicals:
+  - title: 'Практика: Файловые системы'
+    source: https://koroteev.site/os/2/2-filesystems/
+    source_label: Оригинальная структура темы
+    local: /labs/lx6.html#storage-map
+  - title: 'Практика: Безопасный loop image и mount'
+    source: https://man7.org/linux/man-pages/man4/loop.4.html
+    source_label: Современная документация Linux
+    local: /labs/lx6.html#loop-image
+  - title: 'Практика: Сетевые файловые системы'
+    source: https://koroteev.site/os/2/2-filesystems/
+    source_label: Тема автора
+    local: /labs/lx6.html#network-cleanup
+- code: LX7
+  id: lx7
+  module: admin
+  title: Основы скриптов на Bash
+  source: https://koroteev.site/os/2/3-bash/
+  outcome: Проверенный Bash-сценарий, понятные коды завершения, контроль целостности SHA-256 и безопасная пользовательская
+    задача cron.
+  idea: Bash-сценарий превращает последовательность команд в повторяемую процедуру. Надёжность начинается с явного интерпретатора,
+    кавычек, проверки синтаксиса и осмысленных кодов завершения. Cron запускает сценарий в другом контексте, поэтому пути
+    и окружение нужно задавать явно. Контрольная сумма помогает обнаружить изменение байтов, но не заменяет доверенный источник
+    или цифровую подпись.
+  concepts:
+  - shebang и исполняемый файл
+  - переменные, параметры и кавычки
+  - условия, case и exit status
+  - PATH и окружение
+  - SHA-256 и доверенная baseline
+  - пользовательский crontab
+  practice:
+  - Первый сценарий, bash -n, параметры и безопасное добавление учебного каталога в PATH текущей сессии.
+  - Сценарий system-report с case и осмысленным exit status.
+  - Проверка изменения файла через SHA-256 и восстановление доверенной baseline.
+  - Пользовательская cron-задача с явным окружением, наблюдением одного запуска и аккуратным удалением только LX7-блока.
+  question: Почему сценарий может успешно работать из терминала, но вести себя иначе при запуске из cron?
+  answer: У cron может быть другое окружение, PATH и рабочий контекст. Поэтому для автоматизации полезно использовать абсолютные
+    пути, явно задавать необходимое окружение и писать диагностический вывод в известный лог.
+  ready: true
+  lab: /labs/lx7.html
+  quiz: /labs/lx7.html#quiz
+  quiz_count: 12
+  practicals:
+  - title: 'Практика: Ваш первый сценарий'
+    source: https://koroteev.site/text/os23-1/
+    source_label: Оригинал задания
+    local: /labs/lx7.html#first-script
+  - title: 'Практика: Работа с cron'
+    source: https://koroteev.site/text/os23-2/
+    source_label: Оригинал задания
+    local: /labs/lx7.html#cron-safe
+  - title: 'Дополнительно: контрольные суммы — современная версия SHA-256'
+    source: https://koroteev.site/text/os23-3/
+    source_label: Исходная идея MD5, обновлённая в локальной LX7
+    local: /labs/lx7.html#checksum
+- code: LX8
+  id: lx8
+  module: admin
+  title: Средства обработки текста
+  source: https://koroteev.site/os/2/4-text/
+  outcome: Полезная информация, извлечённая из журналов и оформленная в отчёт.
+  idea: Журналы и текстовые файлы можно рассматривать как поток записей. Фильтрация выбирает нужные строки, преобразование
+    меняет их представление, а агрегирование помогает увидеть повторения и частоты. Регулярное выражение описывает шаблон;
+    его нужно проверять на подходящих и неподходящих примерах.
+  concepts:
+  - grep
+  - sed и awk
+  - регулярные выражения
+  - отчёты
+  practice:
+  - Формирование HTML-отчёта.
+  - Разбор журналов, фильтрация и сводная информация.
+  question: Почему совпадение с шаблоном ещё не доказывает правильность всей обработки?
+  answer: Нужны также проверки строк, которые не должны совпасть, пустого ввода и особых символов. Один успешный пример не
+    покрывает все случаи.
+  ready: false
+  lab: null
+  quiz: null
+  quiz_count: null
+  practicals:
+  - title: 'Практика: Создание HTML-отчета'
+    source: https://koroteev.site/text/os24-1/
+    source_label: Оригинал задания
+    local: null
+  - title: 'Практика: Парсинг лог-файлов'
+    source: https://koroteev.site/text/os24-2/
+    source_label: Оригинал задания
+    local: null
+- code: LX9
+  id: lx9
+  module: admin
+  title: Настройка сетевой среды в Linux
+  source: https://koroteev.site/os/2/5-network/
+  outcome: Последовательная диагностика сетевой проблемы.
+  idea: 'Сетевое соединение зависит от интерфейса, адреса, маршрута, разрешения имени и доступности службы. Эти уровни стоит
+    проверять отдельно. Отсутствие ответа ping не доказывает недоступность веб-сервиса: ICMP может фильтроваться, а TCP-соединение
+    — работать.'
+  concepts:
+  - IP и подсети
+  - маршрутизация
+  - DNS
+  - NAT и порты
+  practice:
+  - Диагностика адресов, маршрутов и доступности узлов.
+  - Сравнение режимов сетевого подключения VM.
+  question: Узел доступен по IP, но не по имени. Какую подсистему проверить следующей?
+  answer: 'Проверьте подсистему разрешения имён: результат системного lookup, /etc/hosts и порядок источников NSS, а затем
+    DNS, если он используется. Доступность по IP уже помогает отделить эту проблему от базовой IP-маршрутизации.'
+  ready: false
+  lab: null
+  quiz: null
+  quiz_count: null
+  practicals:
+  - title: 'Практика: Диагностика сетей'
+    source: https://koroteev.site/text/os25-1/
+    source_label: Оригинал задания
+    local: null
+  - title: 'Дополнительно: Способы сетевых подключений виртуальных машин'
+    source: https://docs.google.com/document/d/1H1ozZckECh1R4Rj5nP_S8urGUUyRfL-NSHBC_Rn9fvw/edit?usp=sharing
+    source_label: Методичка автора
+    local: null
+- code: DO0
+  id: do0
+  module: network
+  title: Использование Linux для разработки
+  source: https://koroteev.site/os/3/0-environment/
+  outcome: Среда Python, которую можно воспроизвести для проекта.
+  idea: 'Проекту нужен не просто интерпретатор, а согласованное окружение: версия Python, зависимости и способ запуска. Изоляция
+    зависимостей помогает не смешивать требования разных проектов, но сама по себе не гарантирует воспроизводимость: фиксируйте
+    поддерживаемую версию Python, зависимости и способ их установки. Редактор и файловые инструменты упрощают работу, но не
+    заменяют понимание того, какой интерпретатор выполняет код.'
+  concepts:
+  - интерпретатор
+  - окружение проекта
+  - зависимости
+  - файловые операции
+  practice:
+  - Настройка Python и знакомство с Vim.
+  - Системное программирование и учебный файловый менеджер.
+  question: Почему установка библиотеки не всегда устраняет ошибку import?
+  answer: Библиотека могла попасть в другое окружение. Сопоставьте интерпретатор запуска с тем, для которого устанавливались
+    зависимости.
+  ready: false
+  lab: null
+  quiz: null
+  quiz_count: null
+  practicals:
+  - title: 'Практика: Настройка рабочего окружения Python в Linux'
+    source: https://www.youtube.com/watch?v=b9tXQsZPJOE
+    source_label: Видео автора
+    local: null
+  - title: 'Практика: Vim'
+    source: https://docs.google.com/document/d/1XmShF_7YvyUUV43iP5F2lkR9oFqQGbnZ8cwYaVHEAaQ/edit?usp=sharing
+    source_label: Методичка автора
+    local: null
+  - title: 'Практика: Файловый менеджер'
+    source: https://docs.google.com/document/d/1OEd8tlQeB8G2aBxeJSYDEb168NCmVwySZv0oZ7QFzXw/edit?usp=sharing
+    source_label: Методичка автора
+    local: null
+- code: DO1
+  id: do1
+  module: network
+  title: 'Контроль версий: Git и GitHub'
+  source: https://koroteev.site/os/3/2-git/
+  outcome: История изменений проекта и работа с удалённым репозиторием.
+  idea: Git хранит историю изменений локально. Commit фиксирует выбранные изменения, ветка позволяет развивать вариант работы,
+    а удалённый репозиторий — обмениваться историей. GitHub и GitLab размещают репозитории, но сам Git не требует постоянного
+    подключения к ним.
+  concepts:
+  - репозиторий
+  - commit
+  - ветка
+  - remote
+  practice:
+  - Git в графическом интерфейсе и терминале.
+  - Работа с удалёнными репозиториями и GitHub.
+  question: Увидят ли другие участники ваш новый commit сразу после его создания?
+  answer: Нет. Сначала commit находится локально; для передачи в доступный другим удалённый репозиторий обычно выполняют push.
+  ready: false
+  lab: null
+  quiz: null
+  quiz_count: null
+  practicals:
+  - title: 'Практика: Основы работы с СКВ в графическом режиме'
+    source: https://github.com/fa-python-network/0_git_basics#1-%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D1%8B-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B-%D1%81-%D1%81%D0%BA%D0%B2-%D0%B2-%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%BC-%D1%80%D0%B5%D0%B6%D0%B8%D0%BC%D0%B5
+    source_label: Методичка автора
+    local: null
+  - title: 'Практика: Работа с Git в терминале'
+    source: https://github.com/fa-python-network/0_git_basics#2-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-git-%D0%B2-%D1%82%D0%B5%D1%80%D0%BC%D0%B8%D0%BD%D0%B0%D0%BB%D0%B5
+    source_label: Методичка автора
+    local: null
+  - title: 'Практика: Работа с удаленными репозиториями и GitHub'
+    source: https://github.com/fa-python-network/0_git_basics#3-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-%D1%81-%D1%83%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD%D0%BD%D1%8B%D0%BC%D0%B8-%D1%80%D0%B5%D0%BF%D0%BE%D0%B7%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D1%8F%D0%BC%D0%B8-%D0%B8-github
+    source_label: Методичка автора
+    local: null
+- code: NP1
+  id: np1
+  module: network
+  title: Использование сокетов
+  source: https://koroteev.site/os/3/3-sockets/
+  outcome: Простой клиент и сервер, обменивающиеся данными.
+  idea: 'Сокет — интерфейс программы для сетевого обмена. Для TCP сервер обычно выполняет bind/listen/accept, а клиент — connect.
+    UDP работает с датаграммами и не требует обязательного установления соединения; connect для UDP может использоваться как
+    удобная привязка к peer. TCP передаёт поток байтов: границы отдельных send не превращаются автоматически в границы сообщений.
+    Формат и границы сообщения задаёт протокол приложения.'
+  concepts:
+  - сокет
+  - TCP и UDP
+  - адрес и порт
+  - формат сообщения
+  practice:
+  - Простой эхо-сервер и клиент.
+  - Проверка обмена, разрыва соединения и границ сообщений.
+  question: Обязательно ли один recv вернёт всё сообщение, отправленное через TCP?
+  answer: Нет. Он может вернуть часть данных или данные нескольких отправок. Программа должна собирать сообщения по правилам
+    своего протокола.
+  ready: false
+  lab: null
+  quiz: null
+  quiz_count: null
+  practicals:
+  - title: 'Практика: Простой эхо-сервер'
+    source: https://github.com/fa-python-network/1_echo_server
+    source_label: Архивный материал автора · не инструкция к выполнению
+    local: null
+- code: NP2
+  id: np2
+  module: network
+  title: Асинхронное программирование
+  source: https://koroteev.site/os/3/4-threading/
+  outcome: Выбор подходящей модели одновременной работы.
+  idea: Потоки, процессы и asyncio решают задачи конкурентного выполнения разными способами. Асинхронность особенно полезна
+    при ожидании ввода-вывода, но сама по себе не ускоряет вычисление. В обычной сборке CPython с включённым GIL потоки подходят
+    прежде всего для конкурентного I/O, а для CPU-bound параллелизма часто используют процессы; free-threaded сборки CPython
+    существуют, но не являются режимом по умолчанию. В современном Python верхнеуровневой точкой входа для типичного asyncio-приложения
+    служит asyncio.run(). При выборе модели учитывают тип нагрузки, обмен данными и стоимость координации.
+  concepts:
+  - потоки
+  - процессы
+  - asyncio
+  - ожидание и параллелизм
+  practice:
+  - Многопоточный сервер и многопроцессные вычисления.
+  - Задачи и сетевое ожидание в asyncio.
+  question: Станет ли тяжёлое вычисление быстрее, если только добавить к функции async?
+  answer: Нет. async задаёт возможность асинхронного взаимодействия, а не автоматически распределяет вычисления между ядрами.
+  ready: false
+  lab: null
+  quiz: null
+  quiz_count: null
+  practicals:
+  - title: 'Практика: Многопоточный сервер'
+    source: https://github.com/fa-python-network/2_threaded_server
+    source_label: Архивный материал автора · не инструкция к выполнению
+    local: null
+  - title: 'Практика: Мультипроцессные вычисления'
+    source: https://github.com/fa-python-network/3_Parallelism
+    source_label: Архивный материал автора · не инструкция к выполнению
+    local: null
+  - title: 'Практика: Библиотека asyncio'
+    source: https://github.com/fa-python-network/4_asyncio_server
+    source_label: Архивный материал автора · не инструкция к выполнению
+    local: null
+- code: NP3
+  id: np3
+  module: network
+  title: Безопасность сетевых приложений
+  source: https://koroteev.site/os/4/1-tls/
+  outcome: Понимание задач шифрования, проверки подлинности и защищённого обмена.
+  idea: 'Конфиденциальность, целостность и аутентификация — разные свойства защиты. Симметричные и асимметричные методы используются
+    совместно в современных протоколах. Классические шифры и упрощённый обмен ключами допустимы только как модели для изучения
+    принципов и слабостей: неаутентифицированный обмен Диффи–Хеллмана, например, сам по себе не защищает от активной атаки
+    посредника. Для реальных приложений используют стандартизованные протоколы, аутентифицированное шифрование и проверенные
+    библиотеки, а не собственную криптосхему.'
+  concepts:
+  - ключи
+  - шифрование
+  - аутентификация
+  - TLS
+  practice:
+  - Анализ учебных шифров как моделей и обсуждение причин, по которым их нельзя применять для реальной защиты.
+  - TLS-рукопожатие, аутентификация peer и установление защищённого обмена с использованием проверенной библиотеки.
+  question: Достаточно ли зашифровать данные, чтобы знать, с кем установлено соединение?
+  answer: Нет. Нужна аутентификация другой стороны. В типичном HTTPS сервер подтверждает подлинность сертификатом и владением
+    соответствующим закрытым ключом; TLS 1.3 также предусматривает режимы с предварительно общим ключом (PSK).
+  ready: false
+  lab: null
+  quiz: null
+  quiz_count: null
+  practicals:
+  - title: 'Практика: Симметричное шифрование'
+    source: https://github.com/fa-python-network/7_Symmetric_ciphers
+    source_label: Архивный материал автора · не инструкция к выполнению
+    local: null
+  - title: 'Практика: Асимметричное шифрование'
+    source: https://github.com/fa-python-network/8_Assymmetric_ciphers
+    source_label: Архивный материал автора · не инструкция к выполнению
+    local: null
+  - title: 'Практика: Протокол рукопожатия'
+    source: https://koroteev.site/os/4/1-tls/
+    source_label: Тема автора
+    local: null
+- code: NP4
+  id: np4
+  module: network
+  title: Веб-сервер
+  source: https://koroteev.site/os/4/2-web-server/
+  outcome: Понимание пути HTTP-запроса от клиента до ответа сервера.
+  idea: HTTP задаёт семантику запросов и ответов. Веб-сервер принимает трафик, может отдавать файлы или передавать запрос
+    приложению. HTTP/1.1 и HTTP/2 обычно используют TCP (для HTTPS — с TLS), а HTTP/3 переносит HTTP-семантику поверх QUIC/UDP.
+    Код состояния и журналы помогают локализовать ошибку. Виртуальные хосты позволяют одному серверу обслуживать несколько
+    имён.
+  concepts:
+  - HTTP
+  - Apache и nginx
+  - виртуальные хосты
+  - клиент и сервер
+  practice:
+  - Установка веб-сервера и виртуальные хосты.
+  - Простой веб-клиент, веб-сервер и разбор страниц.
+  question: Всегда ли ответ 404 означает, что сетевое соединение не установилось?
+  answer: Нет. HTTP-ответ уже получен. Проверяйте путь, маршрутизацию запроса внутри сервера и доступность запрошенного ресурса.
+  ready: false
+  lab: null
+  quiz: null
+  quiz_count: null
+  practicals:
+  - title: 'Практика: Установка Apache'
+    source: https://docs.google.com/document/d/1yWW0frd1MdW0onBCcwQYSQk_NZWtkNSQ_f9uzCEbA0Q/edit?usp=sharing
+    source_label: Архивный материал автора · не инструкция к выполнению
+    local: null
+  - title: 'Практика: Установка nginx'
+    source: https://www.youtube.com/watch?v=UpS5s4z6odo
+    source_label: Архивный материал автора · не инструкция к выполнению
+    local: null
+  - title: 'Практика: Виртуальные хосты'
+    source: https://www.youtube.com/watch?v=ZyGfUllQ34I
+    source_label: Архивный материал автора · не инструкция к выполнению
+    local: null
+  - title: 'Практика: Простой веб-клиент'
+    source: https://github.com/fa-python-network/6_Web_server
+    source_label: Архивный материал автора · не инструкция к выполнению
+    local: null
+  - title: 'Практика: Простой веб-сервер'
+    source: https://github.com/fa-python-network/6_Web_server
+    source_label: Архивный материал автора · не инструкция к выполнению
+    local: null
+  - title: 'Практика: Веб-парсер'
+    source: https://docs.google.com/document/d/1-8xcdBJ96kir46xRXAaDHcED0vFj6jnJilTk6oeVoFI/edit?usp=sharing
+    source_label: Архивный материал автора · не инструкция к выполнению
+    local: null
+- code: DO2
+  id: do2
+  module: network
+  title: Создание и развёртывание серверного приложения
+  source: https://koroteev.site/os/4/5-deploy/
+  outcome: Приложение, запуск и обновление которого можно повторить.
+  idea: Развёртывание переносит приложение из среды разработки в среду работы. Помимо кода нужны зависимости, конфигурация,
+    права, сеть, данные и проверка работоспособности. При контейнерном развёртывании образ и контейнер — разные сущности,
+    а данные, которые должны пережить удаление контейнера, размещают в подходящем постоянном хранилище, например volume или
+    bind mount. История версий и понятный порядок обновления помогают повторить запуск и восстановиться после неудачного изменения.
+  concepts:
+  - конфигурация
+  - зависимости
+  - развёртывание
+  - проверка сервиса
+  practice:
+  - Развёртывание вручную, через Git и с помощью Docker.
+  - Учебный файловый сервис поверх сокетов не следует называть FTP, если он не реализует стандартный протокол FTP. Классический
+    FTP сам по себе не шифрует учётные данные и содержимое; SFTP — отдельный протокол поверх SSH, а FTPS добавляет TLS к FTP.
+    Для реального сервиса протокол выбирают по требованиям и модели угроз.
+  question: Почему одного сообщения «процесс запущен» недостаточно для проверки развёртывания?
+  answer: Процесс может работать, но не обслуживать запросы. Нужны проверка доступности, ожидаемого ответа и журналов приложения.
+  ready: false
+  lab: null
+  quiz: null
+  quiz_count: null
+  practicals:
+  - title: 'Практика: Учебный файловый сервис (в исходнике — «FTP-сервер»)'
+    source: https://koroteev.site/os/4/5-deploy/
+    source_label: Исходная тема автора
+    local: null
+  - title: 'Практика: Развертывание в ручном режиме'
+    source: https://www.youtube.com/watch?v=jRM95_yCbQ4
+    source_label: Архивный материал автора · не инструкция к выполнению
+    local: null
+  - title: 'Практика: Развертывание через Git'
+    source: https://www.youtube.com/watch?v=oKqTB2nJ-Yc
+    source_label: Архивный материал автора · не инструкция к выполнению
+    local: null
+  - title: 'Практика: Развертывание через Docker'
+    source: https://www.youtube.com/watch?v=vd609d2Wc5E
+    source_label: Архивный материал автора · не инструкция к выполнению
+    local: null

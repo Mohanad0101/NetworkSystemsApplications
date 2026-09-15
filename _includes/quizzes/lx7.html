@@ -1,0 +1,165 @@
+<section class="quiz-shell" data-quiz-shell="lx7">
+  <div class="quiz-header">
+    <div><p class="eyebrow">Проверка понимания</p><h3>LX7 · 12 вопросов</h3></div>
+    <p>Выберите наиболее точный вариант. Если первая попытка не подошла, прочитайте объяснение и попробуйте снова — это часть обучения, а не штраф.</p>
+  </div>
+  <div class="quiz" data-quiz="lx7" data-course="Сетевые системы и приложения">
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="shebang" data-review="#first-script">
+      <p class="quiz-question" id="lx7-q-0">1. Что делает shebang в первой строке исполняемого Bash-сценария?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx7-q-0">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Задаёт пароль для script</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Подсказывает ядру, какой интерпретатор использовать при прямом запуске файла</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Автоматически добавляет файл в PATH</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Делает файл доступным root</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Shebang вида #!/usr/bin/env bash задаёт интерпретатор для прямого запуска исполняемого файла. При запуске bash script.sh интерпретатор уже выбран явно командой bash.</span></p>
+        <p class="quiz-reading"><a href="#first-script">Разобрать в лабораторной</a><a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Scripts.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="PATH" data-review="#first-script">
+      <p class="quiz-question" id="lx7-q-1">2. Почему после chmod +x ./hello.sh может запускаться, а команда hello.sh всё ещё не находиться?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx7-q-1">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">chmod удаляет PATH</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Текущий каталог автоматически не обязан входить в PATH; Bash ищет команду по каталогам PATH</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Расширение .sh запрещает поиск</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Bash запускает только файлы из /usr/bin</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Если в имени команды нет slash, Bash ищет функции, builtins и затем executable files в каталогах PATH. ./hello.sh содержит slash и обращается к файлу напрямую.</span></p>
+        <p class="quiz-reading"><a href="#first-script">Разобрать в лабораторной</a><a href="https://www.gnu.org/software/bash/manual/html_node/Command-Search-and-Execution.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="quoting" data-review="#first-script">
+      <p class="quiz-question" id="lx7-q-2">3. Зачем писать &quot;$name&quot;, а не $name, когда значение передаётся как один аргумент?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx7-q-2">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Кавычки делают текст root-only</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Двойные кавычки сохраняют результат expansion как один аргумент и предотвращают нежелательное word splitting/globbing</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Кавычки отключают переменные</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Без кавычек Bash всегда завершится с кодом 2</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Двойные кавычки позволяют expansion переменной, но сохраняют её как единый аргумент. Это особенно важно для значений с пробелами и wildcard-символами.</span></p>
+        <p class="quiz-reading"><a href="#first-script">Разобрать в лабораторной</a><a href="https://www.gnu.org/software/bash/manual/bash.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="syntax check" data-review="#logic-exit">
+      <p class="quiz-question" id="lx7-q-3">4. Что проверяет bash -n script.sh?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx7-q-3">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Выполняет все команды с правами root</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Проверяет синтаксис, не выполняя обычные команды сценария</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Проверяет только права доступа</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Запускает сценарий из cron</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Опция -n читает команды и проверяет синтаксис без их выполнения. Это полезная ранняя проверка, но она не гарантирует отсутствие логических ошибок.</span></p>
+        <p class="quiz-reading"><a href="#logic-exit">Разобрать в лабораторной</a><a href="https://www.gnu.org/software/bash/manual/html_node/Invoking-Bash.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="exit status" data-review="#logic-exit">
+      <p class="quiz-question" id="lx7-q-4">5. Как обычно интерпретируется exit status 0 в Unix/Linux?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx7-q-4">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Синтаксическая ошибка</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Успешное завершение</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Процесс обязательно стал daemon</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Файл был изменён</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>По соглашению 0 означает успех, а ненулевое значение сообщает вызывающей стороне об ошибке или особом результате. Конкретные ненулевые коды определяет программа.</span></p>
+        <p class="quiz-reading"><a href="#logic-exit">Разобрать в лабораторной</a><a href="https://www.gnu.org/software/bash/manual/html_node/Bourne-Shell-Builtins.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="automation contracts" data-review="#logic-exit">
+      <p class="quiz-question" id="lx7-q-5">6. Почему INVALID_EXIT=2 полезнее, чем просто печать строки «неверный режим»?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx7-q-5">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Код 2 увеличивает скорость Bash</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Другой сценарий или cron может машинно проверить ненулевой status, не анализируя человеческий текст</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Код 2 автоматически исправляет параметр</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Он добавляет script в PATH</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Текст удобен человеку, а exit status — простой машинно-читаемый сигнал. Поэтому автоматизация может ветвиться по успеху/ошибке без разбора текста.</span></p>
+        <p class="quiz-reading"><a href="#logic-exit">Разобрать в лабораторной</a><a href="https://www.gnu.org/software/bash/manual/html_node/Bourne-Shell-Builtins.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="SHA-256" data-review="#checksum">
+      <p class="quiz-question" id="lx7-q-6">7. Что показывает успешный sha256sum -c baseline.sha256?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx7-q-6">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Файл обязательно получен от доверенного автора</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Текущие байты файла совпадают с digest, записанным в baseline-файле</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Файл никогда не менялся в прошлом</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Файл зашифрован</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Проверка подтверждает соответствие текущего содержимого сохранённому digest. Если злоумышленник может изменить и файл, и baseline, одной checksum недостаточно для доказательства подлинности.</span></p>
+        <p class="quiz-reading"><a href="#checksum">Разобрать в лабораторной</a><a href="https://www.gnu.org/software/coreutils/manual/html_node/sha2-utilities.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="hash choice" data-review="#checksum">
+      <p class="quiz-question" id="lx7-q-7">8. Почему в локальной LX7 вместо исходного примера MD5 используется SHA-256?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx7-q-7">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">MD5 не умеет читать файлы</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Для современной демонстрации integrity SHA-256 имеет значительно более подходящие криптографические свойства; MD5 не следует использовать для защиты от намеренной подделки</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">SHA-256 автоматически подписывает файл</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">MD5 работает только в Windows</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>MD5 имеет известные collision weaknesses. Для современного учебного примера целостности лучше SHA-256, при этом даже SHA-256 без доверенной baseline или подписи не доказывает происхождение.</span></p>
+        <p class="quiz-reading"><a href="#checksum">Разобрать в лабораторной</a><a href="https://www.gnu.org/software/coreutils/manual/html_node/sha2-utilities.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="cron syntax" data-review="#cron-safe">
+      <p class="quiz-question" id="lx7-q-8">9. Сколько полей времени стоит перед командой в пользовательской строке crontab?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx7-q-8">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">3</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">5</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">6, потому что обязательно указывается имя пользователя</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">8</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Пользовательский crontab использует пять time/date fields, затем команду. Имя пользователя добавляется в системных crontab-файлах другого формата.</span></p>
+        <p class="quiz-reading"><a href="#cron-safe">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man5/crontab.5.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="cron environment" data-review="#cron-safe">
+      <p class="quiz-question" id="lx7-q-9">10. Почему script, который работает вручную, может не сработать из cron?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx7-q-9">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Cron запрещает Bash</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">У cron может отличаться окружение/PATH, поэтому полезны абсолютные пути и явное окружение</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Cron удаляет execute bit</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Cron всегда запускает команды от root</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Cron запускает команды не из вашей интерактивной shell-сессии. Не стоит полагаться на aliases, текущий каталог или интерактивно изменённый PATH.</span></p>
+        <p class="quiz-reading"><a href="#cron-safe">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man5/crontab.5.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="safe cron management" data-review="#cron-safe">
+      <p class="quiz-question" id="lx7-q-10">11. Почему LX7 добавляет cron-запись между маркерами NSA-LX7-BEGIN/END вместо crontab -r?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx7-q-10">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Маркеры ускоряют cron</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Так можно удалить только учебный блок и сохранить другие пользовательские задания</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Без маркеров cron не запускается</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Маркеры дают root-права</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>crontab -r удаляет весь пользовательский crontab. Маркированный блок позволяет автоматизировать cleanup только ресурсов LX7, не затрагивая существующие задания студента.</span></p>
+        <p class="quiz-reading"><a href="#cron-safe">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man5/crontab.5.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="automation model" data-review="#first-script">
+      <p class="quiz-question" id="lx7-q-11">12. Какой вывод лучше всего описывает цель LX7?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx7-q-11">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Запомнить как можно больше однострочных команд</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Научиться превращать ручные действия в повторяемый сценарий с проверяемыми входами, status-кодами, целостностью и безопасным расписанием</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Запускать все scripts через sudo</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Заменить Python на Bash во всех задачах</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Bash особенно полезен как glue/automation language для системных операций. Ключевой навык — делать небольшие повторяемые процедуры понятными, проверяемыми и безопасно автоматизируемыми.</span></p>
+        <p class="quiz-reading"><a href="#first-script">Разобрать в лабораторной</a><a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Scripts.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <noscript><p class="callout warning"><strong>Вопросы доступны.</strong> Для мгновенной проверки ответа и учебной обратной связи включите JavaScript для этого сайта.</p></noscript>
+  </div>
+</section>

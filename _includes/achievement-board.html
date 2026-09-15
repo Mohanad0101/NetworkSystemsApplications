@@ -1,0 +1,39 @@
+{% assign achievement_data = site.data.achievements %}
+{% assign achievement_entries = achievement_data.entries | where: 'approved', true %}
+<aside class="achievement-board" aria-labelledby="achievement-board-title">
+  <div class="achievement-board-head">
+    <div>
+      <p class="course-kicker">После проверки преподавателем</p>
+      <h3 id="achievement-board-title">Достижения практикума</h3>
+    </div>
+    <span class="achievement-shield" aria-hidden="true">✓</span>
+  </div>
+  <p class="achievement-board-intro">Небольшая лента принятых работ. Это не рейтинг: здесь отмечается прогресс, а специальные бейджи подтверждает преподаватель.</p>
+
+  {% if achievement_entries.size > 0 %}
+  <ol class="achievement-list" aria-label="Последние принятые лабораторные">
+    {% for entry in achievement_entries limit: 8 %}
+    {% assign badge = achievement_data.badges[entry.badge] %}
+    <li class="achievement-item">
+      <div class="achievement-item-top">
+        <span class="achievement-lab">{{ entry.lab | escape }}</span>
+        <time datetime="{{ entry.date | escape }}">{{ entry.date | date: "%d.%m.%Y" }}</time>
+      </div>
+      <div class="achievement-student"><strong>{{ entry.group | escape }}</strong><span>№ {{ entry.number | escape }}</span></div>
+      <span class="achievement-badge badge-{{ badge.tone | default: 'green' }}" title="{{ badge.description | escape }}">{{ badge.label | default: 'Работа принята' | escape }}</span>
+    </li>
+    {% endfor %}
+  </ol>
+  {% else %}
+  <div class="achievement-empty">
+    <strong>Первая принятая работа появится здесь.</strong>
+    <p>После проверки преподаватель публикует только учебный идентификатор: группу, номер по списку, лабораторную и дату.</p>
+  </div>
+  {% endif %}
+
+  <details class="achievement-about">
+    <summary>Как это работает и что видно другим</summary>
+    <p>{{ achievement_data.privacy.message | escape }}</p>
+    <p>Бейджи за качество или самостоятельность не вычисляются из MCQ, скорости или процента комплектности: их может назначить только преподаватель после проверки работы.</p>
+  </details>
+</aside>

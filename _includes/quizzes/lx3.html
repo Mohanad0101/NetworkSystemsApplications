@@ -1,0 +1,169 @@
+<section class="quiz-shell" data-quiz-shell="lx3">
+  <div class="quiz-intro-row">
+    <div>
+      <p class="eyebrow">Проверка понимания</p>
+      <p class="quiz-static-note"><strong>12 вопросов.</strong> Выберите лучший ответ. Если вариант не подошёл, прочитайте объяснение и попробуйте ещё раз; правильный ответ можно найти без штрафа. Итог прохождения автоматически войдёт в отчёт.</p>
+    </div>
+    <div class="quiz-status-badge">1 лучший ответ</div>
+  </div>
+  <div class="quiz" data-quiz="lx3" data-course="Сетевые системы и приложения">
+    <div class="quiz-score" data-quiz-score role="status">Пройдено: 0 / 12 · Можно пробовать снова</div>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="UID и группы" data-review="#practice-users">
+      <p class="quiz-question" id="lx3-q-0">1. Id показывает uid=2003(user_3), gid=2003(user_3), groups=2003(user_3),1002(students). Как это прочитать?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx3-q-0">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">UID пользователя — 1002; основная группа — students</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">UID пользователя — 2003; основная группа — user_3; students — дополнительная</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Пользователь имеет две разные учётные записи</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">GID 2003 означает наличие административных прав</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>UID идентифицирует пользователя, GID — группу. В дополнительных группах можно состоять независимо от основной группы.</span></p>
+        <p class="quiz-reading"><a href="#practice-users">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os13-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Разделение учётных данных" data-review="#practice-users">
+      <p class="quiz-question" id="lx3-q-1">2. Почему обычному пользователю обычно разрешено читать /etc/passwd, но не /etc/shadow?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx3-q-1">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Cat скрывает секретные поля passwd автоматически</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Общие сведения о пользователях нужны программам, а хеши паролей требуют защиты</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Passwd содержит только данные того, кто его читает</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Shadow хранит лишь список открытых терминалов</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>В passwd находятся логин, UID, GID, домашний каталог и оболочка. При shadow-паролях секретные сведения отделены от этих общих данных.</span></p>
+        <p class="quiz-reading"><a href="#practice-users">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os13-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="2" data-topic="Дополнительные группы" data-review="#users-create">
+      <p class="quiz-question" id="lx3-q-2">3. Нужно добавить user_3 в students, сохранив прежние дополнительные группы. Какая форма подходит?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx3-q-2">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">sudo groupadd students user_3</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">sudo usermod -G students user_3</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">sudo usermod -aG students user_3</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">sudo passwd user_3</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>-a добавляет группы к существующему списку. Без -a параметр -G заменяет список дополнительных групп.</span></p>
+        <p class="quiz-reading"><a href="#users-create">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os13-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="2" data-topic="Контекст выполнения" data-review="#access-check">
+      <p class="quiz-question" id="lx3-q-3">4. Администратор выполняет sudo -u user_3 cat /labs/list. От чьего имени читается файл?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx3-q-3">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">От владельца файла независимо от -u</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Обязательно от root, потому что присутствует слово sudo</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">От имени user_3 с его учётными данными</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">От группы workers независимо от пользователя</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>-u выбирает целевого пользователя. Такая проверка моделирует его доступ; обычное sudo cat без -u обычно проверяло бы доступ root.</span></p>
+        <p class="quiz-reading"><a href="#access-check">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os13-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="0" data-topic="Группа и проход по пути" data-review="#practice-permissions">
+      <p class="quiz-question" id="lx3-q-4">5. Скрипт принадлежит группе students и имеет 750, но user_3 не может пройти через /labs/tests. Достаточно ли ещё раз выполнить chgrp students для скрипта?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx3-q-4">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Нет: нужно проверить право прохода x у каталогов пути</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Да: группа файла отменяет права каталогов</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Да: chgrp автоматически открывает родительские каталоги</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Нет: всем каталогам обязательно нужны права 777</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Доступ проверяется и на пути к файлу. Изменение группы конечного объекта не изменяет права его родителей.</span></p>
+        <p class="quiz-reading"><a href="#practice-permissions">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os13-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="2" data-topic="Числовые права файла" data-review="#practice-permissions">
+      <p class="quiz-question" id="lx3-q-5">6. У обычного файла root:workers права 640. User_1 состоит в workers, не является владельцем, путь доступен. Что разрешают эти биты?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx3-q-5">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Читать и изменять файл</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Только выполнять файл</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Читать, но не изменять и не выполнять файл</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Ничего, поскольку владельцем является root</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Групповая тройка 4 означает r--. Первая цифра относится к владельцу, а не ко всем пользователям.</span></p>
+        <p class="quiz-reading"><a href="#practice-permissions">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os13-2/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="0" data-topic="Проход без списка" data-review="#practice-permissions">
+      <p class="quiz-question" id="lx3-q-6">7. В LX3 каталог /labs/tests имеет 771. Почему student вне teachers может запустить разрешённый скрипт по известному полному пути, но не получить список имён через ls?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx3-q-6">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">У остальных есть x на каталог, но нет r; права скрипта проверяются отдельно</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">X автоматически даёт чтение списка каталога</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Права каталога полностью игнорируются для скриптов</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Группа скрипта автоматически становится группой каталога</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>X позволяет проходить к известному имени, r — читать список имён. Для Bash-скрипта нужны также подходящие права самого файла.</span></p>
+        <p class="quiz-reading"><a href="#practice-permissions">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os13-2/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="3" data-topic="Файл и его имя" data-review="#file-modes">
+      <p class="quiz-question" id="lx3-q-7">8. В доступном каталоге без sticky bit у пользователя есть w и x. На чужой обычный файл внутри — только r. Что в рамках обычных прав возможно?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx3-q-7">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Изменить владельца файла благодаря x у каталога</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Изменить содержимое только потому, что каталог доступен для записи</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Удалить файл только при наличии w у самого файла</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Удалить имя файла из каталога, хотя изменить содержимое нельзя</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Удаление имени определяется правами родительского каталога. Запись в содержимое — отдельная операция с проверкой прав файла.</span></p>
+        <p class="quiz-reading"><a href="#file-modes">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os13-2/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Проверка разграничения" data-review="#access-check">
+      <p class="quiz-question" id="lx3-q-8">9. Нужно доказать, что user_1 читает /labs/list, но не пишет в него. Какой набор проверок подходит?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx3-q-8">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Только команда chmod без проверки результата</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Чтение и попытка записи от user_1 с фиксацией успеха и отказа</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Чтение от user_1 и запись от root</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Только успешное чтение от root</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Проверка должна воспроизводить действия целевого пользователя. Разные полномочия у двух проверок не доказывают нужное ограничение.</span></p>
+        <p class="quiz-reading"><a href="#access-check">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os13-2/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="3" data-topic="Sticky bit" data-review="#shared-directory">
+      <p class="quiz-question" id="lx3-q-9">10. Каталог root:root имеет 1777. User_3 и user_4 создали по файлу. Почему user_3 не может удалить файл user_4?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx3-q-9">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Бит 1 шифрует содержимое всех файлов</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Режим 1777 запрещает создание новых файлов</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Sticky bit меняет владельцев файлов на root</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Sticky bit ограничивает удаление чужих имён, даже при w и x на каталог</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>При обычных условиях удалить такой файл может его владелец, владелец каталога или привилегированный процесс. User_3 к ним не относится.</span></p>
+        <p class="quiz-reading"><a href="#shared-directory">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os13-2/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Маска создания" data-review="#creation-mask">
+      <p class="quiz-question" id="lx3-q-10">11. Новый обычный файл запрашивает режим 0666, umask равна 0027. При отсутствии default ACL какие права получатся?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx3-q-10">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">0637</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">0640</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">0750</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">0666</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Маска убирает выбранные биты: группе запрещена запись, остальным — весь доступ. Это побитовая операция, а не десятичное или обычное восьмеричное вычитание.</span></p>
+        <p class="quiz-reading"><a href="#creation-mask">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os13-2/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="0" data-topic="Полномочия и перенаправление" data-review="#lab-structure">
+      <p class="quiz-question" id="lx3-q-11">12. Почему в опыте записи используется sudo -u user_1 bash -c &#x27;echo try &gt;&gt; /labs/list&#x27;, а не только sudo -u user_1 echo try &gt;&gt; /labs/list?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx3-q-11">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">В первом варианте файл для перенаправления открывает оболочка user_1</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Кавычки сами по себе выдают право записи</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Во втором варианте &gt;&gt; означает чтение вместо записи</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">В первом варианте echo автоматически работает от root</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Перенаправление выполняет оболочка, которая его разбирает. Bash под -u проверяет запись в контексте целевого пользователя.</span></p>
+        <p class="quiz-reading"><a href="#lab-structure">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os13-2/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <noscript><p class="callout warning"><strong>Вопросы доступны.</strong> Для мгновенной проверки ответа и подсчёта результата включите JavaScript для этого сайта.</p></noscript>
+  </div>
+</section>

@@ -1,0 +1,215 @@
+{% assign ready_lessons = site.data.course.lessons | where: 'ready', true %}
+<section class="course-hero" aria-labelledby="course-title">
+  <div class="course-hero-copy">
+    <p class="course-kicker">Университетский курс · теория и практика</p>
+    <h1 id="course-title">Сетевые системы<br>и приложения</h1>
+    <p class="course-lead">От первой Linux-машины —<br>к собственному сетевому сервису.</p>
+    <p class="course-intro">Поймите, как программа работает в системе, общается по сети и становится доступной другим. Настраивайте среду, автоматизируйте задачи и связывайте теорию с результатом, который можно проверить.</p>
+    <div class="course-actions">
+      <a class="course-button primary" href="{{ '/labs/lx0.html' | relative_url }}" data-course-resume-link>Начать с LX0 <span aria-hidden="true">↗</span></a>
+      <a class="course-button inverse" href="#course-introduction">О курсе <span aria-hidden="true">↓</span></a>
+      <a class="course-button inverse" href="#program">Вся программа <span aria-hidden="true">↓</span></a>
+    </div>
+    <p class="course-hero-foot">Linux <span>·</span> Bash <span>·</span> SSH <span>·</span> Сети <span>·</span> Python <span>·</span> Git <span>·</span> Docker</p>
+  </div>
+  <aside class="course-route" aria-label="Путь по курсу">
+    <p class="course-kicker">Ваш маршрут</p>
+    {% for module in site.data.course.modules %}
+    <a class="route-stop" href="#module-{{ module.id }}">
+      <span class="route-number">{{ module.number }}</span>
+      <span><strong>{{ module.title }}</strong><small>{{ module.goal }}</small></span>
+      <span class="route-arrow" aria-hidden="true">↗</span>
+    </a>
+    {% endfor %}
+    <div class="route-result"><span class="route-light" aria-hidden="true"></span>Результат: среда, код и работающий сервис</div>
+  </aside>
+</section>
+
+<div class="course-facts" aria-label="Структура курса">
+  <div><strong>{{ site.data.course.lessons | size }}</strong><span>тем в полной программе</span></div>
+  <div><strong>{{ site.data.course.modules | size }}</strong><span>последовательных блока</span></div>
+  <div><strong>{{ ready_lessons | size }}</strong><span>практикума доступны сейчас</span></div>
+  <div><strong>5</strong><span>понятных этапов в каждой готовой лабораторной</span></div>
+</div>
+
+<section class="course-section course-start-section" id="practice" aria-labelledby="practice-title">
+  <div class="course-section-heading">
+    <div><p class="course-kicker">Начните здесь</p><h2 id="practice-title">Практика без лишней сложности</h2></div>
+    <a class="course-text-link" href="#program">Посмотреть всю программу <span aria-hidden="true">↓</span></a>
+  </div>
+  <p class="course-section-intro">Проходите LX0–LX5 по порядку. Не нужно читать лабораторную целиком: выполните один этап, сравните результат со строкой <strong>«Готово, когда»</strong>, сохраните только главный результат и двигайтесь дальше. Прогресс помогает продолжить с места остановки и не является оценкой.</p>
+
+  <aside class="course-naming-note" aria-label="Как использовать имена из примеров">
+    <span class="course-naming-mark" aria-hidden="true">Aa</span>
+    <div>
+      <strong>Примерные имена не копируйте буквально.</strong>
+      <p>Если в лабораторной встречаются метки вроде <code>myname</code>, <code>YOUR NAME</code> или пример ФИО, используйте <strong>свою фамилию/имя</strong> там, где инструкция просит персонализировать VM, hostname, файл или отчёт. В LX3 имена <code>user_1</code>…<code>user_5</code>, учётная запись <code>student</code> и группы <code>workers</code>/<code>teachers</code>/<code>students</code> — часть эксперимента; их оставляйте как указано.</p>
+    </div>
+  </aside>
+
+  <div class="course-learning-flow" aria-label="Как проходить лабораторную">
+    <article><span>1</span><div><strong>Выполните</strong><p>Один небольшой этап, а не всю страницу сразу.</p></div></article>
+    <article><span>2</span><div><strong>Проверьте</strong><p>Сверьтесь с «Готово, когда» и мягкими подсказками.</p></div></article>
+    <article><span>3</span><div><strong>Сохраните главное</strong><p>Текст — как текст; снимок — только когда важен экран.</p></div></article>
+    <article><span>4</span><div><strong>Закрепите</strong><p>MCQ можно повторять; затем скачайте автоматически собранный DOCX.</p></div></article>
+  </div>
+
+  <div class="practice-dashboard-layout">
+    <div class="practice-dashboard-main">
+      <section class="course-progress-overall" data-course-progress-overall aria-label="Общий учебный прогресс по доступным лабораторным">
+        <div>
+          <p class="course-kicker">Мой учебный маршрут</p>
+          <strong data-overall-progress-text>Прогресс появится после первого отмеченного этапа</strong>
+          <small>Здесь показаны отмеченные этапы. Готовность материалов к отчёту отображается отдельно · оба показателя не являются оценкой.</small>
+          <small class="course-overall-materials" data-overall-completeness-text>Материалы к отчёту: сводка появится после работы в лабораторной.</small>
+        </div>
+        <progress data-overall-progress-bar max="{{ ready_lessons | size | times: 5 }}" value="0">0%</progress>
+        <a class="course-text-link" data-overall-progress-link href="{{ '/labs/lx0.html' | relative_url }}">Начать с LX0 →</a>
+      </section>
+
+      <div class="practice-grid">
+    {% for lesson in ready_lessons %}
+    {% assign progress_lab = site.data.submission.labs[lesson.id] %}
+    {% assign card_screenshots = progress_lab.evidence | where: "kind", "screenshot" %}
+    {% assign card_texts = progress_lab.evidence | where: "kind", "text" %}
+    {% assign card_text_results = card_texts | size | minus: 1 %}
+    <article class="practice-card" data-home-progress-lab="{{ lesson.id }}" data-home-progress-total="{{ progress_lab.route | size }}">
+      <div class="practice-card-top">
+        <span class="course-code">{{ lesson.code }}</span>
+        <span class="course-status available practice-card-state" data-home-card-state>Можно начать</span>
+      </div>
+      <h3><a href="{{ lesson.lab | relative_url }}">{{ lesson.title }}</a></h3>
+      <p class="practice-card-result-label">Результат лабораторной</p>
+      <p class="practice-card-outcome">{{ lesson.outcome }}</p>
+      <div class="practice-card-meta" aria-label="Структура {{ lesson.code }}">
+        <span>{{ progress_lab.route | size }} этапов</span>
+        <span>{{ lesson.quiz_count }} MCQ</span>
+        <span>авто-DOCX</span>
+        {% if card_screenshots.size > 0 %}<span>{{ card_screenshots.size }} снимка</span>{% elsif card_text_results > 0 %}<span>{{ card_text_results }} текстовых результата</span>{% endif %}
+      </div>
+      <div class="practice-progress-panel" aria-label="Ваш прогресс {{ lesson.code }}">
+        <div class="practice-progress-row is-learning">
+          <div class="practice-progress-label"><strong>Учебный маршрут</strong><span data-home-progress-text>0 / {{ progress_lab.route | size }} · можно начать</span></div>
+          <progress data-home-progress-bar max="{{ progress_lab.route | size }}" value="0">0%</progress>
+        </div>
+        <div class="practice-progress-row is-materials">
+          <div class="practice-progress-label"><strong>Материалы к отчёту</strong><span data-home-completeness-text>0% · ещё нет материалов</span></div>
+          <progress data-home-completeness-bar max="100" value="0">0%</progress>
+        </div>
+        <small data-home-completeness-updated>Появится после заполнения отчёта в лабораторной</small>
+      </div>
+      <div class="practice-card-actions">
+        <a class="practice-primary-link" href="{{ lesson.lab | relative_url }}" data-home-progress-link>Начать {{ lesson.code }} →</a>
+        <a class="practice-secondary-link" href="{{ lesson.quiz | relative_url }}">MCQ · можно повторять</a>
+      </div>
+    </article>
+    {% endfor %}
+      </div>
+      <p class="course-progress-privacy">Прогресс на этой странице хранит только номера отмеченных этапов и числовую сводку комплектности. Текст результатов, ФИО и снимки сюда не копируются.</p>
+    </div>
+    {% include achievement-board.html %}
+  </div>
+
+  <details class="course-start-guide">
+    <summary>Первое занятие? Короткая памятка перед стартом</summary>
+    <div class="course-guide-grid">
+      <div><h3>Подготовьте среду</h3><p>Для LX0 достаточно обычных навыков работы с компьютером. Дальше используйте ту же учебную Linux-среду, если лабораторная не говорит иначе.</p></div>
+      <div><h3>Используйте свои данные</h3><p>Примерные фамилии и имена заменяйте своими только там, где это явно указано. Служебные имена пользователей, групп, файлов и команд не переименовывайте самовольно.</p></div>
+      <div><h3>Учитесь через попытки</h3><p>MCQ даёт объяснение и позволяет пробовать снова без штрафа. Цель — понять причину ответа, а не угадать с первого раза.</p></div>
+    </div>
+  </details>
+</section>
+
+<section class="course-section course-orientation" id="course-introduction" aria-labelledby="introduction-title">
+  <div class="course-section-heading"><div><p class="course-kicker">После первого знакомства с практикой</p><h2 id="introduction-title">О курсе: зачем и чему учиться</h2></div></div>
+  <nav class="course-module-nav" aria-label="Введение в курс"><a href="#why-linux">Зачем Linux</a><a href="#course-skills">Навыки курса</a><a href="#concepts">Основные понятия</a><a href="#program">К программе ↓</a></nav>
+  <div class="course-introduction-body">
+    {% capture course_introduction %}{% include course-introduction.md %}{% endcapture %}
+    {{ course_introduction | markdownify }}
+  </div>
+</section>
+
+<section class="course-section" id="program" aria-labelledby="program-title">
+  <div class="course-section-heading">
+    <div><p class="course-kicker">От системы к приложению</p><h2 id="program-title">Полная программа курса</h2></div>
+    <span class="course-count">{{ site.data.course.lessons | size }} тем · последовательность исходного курса</span>
+  </div>
+  <p class="course-section-intro">Ниже — академическая карта всего курса. Темы идут в последовательности исходного курса М. Коротеева; готовые локальные практикумы LX0–LX5 выделены отдельно. Для будущих тем внешние материалы показаны только как справочная структура и не заменяют проверенную локальную лабораторную.</p>
+  <div class="course-catalog-controls" hidden>
+    <div class="course-search"><label for="course-search">Найти тему или инструмент</label><input id="course-search" type="search" placeholder="Например: SSH, процессы, Python" autocomplete="off"></div>
+    <div class="course-filter" role="group" aria-label="Доступность практики"><button type="button" data-course-filter="all" aria-pressed="true">Все темы</button><button type="button" data-course-filter="ready" aria-pressed="false">С готовой практикой</button></div>
+    <p id="course-search-status" role="status" aria-live="polite">Показаны все темы: {{ site.data.course.lessons | size }}</p>
+  </div>
+  <nav class="course-module-nav" aria-label="Блоки программы">
+    {% for module in site.data.course.modules %}<a href="#module-{{ module.id }}">{{ module.number }} <span>{{ module.title }}</span></a>{% endfor %}
+  </nav>
+  <p class="course-no-results" hidden>Темы не найдены. Попробуйте другое слово или выберите «Все темы».</p>
+  {% for module in site.data.course.modules %}
+  {% assign module_lessons = site.data.course.lessons | where: 'module', module.id %}
+  <section class="course-module" id="module-{{ module.id }}" aria-labelledby="module-title-{{ module.id }}">
+    <div class="course-module-heading"><span class="module-number">{{ module.number }}</span><div><h3 id="module-title-{{ module.id }}">{{ module.title }}</h3><p>{{ module.description }}</p></div><span class="module-range">{{ module.codes }}</span></div>
+    <div class="topic-grid">
+      {% for lesson in module_lessons %}
+      {% assign practical_titles = lesson.practicals | map: 'title' | join: ' ' %}
+      <article class="topic-card" id="topic-{{ lesson.id }}" data-course-topic data-ready="{{ lesson.ready }}" data-search="{{ lesson.code | append: ' ' | append: lesson.title | append: ' ' | append: lesson.idea | append: ' ' | append: lesson.concepts | append: ' ' | append: practical_titles | escape }}">
+        <div class="topic-heading"><span class="course-code">{{ lesson.code }}</span>{% if lesson.ready %}<span class="course-status available">Практика доступна</span>{% else %}<span class="course-status planned">В программе</span>{% endif %}</div>
+        <h4>{{ lesson.code }} · {{ lesson.title }}</h4>
+        <p class="topic-outcome">{{ lesson.outcome }}</p>
+        <ul class="syllabus-practices" aria-label="Практические работы: {{ lesson.code }}">
+          {% for task in lesson.practicals %}
+          <li>
+            <span class="syllabus-task-title">{{ task.title }}</span>
+            <span class="syllabus-task-actions">
+              {% if task.local %}<a class="syllabus-local" href="{{ task.local | relative_url }}">Выполнить здесь →</a>{% else %}<span class="syllabus-pending">Наша версия — позже</span>{% endif %}
+              {% if lesson.ready %}
+              <a class="syllabus-source" href="{{ task.source }}" target="_blank" rel="noopener noreferrer" aria-label="{{ task.source_label }}: {{ task.title }}">{{ task.source_label }} ↗</a>
+              {% else %}
+              <span class="syllabus-reference-note" title="Внешний практический материал не используется как инструкция в проверенной версии курса">Внешняя практика не назначается</span>
+              {% endif %}
+            </span>
+          </li>
+          {% endfor %}
+        </ul>
+        <details class="topic-theory">
+          <summary>Краткая теория и вопрос для самопроверки</summary>
+          <div class="topic-theory-body">
+            <p>{{ lesson.idea }}</p>
+            <ul class="concept-list" aria-label="Ключевые понятия">{% for concept in lesson.concepts %}<li>{{ concept }}</li>{% endfor %}</ul>
+
+            <div class="topic-question"><strong>Проверьте понимание</strong><p>{{ lesson.question }}</p><details class="topic-answer"><summary>Разобрать ответ</summary><p>{{ lesson.answer }}</p></details></div>
+            {% if lesson.ready %}<a class="course-source-link" href="{{ lesson.source }}" target="_blank" rel="noopener noreferrer">Тема в исходном курсе М. Коротеева ↗</a>{% else %}<a class="course-source-link" href="{{ lesson.source }}" target="_blank" rel="noopener noreferrer">Исходная структура темы · архивная справка ↗</a>{% endif %}
+          </div>
+        </details>
+        <div class="topic-links">
+          {% if lesson.ready %}<a href="{{ lesson.source }}" target="_blank" rel="noopener noreferrer">Тема и лекции автора ↗</a>{% else %}<a href="{{ lesson.source }}" target="_blank" rel="noopener noreferrer">Исходная структура курса · архивная справка ↗</a>{% endif %}
+          {% if lesson.lab %}<a href="{{ lesson.lab | relative_url }}">Открыть практикум →</a>{% else %}<span class="topic-pending">Практикум появится позже</span>{% endif %}
+          {% if lesson.quiz %}<a href="{{ lesson.quiz | relative_url }}">Тест · {{ lesson.quiz_count }}</a>{% else %}<span class="topic-pending">Тест — после публикации практики</span>{% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+  {% endfor %}
+</section>
+
+<section class="course-section assessment-section" id="assessment" aria-labelledby="assessment-title">
+  <div class="course-section-heading"><div><p class="course-kicker">Понять, а не угадать</p><h2 id="assessment-title">Тесты и контрольные точки</h2></div></div>
+  <p class="course-section-intro">Вопросы проверяют понимание, интерпретацию команд и выбор действий. Правильный ответ отмечается зелёным. Если вариант не подошёл, он мягко подсвечивается жёлтым, появляется объяснение и можно сразу попробовать другой вариант — без штрафа.</p>
+  <div class="assessment-layout">
+    <div class="assessment-labs"><h3>После каждой лабораторной</h3>
+      {% for lesson in ready_lessons %}<a class="assessment-row" href="{{ lesson.quiz | relative_url }}"><span class="course-code">{{ lesson.code }}</span><span>{{ lesson.title }}</span><strong>{{ lesson.quiz_count }} вопросов <span aria-hidden="true">↗</span></strong></a>{% endfor %}
+    </div>
+    <article class="assessment-feature"><p class="course-kicker">Объедините знания</p><h3>Готовы двигаться дальше?</h3><p>Проверьте основу после LX0–LX3: выбор среды, файлы, SSH и права доступа в общих практических ситуациях.</p><div class="assessment-meta"><span>12 вопросов</span><span>Без таймера</span><span>С пояснениями</span></div><a class="course-button primary" href="{{ '/assessments/foundation.html' | relative_url }}">Пройти проверку LX0–LX3 →</a><p class="assessment-note">Это самопроверка первых четырёх тем, а не итоговый экзамен по всему курсу.</p></article>
+  </div>
+  <details class="course-assessment-guide"><summary>Как фиксировать результат и что будет дальше</summary><p>MCQ даёт обратную связь сразу и не превращается автоматически в оценку лабораторной. После завершения теста результат сам попадёт в формируемый DOCX. В лабораториях сдавайте только отмеченные доказательства: текст вместо снимка экрана для терминала и снимок экрана только для действительно визуальных состояний. <a href="{{ '/labs/lx0.html' | relative_url }}#submit">Образец оформления и отправки →</a></p><p>Практические работы оцениваются по полученному результату и вашему объяснению действий. Необязательные задания скрыты в конце лабораторной и не входят в основной отчёт, если преподаватель отдельно не попросил их выполнить. Итоговая проверка всей программы будет добавлена после публикации остальных практикумов; её критерии преподаватель сообщит отдельно.</p></details>
+</section>
+
+<section class="course-section" id="resources" aria-labelledby="resources-title">
+  <div class="course-section-heading"><div><p class="course-kicker">Для осмысленной практики</p><h2 id="resources-title">Материалы и ориентиры</h2></div></div>
+  <div class="resource-grid">
+    <article class="resource-card"><span class="resource-label">Программа и теория</span><h3>Исходный курс</h3><p>Темы, лекции, презентации и оригинальные задания. Разделы расположены в авторской последовательности; ссылки на конкретные темы и задания есть в программе выше.</p><a href="https://koroteev.site/os/" target="_blank" rel="noopener noreferrer">Курс М. Коротеева ↗</a></article>
+    <article class="resource-card"><span class="resource-label">Рабочие инструменты</span><h3>Официальная документация</h3><ul><li><a href="https://linuxmint-installation-guide.readthedocs.io/en/latest/">Установка Linux Mint</a></li><li><a href="https://docs.python.org/3/tutorial/">Руководство Python</a></li><li><a href="https://git-scm.com/book/ru/v2">Pro Git на русском</a></li><li><a href="https://docs.docker.com/get-started/">Введение в Docker</a></li></ul></article>
+    <article class="resource-card"><span class="resource-label">Сквозной вопрос</span><h3>Почему сервис не отвечает?</h3><p>Проверьте, запущен ли процесс, хватает ли ему прав, слушает ли он нужный порт и доходит ли запрос. К концу курса отдельные команды складываются в последовательный поиск причины.</p><a href="#module-network">К сетевым приложениям ↓</a></article>
+  </div>
+  <p class="course-attribution">Академическая основа — «Сетевые системы и приложения», М. Коротеев. Краткие объяснения и интерактивные задания этого практикума дополняют исходные материалы.</p>
+</section>

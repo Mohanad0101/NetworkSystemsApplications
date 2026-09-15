@@ -1,0 +1,157 @@
+{% assign submission = site.data.submission.labs[include.lab] %}
+{% assign lab_code = include.lab | upcase %}
+{% assign lab_lesson = site.data.course.lessons | where: "id", include.lab | first %}
+{% assign question_count = lab_lesson.quiz_count %}
+{% assign screenshot_items = submission.evidence | where: "kind", "screenshot" %}
+{% assign text_items = submission.evidence | where: "kind", "text" %}
+{% assign evidence_count = submission.evidence | size %}
+{% assign answer_count = submission.questions | size %}
+{% assign extra_count = submission.delivery.extra | size %}
+{% assign required_count = evidence_count | plus: answer_count | plus: extra_count | plus: 3 %}
+
+<section class="submission-simple" data-submission-lab="{{ include.lab }}">
+  <section class="report-builder" data-report-builder data-course-id="{{ site.course_id | default: 'network-systems-applications' }}" data-lab="{{ include.lab }}" data-lab-code="{{ lab_code }}" data-lab-title="{{ submission.title | escape }}" data-required-count="{{ required_count }}">
+    <div class="submission-ready report-ready-card">
+      <div>
+        <p class="eyebrow">Отчёт собирается автоматически</p>
+        <h3>Заполните результаты на странице → скачайте готовый DOCX</h3>
+        <p>Текст из полей результатов, итог MCQ, короткие ответы и выбранные снимки автоматически попадут в оформленный Word-отчёт. <strong>Повторно копировать их в Word не нужно.</strong></p>
+      </div>
+      <div class="report-primary-action">
+        <div class="report-completeness" aria-live="polite">
+          <span class="report-completeness-value" data-completeness-percent>0%</span>
+          <div>
+            <strong data-report-progress>Комплектность: проверяем…</strong>
+            <small>Комплектность — не оценка. Она показывает только готовность материалов. Подсказки помогают заметить, что можно дополнить, но не блокируют обучение и не штрафуют за попытки.</small>
+          </div>
+        </div>
+        <progress class="report-completeness-bar" data-completeness-bar max="100" value="0">0%</progress>
+        <div class="report-action-row">
+          <button type="button" class="template-download report-download" data-build-report>Скачать текущий отчёт (.docx)</button>
+          <a class="template-download secondary" href="{{ submission.template | relative_url }}" download>Скачать пустой шаблон</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-privacy-note"><strong>Локально:</strong> формирование DOCX происходит в браузере. Этот модуль не отправляет результаты, ФИО или изображения на сервер. Не вставляйте пароли, закрытые ключи, токены или <code>/etc/shadow</code>.<br><strong>Что означает автоподсказка:</strong> она мягко сравнивает результат с ожидаемыми признаками шага. Если что-то отличается, это приглашение спокойно сверить команду, а не штраф. Она не доказывает авторство и не заменяет проверку преподавателя.</div>
+
+    <h3>1. Данные студента</h3>
+    <div class="student-report-fields">
+      <label>ФИО<input type="text" maxlength="120" autocomplete="name" data-student-name data-report-field="name" placeholder="Введите ваши имя и фамилию"></label>
+      <label>Группа<input type="text" maxlength="40" autocomplete="off" data-student-group data-report-field="group" placeholder="Введите вашу группу"></label>
+      <label>№ по списку<input type="text" maxlength="12" inputmode="numeric" autocomplete="off" data-student-number data-report-field="number" placeholder="Ваш номер"></label>
+    </div>
+    <p class="student-identity-note"><strong>Используйте свои реальные данные.</strong> Примерные имена из текста лабораторной не должны попадать в ФИО, имя VM, hostname или имя отчёта.</p>
+    <label class="achievement-consent">
+      <input type="checkbox" data-public-board-consent>
+      <span><strong>Можно показать моё достижение на странице курса после проверки.</strong><small>Публично будут видны только группа, № по списку, лабораторная, дата и одобренный преподавателем бейдж. ФИО, ответы, снимки, MCQ и оценка не публикуются. Можно оставить флажок выключенным.</small></span>
+    </label>
+
+    <div class="submission-summary-grid">
+      <div><strong>Снимки</strong><span>{{ screenshot_items | size }}</span><small>только ключевые визуальные состояния</small></div>
+      <div><strong>Текст</strong><span>{{ text_items | size | minus: 1 }}</span><small>берётся из полей результатов автоматически</small></div>
+      <div><strong>Короткие ответы</strong><span>{{ submission.questions | size }}</span><small>2–4 предложения своими словами</small></div>
+      <div><strong>MCQ</strong><span>{{ question_count }}</span><small>вопросы можно повторять до правильного решения; итог добавляется автоматически</small></div>
+    </div>
+
+    <div class="callout checkpoint">
+      <strong>Работа готова, когда:</strong> {{ submission.complete }}
+    </div>
+
+    <h3 id="evidence-list">2. Что попадёт в отчёт</h3>
+    <p class="submission-principle"><strong>Один результат — одно доказательство.</strong> Терминал передаём текстом; снимок используем только там, где важен визуальный статус интерфейса или нескольких VM.</p>
+    <div class="evidence-list">
+      {% for item in submission.evidence %}
+      <article class="evidence-list-item evidence-{{ item.kind }}" data-report-evidence="{{ item.id }}" data-evidence-kind="{{ item.kind }}" data-evidence-stage="{{ item.stage | escape }}" data-evidence-proof="{{ item.proof | escape }}">
+        <div class="evidence-list-tag">{% if item.kind == 'screenshot' %}СНИМОК{% elsif item.id contains '-Q' %}MCQ{% else %}ТЕКСТ{% endif %}</div>
+        <div class="evidence-list-content">
+          <div class="evidence-heading-row"><strong>{{ item.id }} · {{ item.stage }}</strong><span class="validation-badge is-pending" data-evidence-validation="{{ item.id }}">Не проверено</span></div><p>{{ item.proof }}</p><small class="validation-detail" data-evidence-validation-detail="{{ item.id }}">Когда шаг будет готов, добавьте основной результат. Подсказка мягко покажет, что можно сверить; результат всё равно можно сохранить в отчёт.</small>
+          {% if item.kind == 'screenshot' %}
+            <label class="image-picker">Добавить снимок в готовый отчёт
+              <input type="file" accept="image/png,image/jpeg"{% if item.id == 'LX0-04' %} multiple{% endif %} data-report-image="{{ item.id }}">
+            </label>
+            <small class="image-state" data-image-state>Снимок ещё не выбран. PNG/JPEG остаётся только в текущей странице до скачивания отчёта. {% if item.id == 'LX0-04' %}Если экран небольшой, можно выбрать два кадра 04a/04b.{% endif %}</small>
+            <span hidden data-required-image="{{ item.id }}"></span>
+          {% elsif item.id contains '-Q' %}
+            <p class="auto-source"><strong>Автоматически:</strong> после завершения MCQ результат появится здесь и войдёт в готовый отчёт.</p>
+            <div class="mcq-auto-preview" data-report-quiz-preview role="status">MCQ ещё можно продолжить. Каждый вопрос разрешает повторную попытку; после прохождения всех вопросов итог появится здесь автоматически.</div>
+          {% else %}
+            <p class="auto-source"><strong>Автоматически:</strong> будет взят текст из поля {{ item.id }} в соответствующем шаге лабораторной.</p>
+            <span hidden data-required-text="{{ item.id }}"></span>
+          {% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+
+    <h3>3. Короткие ответы</h3>
+    <p>Ответьте своими словами. Обычно достаточно <strong>2–4 предложений</strong>. Эти ответы также автоматически войдут в DOCX.</p>
+    <div class="short-answer-list">
+      {% for question in submission.questions %}
+      <label class="short-answer-card"><div class="short-answer-heading"><strong>{{ forloop.index }}. {{ question }}</strong><span class="validation-badge is-pending" data-answer-validation>Не заполнено</span></div>
+        <textarea rows="4" maxlength="2500" data-short-answer data-question="{{ question | escape }}" placeholder="Короткий ответ своими словами…"></textarea>
+        <small class="answer-quality-hint" data-answer-validation-detail>Ответьте своими словами. Даже короткий осмысленный ответ учитывается; если он слишком краткий, система лишь предложит уточнить. Смысл ответа оценивает преподаватель.</small>
+      </label>
+      {% endfor %}
+    </div>
+
+    <section class="report-download-panel">
+      <div>
+        <h3>4. Скачать готовый DOCX и отправить преподавателю</h3>
+        <p data-report-status aria-live="polite">Комплектность материалов рассчитывается автоматически и не является оценкой.</p>
+        <p><strong>Можно скачать в любой момент.</strong> Если работа ещё в процессе, DOCX покажет текущую комплектность и доброжелательно перечислит, что можно дополнить. 100% означает только, что все обязательные материалы представлены — это не 100 баллов и не оценка.</p>
+      </div>
+      <div class="report-download-actions">
+        <button type="button" class="template-download report-download" data-build-report>Скачать текущий отчёт (.docx)</button>
+        <a class="template-download secondary" href="{{ submission.template | relative_url }}" download>Скачать пустой шаблон</a>
+      </div>
+    </section>
+
+    {% if submission.delivery.extra and submission.delivery.extra.size > 0 %}
+    <h3>Дополнительный файл</h3>
+    <p>Выберите обязательный файл здесь только для <strong>локальной проверки комплектности</strong>. Он не отправляется и не встраивается в DOCX — приложите его отдельно при сдаче.</p>
+    <ul class="file-checklist">{% for file in submission.delivery.extra %}<li>{{ file }}</li>{% endfor %}</ul>
+    <label class="extra-file-check">Проверить файл для сдачи
+      <input type="file" data-extra-file-check accept=".tar.gz,.tgz,application/gzip,application/x-gzip">
+      <span class="validation-badge is-pending" data-extra-file-validation>Не выбран</span>
+    </label>
+    {% endif %}
+
+    <div class="send-checklist">
+      <h3>Перед отправкой — 30 секунд</h3>
+      <label><input type="checkbox"> DOCX открыт: ФИО, группа и номер заполнены</label>
+      <label><input type="checkbox"> Все основные доказательства читаются</label>
+      <label><input type="checkbox"> В отчёте нет паролей, закрытых ключей и секретов</label>
+      <label><input type="checkbox"> Итоговый DOCX скачан, открыт и читается</label>
+      {% if submission.delivery.extra and submission.delivery.extra.size > 0 %}<label><input type="checkbox"> Дополнительный файл приложен отдельно</label>{% endif %}
+    </div>
+
+    <details class="submission-details">
+      <summary>Подробности отправки и резервный шаблон</summary>
+      <p>Автоматический отчёт выше — основной путь. Пустой шаблон всегда доступен как резервный вариант и не зависит от процента комплектности.</p>
+      <p><a href="{{ submission.template | relative_url }}" download>Скачать пустой шаблон {{ lab_code }}</a></p>
+      <h4>Имя готового отчёта</h4>
+      <p>Автоматический отчёт сам подставляет ваши данные. Формат имени: <code>NSA_{{ lab_code }}_ГРУППА_НОМЕР_ФИО.docx</code>. Если переименовываете файл вручную, используйте свои реальные группу, номер и ФИО.</p>
+      {% assign teacher_email = site.data.submission.teacher_email | strip %}
+      {% if teacher_email != '' %}
+        <p><strong>Получатель:</strong> <a class="teacher-email" href="mailto:{{ teacher_email | escape }}">{{ teacher_email | escape }}</a>.</p>
+      {% else %}
+        <p class="submission-email-pending"><strong>Получатель:</strong> используйте адрес преподавателя, объявленный на занятии.</p>
+      {% endif %}
+      <p><strong>Тема:</strong> <code>Ваше ФИО | {{ site.data.submission.course_name | escape }} | ваша группа | ваш № | {{ lab_code }}</code></p>
+    </details>
+
+    <details class="submission-details results-backup">
+      <summary>Резервная копия текстовых результатов</summary>
+      <section class="result-notebook" id="result-notebook" data-results-kit>
+        <p>Эти кнопки нужны только как запасной вариант. Для обычной сдачи используйте автоматический DOCX выше.</p>
+        <div class="result-notebook-actions">
+          <button type="button" class="result-copy-all" data-copy-results>Скопировать все текстовые результаты</button>
+          <button type="button" class="result-download" data-download-results>Скачать TXT</button>
+          <button type="button" class="result-clear" data-clear-results>Очистить локальные данные</button>
+        </div>
+        <p class="result-status" data-results-status aria-live="polite"></p>
+      </section>
+    </details>
+  </section>
+</section>

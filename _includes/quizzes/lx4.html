@@ -1,0 +1,169 @@
+<section class="quiz-shell" data-quiz-shell="lx4">
+  <div class="quiz-intro-row">
+    <div>
+      <p class="eyebrow">Проверка понимания</p>
+      <p class="quiz-static-note"><strong>12 вопросов.</strong> Выберите лучший ответ. Если вариант не подошёл, прочитайте объяснение и попробуйте другой; повторные попытки нужны для обучения и не являются штрафом. Итог прохождения автоматически войдёт в отчёт.</p>
+    </div>
+    <div class="quiz-status-badge">1 лучший ответ</div>
+  </div>
+  <div class="quiz" data-quiz="lx4" data-course="Сетевые системы и приложения">
+    <div class="quiz-score" data-quiz-score role="status">Пройдено: 0 / 12 · Можно пробовать снова</div>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="APT · индекс пакетов" data-review="#packages-environment">
+      <p class="quiz-question" id="lx4-q-0">1. Что делает sudo apt update?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx4-q-0">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Обновляет все установленные программы до новых версий</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Обновляет локальную информацию о доступных пакетах из настроенных источников</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Удаляет старые пакеты из системы</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Переустанавливает пакетный менеджер</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>apt update получает актуальную информацию о пакетах из настроенных sources. Само по себе это не означает upgrade установленных пакетов.</span></p>
+        <p class="quiz-reading"><a href="#packages-environment">Разобрать в лабораторной</a><a href="https://manpages.ubuntu.com/manpages/noble/man8/apt.8.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="APT · инструменты" data-review="#packages-install">
+      <p class="quiz-question" id="lx4-q-1">2. Почему в лабораторной apt удобен для интерактивной установки, а apt-get -s — для явной симуляции?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx4-q-1">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">apt предназначен только для графических программ</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">apt — удобный high-level интерфейс для пользователя, а apt-get имеет более стабильный интерфейс для сценариев и поддерживает simulation</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">apt-get не умеет работать с зависимостями</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">apt автоматически делает upgrade всей системы</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Документация APT описывает apt как end-user interface; специализированные APT tools предпочтительнее там, где важна стабильность поведения для сценариев. apt-get -s моделирует действия без изменения системы.</span></p>
+        <p class="quiz-reading"><a href="#packages-install">Разобрать в лабораторной</a><a href="https://manpages.ubuntu.com/manpages/noble/man8/apt.8.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="APT и dpkg" data-review="#packages-install">
+      <p class="quiz-question" id="lx4-q-2">3. Как точнее описать связь apt и dpkg?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx4-q-2">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Это два независимых формата файлов</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">dpkg управляет Debian-пакетами на более низком уровне, а APT предоставляет более удобный верхний уровень с repositories и разрешением зависимостей</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">dpkg работает только с процессами</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">apt работает только если dpkg удалён</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>dpkg — medium-level Debian package tool. APT является более удобным фронтендом и работает с источниками пакетов и зависимостями.</span></p>
+        <p class="quiz-reading"><a href="#packages-install">Разобрать в лабораторной</a><a href="https://manpages.ubuntu.com/manpages/noble/man1/dpkg.1.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="0" data-topic="Безопасное изменение" data-review="#packages-install">
+      <p class="quiz-question" id="lx4-q-3">4. Перед реальной установкой htop вы хотите увидеть план без изменения системы. Какой вариант подходит?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx4-q-3">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">apt-get -s install htop</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">sudo apt purge htop</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">dpkg-query -L htop</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">kill -0 htop</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Опция apt-get -s/--simulate выполняет симуляцию и не выполняет реальные dpkg-действия.</span></p>
+        <p class="quiz-reading"><a href="#packages-install">Разобрать в лабораторной</a><a href="https://manpages.ubuntu.com/manpages/noble/man8/apt-get.8.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Удаление пакетов" data-review="#packages-install">
+      <p class="quiz-question" id="lx4-q-4">5. Чем purge отличается от remove в APT?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx4-q-4">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Purge только останавливает работающий процесс</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Remove удаляет пакет, а purge дополнительно удаляет его системные configuration files</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Purge всегда удаляет домашний каталог пользователя</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Remove обновляет пакет, а purge устанавливает его заново</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>APT определяет purge как remove плюс удаление configuration files пакета. Пользовательские данные в home — отдельная категория.</span></p>
+        <p class="quiz-reading"><a href="#packages-install">Разобрать в лабораторной</a><a href="https://manpages.ubuntu.com/manpages/noble/man8/apt-get.8.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Пакет и процесс" data-review="#process-observe">
+      <p class="quiz-question" id="lx4-q-5">6. Вы завершили процесс htop или sleep. Почему программу можно запустить снова?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx4-q-5">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Процесс автоматически переустанавливает пакет</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Исполняемые файлы остаются установленными; завершился только конкретный работающий экземпляр</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">PID сохраняет копию всей программы навсегда</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">SIGTERM превращает процесс обратно в .deb</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Пакет/файлы программы и работающий процесс — разные уровни. Завершение процесса освобождает ресурсы запуска, но не удаляет установленные файлы.</span></p>
+        <p class="quiz-reading"><a href="#process-observe">Разобрать в лабораторной</a><a href="https://koroteev.site/os/1/4-processes/" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="0" data-topic="Наблюдение за процессами" data-review="#process-observe">
+      <p class="quiz-question" id="lx4-q-6">7. Какое утверждение о ps и top/htop верно?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx4-q-6">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">ps обычно показывает снимок процессов, а top/htop обновляют представление повторно</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">ps изменяет priority процесса, а top устанавливает пакеты</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">top показывает только процессы текущей shell</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">htop является системным daemon</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>ps сообщает snapshot выбранных процессов. Для повторяющегося обновления состояния документация ps рекомендует top; htop предоставляет интерактивный процесс-viewer.</span></p>
+        <p class="quiz-reading"><a href="#process-observe">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man1/ps.1.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="0" data-topic="PID и PPID" data-review="#process-observe">
+      <p class="quiz-question" id="lx4-q-7">8. В выводе процесса PID=4200 и PPID=3100. Что это означает?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx4-q-7">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">4200 — идентификатор процесса, а 3100 — идентификатор его родительского процесса</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">4200 — nice value, а 3100 — номер TTY</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Оба числа — версии пакетов</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">PPID всегда равен UID пользователя</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>PID идентифицирует конкретный процесс, PPID — его родителя. /proc/&lt;PID&gt;/status также содержит поля Pid и PPid для живого процесса.</span></p>
+        <p class="quiz-reading"><a href="#process-observe">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man5/proc_pid_status.5.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Состояния и сигналы" data-review="#process-control">
+      <p class="quiz-question" id="lx4-q-8">9. После kill -STOP &quot;$PID&quot; процесс показал STAT с T. Какое следующее действие соответствует эксперименту?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx4-q-8">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Удалить пакет процесса</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Послать SIGCONT, чтобы разрешить продолжение</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Сразу перезагрузить VM</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Изменить /proc/PID/status текстовым редактором</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>SIGSTOP останавливает процесс, а SIGCONT позволяет ему продолжить. Состояние T в ps соответствует stopped/traced state.</span></p>
+        <p class="quiz-reading"><a href="#process-control">Разобрать в лабораторной</a><a href="https://www.gnu.org/software/bash/manual/bash.html#Job-Control-Basics" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Корректное завершение" data-review="#process-control">
+      <p class="quiz-question" id="lx4-q-9">10. Почему SIGTERM обычно разумнее попробовать до SIGKILL?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx4-q-9">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">SIGTERM всегда сильнее KILL</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">SIGTERM может быть обработан программой для orderly cleanup, а SIGKILL нельзя перехватить или обработать</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">SIGKILL работает только с пакетами</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">SIGTERM не является сигналом</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>kill(1) рекомендует TERM как обычный первый сигнал завершения: приложение может обработать его и выполнить cleanup. KILL не даёт такой возможности.</span></p>
+        <p class="quiz-reading"><a href="#process-control">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man1/kill.1.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="2" data-topic="Nice" data-review="#process-control">
+      <p class="quiz-question" id="lx4-q-10">11. Вы изменили nice value своего тестового процесса с 10 на 15. Что это означает для обычного CPU scheduling?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx4-q-10">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Процесс получает более благоприятный priority</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Процесс становится root</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Процесс получает менее благоприятный scheduling priority; он «уступает» больше</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Процесс автоматически останавливается</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Диапазон nice обычно -20…19: -20 наиболее благоприятно процессу, 19 — наименее. Поэтому увеличение 10→15 уменьшает его scheduling favorability.</span></p>
+        <p class="quiz-reading"><a href="#process-control">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man1/nice.1.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="2" data-topic="Job control" data-review="#process-control">
+      <p class="quiz-question" id="lx4-q-11">12. Что точнее всего означает команда sleep 7200 &amp; в интерактивной Bash?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx4-q-11">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Она автоматически создаёт systemd service</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Она удаляет controlling terminal у процесса навсегда</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Она запускает shell job асинхронно в background; это ещё не делает процесс daemon или системной службой</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Она запускает процесс без PID</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Bash job control различает foreground/background jobs. Асинхронный запуск через &amp; создаёт background job этой shell, но не эквивалентен созданию системной службы.</span></p>
+        <p class="quiz-reading"><a href="#process-control">Разобрать в лабораторной</a><a href="https://www.gnu.org/software/bash/manual/bash.html#Job-Control-Basics" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <noscript><p class="callout warning"><strong>Вопросы доступны.</strong> Для мгновенной проверки ответа и учебной обратной связи включите JavaScript для этого сайта.</p></noscript>
+  </div>
+</section>

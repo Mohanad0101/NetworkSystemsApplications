@@ -1,0 +1,169 @@
+<section class="quiz-shell" data-quiz-shell="lx2">
+  <div class="quiz-intro-row">
+    <div>
+      <p class="eyebrow">Проверка понимания</p>
+      <p class="quiz-static-note"><strong>12 вопросов.</strong> Выберите лучший ответ. Если вариант не подошёл, прочитайте объяснение и попробуйте ещё раз; правильный ответ можно найти без штрафа. Итог прохождения автоматически войдёт в отчёт.</p>
+    </div>
+    <div class="quiz-status-badge">1 лучший ответ</div>
+  </div>
+  <div class="quiz" data-quiz="lx2" data-course="Сетевые системы и приложения">
+    <div class="quiz-score" data-quiz-score role="status">Пройдено: 0 / 12 · Можно пробовать снова</div>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Клиент и сервер SSH" data-review="#ssh-concept">
+      <p class="quiz-question" id="lx2-q-0">1. Нужно управлять учебной Mint VM из терминала Windows. Как распределяются роли?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx2-q-0">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">В Windows нужен только SSH-сервер, в Mint — только клиент</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">В Windows работает SSH-клиент, в Mint — SSH-сервер</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Достаточно установить клиент в Mint, не запуская сервер</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Оба терминала должны быть открыты внутри Mint</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Клиент инициирует соединение, а сервер принимает его и запускает удалённую оболочку после аутентификации.</span></p>
+        <p class="quiz-reading"><a href="#ssh-concept">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="3" data-topic="Диагностика соединения" data-review="#ssh-errors">
+      <p class="quiz-question" id="lx2-q-1">2. SSH немедленно сообщает Connection refused. Какой первый шаг наиболее уместен?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx2-q-1">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Сразу менять пароль Linux-пользователя</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Изменить права на файл, который собирались копировать</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Пересоздать пару ключей до проверки сети</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Проверить адрес, порт, слушающую службу и правила отклонения соединений</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Соединение отвергнуто до аутентификации. Причиной может быть отсутствие слушающего сервиса, неверный порт или активное отклонение фильтром.</span></p>
+        <p class="quiz-reading"><a href="#ssh-errors">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="3" data-topic="Диагностика службы" data-review="#practice-ssh">
+      <p class="quiz-question" id="lx2-q-2">3. Внутри VM systemctl status ssh показывает active (running). Доказывает ли это доступность SSH с клиента?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx2-q-2">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Нет: статус означает только наличие SSH-клиента</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Да: все открытые ключи автоматически разрешены</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Да: любой клиент в интернете теперь может войти</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Нет: нужно ещё проверить адрес, порт, режим сети и подключение</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Работающий сервис — одно условие. Сеть и аутентификация проверяются отдельно реальным подключением.</span></p>
+        <p class="quiz-reading"><a href="#practice-ssh">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="0" data-topic="Передача файлов" data-review="#ssh-transfer">
+      <p class="quiz-question" id="lx2-q-3">4. Команда scp lx2-local.txt user@vm:~/NSA/LX2/ssh/ запущена на клиенте. Где находится исходный файл?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx2-q-3">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">В текущем каталоге клиента</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">В домашнем каталоге сервера</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">В ~/.ssh клиента</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">В каталоге установки OpenSSH на сервере</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Локальный относительный путь берётся из текущего каталога клиента. Часть user@vm: у второго аргумента обозначает удалённое назначение.</span></p>
+        <p class="quiz-reading"><a href="#ssh-transfer">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="0" data-topic="Пара ключей" data-review="#ssh-keys">
+      <p class="quiz-question" id="lx2-q-4">5. Есть id_ed25519 и id_ed25519.pub. Что передают на сервер для входа по ключу в этой работе?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx2-q-4">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Содержимое id_ed25519.pub</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Только passphrase от id_ed25519</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Содержимое id_ed25519</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Оба файла в одном архиве</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>На сервер добавляют открытый ключ. Закрытая часть и её passphrase остаются под контролем владельца и не включаются в отчёт.</span></p>
+        <p class="quiz-reading"><a href="#ssh-keys">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="3" data-topic="Пароль и passphrase" data-review="#ssh-config">
+      <p class="quiz-question" id="lx2-q-5">6. Проверка входа с PreferredAuthentications=publickey и PasswordAuthentication=no запросила passphrase закрытого ключа. Что это означает?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx2-q-5">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Опция PasswordAuthentication=no отключила шифрование</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Сервер обязательно переключился на вход по паролю</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Открытый ключ нужно отправить вместе с passphrase</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Клиенту нужно разблокировать локальный ключ; это не пароль учётной записи сервера</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Passphrase защищает закрытый ключ. Она может требоваться и при полностью успешной аутентификации по открытому ключу.</span></p>
+        <p class="quiz-reading"><a href="#ssh-config">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Конфигурация клиента" data-review="#ssh-config">
+      <p class="quiz-question" id="lx2-q-6">7. Нужно подключаться командой ssh mint-lab с сохранёнными адресом, пользователем и портом. Где задать эти параметры?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx2-q-6">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">В /etc/hostname сервера</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">В ~/.ssh/config на клиенте, в блоке Host mint-lab</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">В ~/.ssh/authorized_keys на сервере</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">В имени файла id_ed25519.pub</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Config хранит клиентские параметры подключения. Authorized_keys разрешает ключи, а hostname задаёт имя машины.</span></p>
+        <p class="quiz-reading"><a href="#ssh-config">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="3" data-topic="Порт SSH и SCP" data-review="#ssh-transfer">
+      <p class="quiz-question" id="lx2-q-7">8. В VirtualBox настроен проброс 127.0.0.1:2222 → порт 22 гостя. Как отправить file.txt с хоста, не используя псевдоним config?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx2-q-7">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">scp -P 22 file.txt user@127.0.0.1:~/NSA/LX2/ssh/</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">scp -p 2222 file.txt user@127.0.0.1:~/NSA/LX2/ssh/</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">scp file.txt user@127.0.0.1:2222</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">scp -P 2222 file.txt user@127.0.0.1:~/NSA/LX2/ssh/</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>У scp порт задаётся заглавной -P; у ssh — строчной -p. Часть после двоеточия в обычном синтаксисе scp является путём, а не портом.</span></p>
+        <p class="quiz-reading"><a href="#ssh-transfer">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="2" data-topic="Сохранение удалённой работы" data-review="#practice-tmux">
+      <p class="quiz-question" id="lx2-q-8">9. Нужно наблюдать htop и вернуться к нему после закрытия SSH. Где следует запустить tmux для опыта LX2?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx2-q-8">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">На VM после завершения htop</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Только на клиенте, запустив htop вне tmux на VM</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">На удалённой VM, затем запустить htop внутри его сеанса</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">В любом месте: tmux автоматически переносит процессы между ПК</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Сеанс и его процессы живут там, где запущен tmux. Локальный tmux не переносит в себя процессы удалённой оболочки.</span></p>
+        <p class="quiz-reading"><a href="#practice-tmux">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-2/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="3" data-topic="Ограничения tmux" data-review="#practice-tmux">
+      <p class="quiz-question" id="lx2-q-9">10. Во время перерыва VM перезагрузилась. Почему обычный tmux не восстановил работающий htop?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx2-q-9">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Именованный сеанс обязательно переживает выключение</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">После перезагрузки нужно только заново ввести префикс Ctrl+b</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Tmux хранит процессы внутри SSH-ключа</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Перезагрузка завершает процессы VM, включая tmux и htop</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Tmux отделяет жизнь сеанса от клиентского подключения, но сам остаётся процессом ОС. Перезапуск VM отличается от разрыва SSH.</span></p>
+        <p class="quiz-reading"><a href="#practice-tmux">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-2/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="3" data-topic="Проверка ключа сервера" data-review="#ssh-errors">
+      <p class="quiz-question" id="lx2-q-10">11. При подключении появилось REMOTE HOST IDENTIFICATION HAS CHANGED. Какой порядок действий правильный?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx2-q-10">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Отключить проверку ключа сервера во всех подключениях</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Отправить серверу закрытый ключ для проверки</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Сразу удалить known_hosts целиком и согласиться с новым ключом</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Проверить причину и новый отпечаток через доверенный канал; затем обновить запись, если замена подтверждена</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Предупреждение возможно после переустановки, смены адреса или при подмене. Удаление записи без проверки не устанавливает доверие к новому серверу.</span></p>
+        <p class="quiz-reading"><a href="#ssh-errors">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="0" data-topic="Доступ после входа" data-review="#ssh-transfer">
+      <p class="quiz-question" id="lx2-q-11">12. SSH-вход успешен, но scp сообщает Permission denied при создании файла в каталоге сервера. Что проверять теперь?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx2-q-11">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Пользователя, путь назначения и права записи/прохода на сервере</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Менять клиентский порт, хотя соединение уже работает</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Генерировать новый ключ, не проверяя путь</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Переустанавливать SSH-клиент до проверки прав</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Успешный вход не даёт права писать в любой каталог. Авторизация файловых операций проверяется отдельно от аутентификации SSH.</span></p>
+        <p class="quiz-reading"><a href="#ssh-transfer">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <noscript><p class="callout warning"><strong>Вопросы доступны.</strong> Для мгновенной проверки ответа и подсчёта результата включите JavaScript для этого сайта.</p></noscript>
+  </div>
+</section>

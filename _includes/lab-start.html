@@ -1,0 +1,90 @@
+{% assign submission = site.data.submission.labs[include.lab] %}
+{% assign lab_code = include.lab | upcase %}
+{% assign screenshot_items = submission.evidence | where: "kind", "screenshot" %}
+{% assign text_items = submission.evidence | where: "kind", "text" %}
+{% assign text_result_count = text_items | size | minus: 1 %}
+<section class="lab-start" aria-label="Быстрый маршрут лабораторной">
+  <div class="lab-context-bar"><a href="{{ '/' | relative_url }}">← Страница курса</a><span>{{ lab_code }} · учебная лабораторная</span></div>
+  <div class="lab-start-head">
+    <div>
+      <p class="eyebrow">Работайте спокойно, по одному этапу</p>
+      <h2>Маршрут {{ lab_code }}</h2>
+      <p>Не нужно заранее читать всю страницу. На каждом этапе: <strong>выполните → проверьте → сохраните только главный результат</strong>.</p>
+    </div>
+    <div class="lab-start-actions">
+      <a class="button-link" href="#{{ submission.start_anchor }}" data-progress-continue>Начать практику</a>
+      <a class="template-download secondary" href="{{ submission.template | relative_url }}" download>Скачать пустой шаблон</a>
+    </div>
+  </div>
+
+
+  <aside class="lab-workspace-guide" aria-label="Рабочая папка лабораторной">
+    <span class="lab-workspace-icon" aria-hidden="true">⌂</span>
+    <div>
+      <strong>Единая рабочая папка курса</strong>
+      <p>Все ваши файлы этой лабораторной храните в <code>~/NSA/{{ lab_code }}</code>. Каталог <code>~/NSA</code> — общий учебный workspace курса; каждая лабораторная получает свою отдельную папку <code>LX0</code>, <code>LX1</code>, <code>LX2</code>…</p>
+    </div>
+  </aside>
+
+  <aside class="lab-name-guide" aria-label="Правило персональных имён">
+    <span class="lab-name-guide-mark" aria-hidden="true">Aa</span>
+    <div>
+      <strong>Используйте свои данные там, где это просит инструкция.</strong>
+      {% if include.lab == "lx0" %}
+      <p><code>myname</code> в примерах означает <strong>вашу фамилию латиницей</strong>. Для VM, пользователя, hostname и OVA создавайте узнаваемые имена со своей фамилией. Не оставляйте примерное имя как своё.</p>
+      {% elsif include.lab == "lx3" %}
+      <p><code>myname</code>, <code>YOUR NAME</code> и пример ФИО заменяйте своей фамилией/именем там, где создаются персональные файлы или комментарий учётной записи. Но <code>user_1</code>…<code>user_5</code>, <code>student</code> и группы <code>workers</code>/<code>teachers</code>/<code>students</code> — <strong>служебные имена этого эксперимента</strong>; их не меняйте.</p>
+      {% else %}
+      <p>Команды <code>whoami</code> и <code>hostname</code> должны показывать вашу реальную учебную среду. Заполнители вроде <code>your_user</code> или <code>vm_ip</code> заменяйте своими значениями только там, где это прямо указано.</p>
+      {% endif %}
+    </div>
+  </aside>
+
+  <section class="learning-progress" data-learning-progress data-lab="{{ include.lab }}" data-total="{{ submission.route | size }}" aria-label="Учебный прогресс {{ lab_code }}">
+    <div class="learning-progress-head">
+      <div>
+        <p class="eyebrow">Ваш учебный прогресс</p>
+        <strong data-progress-summary>0 из {{ submission.route | size }} этапов</strong>
+        <small>Это личный ориентир, а не оценка. Отмечайте этап после того, как получили ожидаемый результат.</small>
+      </div>
+      <span class="progress-local-badge">Сохраняется только в этом браузере</span>
+    </div>
+    <progress class="learning-progress-bar" data-progress-bar max="{{ submission.route | size }}" value="0">0%</progress>
+    <div class="learning-progress-actions">
+      <a href="#{{ submission.start_anchor }}" data-progress-continue-link>Продолжить с первого этапа →</a>
+      <button type="button" class="progress-reset-link" data-progress-reset>Сбросить мои отметки</button>
+    </div>
+  </section>
+
+  <div class="lab-color-key" aria-label="Цветовые подсказки">
+    <span class="key-action">ДЕЙСТВИЕ</span><small>что сделать</small>
+    <span class="key-ready">ГОТОВО</span><small>что должно получиться</small>
+    <span class="key-proof">В ОТЧЁТ</span><small>только главный результат</small>
+    <span class="key-tip">ПОДСКАЗКА</span><small>если возникла трудность</small>
+    <span class="key-safe">ОСТОРОЖНО</span><small>проверьте перед действием</small>
+  </div>
+
+  <div class="lab-route" aria-label="Этапы лабораторной">
+    {% for item in submission.route %}
+    <article class="lab-route-item" data-progress-step="{{ item.n }}" data-progress-anchor="{{ item.anchor }}">
+      <a class="lab-route-main" href="#{{ item.anchor }}">
+        <span class="lab-route-number">{{ item.n }}</span>
+        <span class="lab-route-copy"><strong>{{ item.title }}</strong><small>{{ item.proof }}</small></span>
+      </a>
+      <button type="button" class="progress-step-toggle" data-progress-toggle="{{ item.n }}" aria-pressed="false">
+        <span class="progress-step-icon" aria-hidden="true">○</span><span data-progress-toggle-label>Отметить этап</span>
+      </button>
+    </article>
+    {% endfor %}
+  </div>
+
+  <div class="lab-requirements compact">
+    <div><strong>Снимки экрана · {{ screenshot_items | size }}</strong><span>Только когда GUI или состояние нескольких VM действительно являются доказательством.</span></div>
+    <div><strong>Текстовые результаты · {{ text_result_count }}</strong><span>Копируйте только полезный вывод в локальное поле рядом с контрольной точкой.</span></div>
+  </div>
+
+  <div class="lab-delivery-strip"><strong>В конце сдаёте:</strong> {{ submission.delivery.report }}{% if submission.delivery.extra and submission.delivery.extra.size > 0 %} + {{ submission.delivery.extra | size }} дополнительный файл{% endif %}. Шаблон уже оформлен.</div>
+
+  <p class="lab-start-tip"><strong>Главное правило:</strong> текст терминала сдаём как <strong>текст</strong>. Когда увидите бирюзовую карточку «ТЕКСТ В ОТЧЁТ», сразу под ней есть поле для вставки результата. Снимок экрана нужен только там, где сама картинка доказывает состояние среды.</p>
+  <p class="lab-start-links"><a href="#submit">Что именно отправить преподавателю</a> · <a href="{{ '/student/report-guide.html' | relative_url }}">Короткая памятка по отчёту</a></p>
+</section>

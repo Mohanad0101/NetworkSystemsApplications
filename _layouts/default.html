@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; media-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="description" content="{{ page.description | default: site.description | escape }}">
+  <title>{{ page.title | escape }} | {{ site.title | escape }}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v=20260908-1">
+  {% if page.home %}<link rel="stylesheet" href="{{ '/assets/css/course-home.css' | relative_url }}?v=20260908-1">{% endif %}
+</head>
+<body{% if page.lab_id %} class="lab-page"{% endif %}>
+  <a class="skip-link" href="#main">К содержанию</a>
+  <header class="site-header">
+    <a class="brand" href="{{ '/' | relative_url }}">{% if page.lab_id %}<span aria-hidden="true">←</span> К странице курса{% else %}Сетевые системы{% endif %}</a>
+    <nav aria-label="Навигация по курсу">
+      <a href="{{ '/' | relative_url }}#practice">Практика</a>
+      <a href="{{ '/' | relative_url }}#program">Программа</a>
+      <a href="{{ '/' | relative_url }}#assessment">Тесты</a>
+      <a href="{{ '/' | relative_url }}#resources">Материалы</a>
+    </nav>
+  </header>
+  <main class="page{% if page.home %} course-home{% endif %}" id="main">
+    {% unless page.home %}<p class="lab-breadcrumb"><a href="{{ '/' | relative_url }}">← Сетевые системы и приложения · страница курса</a></p>{% endunless %}
+    {% if page.lab_id %}<details class="lab-contents" hidden><summary>Содержание {{ page.lab_id | upcase }}</summary><ul data-lab-toc></ul></details>{% endif %}
+    {{ content }}
+    {% if page.lab_id %}
+    <section class="lab-end" id="lab-end" aria-label="Конец лабораторной">
+      <p><strong>Вы дошли до конца {{ page.lab_id | upcase }}.</strong> Хорошая работа. Проверьте комплектность материалов, сохраните отчёт и вернитесь к карте курса, чтобы видеть следующий шаг.</p>
+      <nav aria-label="Следующее действие">
+        <a class="lab-end-primary" href="{{ '/' | relative_url }}">← Вернуться к странице курса</a>
+        <a href="#submit">Проверить отчёт</a>
+        {% if page.lab_id == 'lx0' %}<a href="{{ '/labs/lx1.html' | relative_url }}">Следующая: LX1 →</a>{% endif %}
+        {% if page.lab_id == 'lx1' %}<a href="{{ '/labs/lx2.html' | relative_url }}">Следующая: LX2 →</a>{% endif %}
+        {% if page.lab_id == 'lx2' %}<a href="{{ '/labs/lx3.html' | relative_url }}">Следующая: LX3 →</a>{% endif %}
+        {% if page.lab_id == 'lx3' %}<a href="{{ '/labs/lx4.html' | relative_url }}">Следующая: LX4 →</a>{% endif %}
+        {% if page.lab_id == 'lx4' %}<a href="{{ '/labs/lx5.html' | relative_url }}">Следующая: LX5 →</a>{% endif %}
+        {% if page.lab_id == 'lx5' %}<a href="{{ '/labs/lx6.html' | relative_url }}">Следующая: LX6 →</a>{% endif %}
+        {% if page.lab_id == 'lx6' %}<a href="{{ '/labs/lx7.html' | relative_url }}">Следующая: LX7 →</a>{% endif %}
+      </nav>
+    </section>
+    {% endif %}
+  </main>
+  {% if page.lab_id %}
+  <nav class="lab-navigation" aria-label="Переходы по лабораторной">
+    <a href="{{ '/' | relative_url }}">← К курсу</a>
+    <a href="#main" aria-label="В начало лабораторной">↑ В начало</a>
+    <a href="#quiz">MCQ</a>
+    <a href="#submit">Отчёт</a>
+  </nav>
+  {% endif %}
+  <footer class="site-footer">Linux · сети · Bash · Python</footer>
+  <script src="{{ '/assets/js/site.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/progress.js' | relative_url }}?v=20260908-1"></script>
+  {% if page.home %}
+  <script src="{{ '/assets/js/course-home.js' | relative_url }}?v=20260908-1"></script>
+  {% else %}
+  <script src="{{ '/assets/js/evidence-pad.js' | relative_url }}?v=20260908-1"></script>
+  <script src="{{ '/assets/js/quiz.js' | relative_url }}?v=20260908-1"></script>
+  <script src="{{ '/assets/js/report-builder.js' | relative_url }}?v=20260908-1"></script>
+  {% endif %}
+</body>
+</html>

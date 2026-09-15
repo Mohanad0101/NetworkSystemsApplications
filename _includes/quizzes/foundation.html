@@ -1,0 +1,169 @@
+<section class="quiz-shell" data-quiz-shell="foundation">
+  <div class="quiz-intro-row">
+    <div>
+      <p class="eyebrow">Проверка понимания</p>
+      <p class="quiz-static-note"><strong>12 вопросов.</strong> Выберите лучший ответ. Если вариант не подошёл, прочитайте объяснение и попробуйте ещё раз; правильный ответ можно найти без штрафа. Итог прохождения автоматически войдёт в отчёт.</p>
+    </div>
+    <div class="quiz-status-badge">1 лучший ответ</div>
+  </div>
+  <div class="quiz" data-quiz="foundation" data-course="Сетевые системы и приложения">
+    <div class="quiz-score" data-quiz-score role="status">Пройдено: 0 / 12 · Можно пробовать снова</div>
+    <section class="quiz-card" data-quiz-card data-answer="2" data-topic="LX0 · Перенос VM" data-review="../labs/lx0.html#verify">
+      <p class="quiz-question" id="foundation-q-0">1. После импорта OVA вы получили вторую VM. Что лучше проверить перед удалением тестовой копии?</p>
+      <div class="quiz-options" role="group" aria-labelledby="foundation-q-0">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Только совпадение размера OVA с виртуальным диском</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Только возможность открыть окно настроек, без загрузки гостя</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Загрузку копии, учётную запись и сохранённый учебный файл</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Только новое имя VM, без проверки данных</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Экспорт имеет смысл, если из него действительно восстанавливается работоспособная среда с ожидаемыми данными.</span></p>
+        <p class="quiz-reading"><a href="../labs/lx0.html#verify">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os00-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="2" data-topic="LX2 · NAT и SSH" data-review="../labs/lx2.html#practice-ssh">
+      <p class="quiz-question" id="foundation-q-1">2. VM использует обычный NAT VirtualBox, SSH-сервер в ней работает. Нужно подключиться с Windows-хоста через выбранный NAT-маршрут. Какое действие подходит?</p>
+      <div class="quiz-options" role="group" aria-labelledby="foundation-q-1">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Использовать гостевой 127.0.0.1 как адрес VM с другого ПК</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Считать исходящий NAT достаточным для любого входящего подключения</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Настроить проброс подходящего порта к SSH-серверу гостя</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Сменить пароль пользователя, не настраивая путь подключения</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Исходящий доступ через NAT не настраивает автоматически входящий SSH. Нужен маршрут подключения и работающий SSH-сервер.</span></p>
+        <p class="quiz-reading"><a href="../labs/lx2.html#practice-ssh">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="0" data-topic="LX0 · Обновление пакетов" data-review="../labs/lx0.html#install">
+      <p class="quiz-question" id="foundation-q-2">3. Студент сделал apt update и решил, что установлены все обновления. Как уточнить результат?</p>
+      <div class="quiz-options" role="group" aria-labelledby="foundation-q-2">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Update обновляет списки; установку доступных обновлений выполняет upgrade</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Update гарантирует установку всех пакетов после следующего входа</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Update устанавливает всё, а upgrade только обновляет список</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Обе команды меняют только версию ядра</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Сведения о доступных версиях и изменение установленных пакетов — разные этапы.</span></p>
+        <p class="quiz-reading"><a href="../labs/lx0.html#install">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os00-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="LX1 · Пути" data-review="../labs/lx1.html#practice-basic">
+      <p class="quiz-question" id="foundation-q-3">4. Файл лежит в ~/project/report.txt, а текущий каталог — ~/project. Какой относительный путь указывает на него?</p>
+      <div class="quiz-options" role="group" aria-labelledby="foundation-q-3">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">~/report.txt</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">report.txt</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">/report.txt</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">../report.txt</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Относительное имя report.txt разрешается относительно текущего каталога.</span></p>
+        <p class="quiz-reading"><a href="../labs/lx1.html#practice-basic">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os11-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="3" data-topic="LX1 · Каналы" data-review="../labs/lx1.html#redirection">
+      <p class="quiz-question" id="foundation-q-4">5. Команда ls -l | less показывает длинный список постранично. Что связывает две программы?</p>
+      <div class="quiz-options" role="group" aria-labelledby="foundation-q-4">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Автоматическая запись списка в домашний каталог</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Передача имени созданного ls файла в less</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Объединение stdout и stderr без дополнительных перенаправлений</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Канал стандартного вывода первой программы на ввод второй</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Оболочка соединяет текстовые потоки; каждая программа выполняет свою часть задачи.</span></p>
+        <p class="quiz-reading"><a href="../labs/lx1.html#redirection">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os11-2/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="2" data-topic="LX2 · Удалённый контекст" data-review="../labs/lx2.html#ssh-connect">
+      <p class="quiz-question" id="foundation-q-5">6. После SSH-входа вы выполнили mkdir ~/test. Где появился каталог?</p>
+      <div class="quiz-options" role="group" aria-labelledby="foundation-q-5">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">На клиенте, потому что там находится окно терминала</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">На обеих машинах одновременно за счёт SSH</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">На удалённой машине в домашнем каталоге вошедшего пользователя</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">В домашнем каталоге владельца Windows независимо от Linux-логина</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>SSH-оболочка исполняет команды на удалённой машине. Whoami и hostname помогают проверить контекст.</span></p>
+        <p class="quiz-reading"><a href="../labs/lx2.html#ssh-connect">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="2" data-topic="LX2 · Аутентификация" data-review="../labs/lx2.html#ssh-config">
+      <p class="quiz-question" id="foundation-q-6">7. SSH сообщает Permission denied (publickey). Что разумно проверить в первую очередь?</p>
+      <div class="quiz-options" role="group" aria-labelledby="foundation-q-6">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Только RAM гостя, не проверяя ключ</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Только права на ещё не передаваемый файл</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Имя пользователя, выбранный ключ и authorized_keys на сервере</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Только историю команд клиента</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Ошибка относится к аутентификации. Она отличается от невозможности установить сетевое соединение.</span></p>
+        <p class="quiz-reading"><a href="../labs/lx2.html#ssh-config">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="3" data-topic="LX2 · Ключи" data-review="../labs/lx2.html#ssh-keys">
+      <p class="quiz-question" id="foundation-q-7">8. Какую часть пары SSH-ключей обычно добавляют в authorized_keys на сервере?</p>
+      <div class="quiz-options" role="group" aria-labelledby="foundation-q-7">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Содержимое known_hosts</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Закрытый ключ</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Passphrase закрытого ключа</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Открытый ключ</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Закрытый ключ остаётся у владельца; сервер использует открытый ключ для проверки аутентификации.</span></p>
+        <p class="quiz-reading"><a href="../labs/lx2.html#ssh-keys">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="3" data-topic="LX2 · Устойчивый сеанс" data-review="../labs/lx2.html#practice-tmux">
+      <p class="quiz-question" id="foundation-q-8">9. Длительная задача запущена в tmux. Вы отсоединились от сеанса и закрыли SSH. Что ожидать, если сервер продолжает работать?</p>
+      <div class="quiz-options" role="group" aria-labelledby="foundation-q-8">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Все процессы сеанса обязательно завершаются вместе с SSH</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Задача автоматически переносится на локальный клиент</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Именованный сеанс сохранится даже после перезагрузки сервера</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Задача может продолжить работу; к сеансу можно подключиться снова</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Tmux отделяет срок жизни сеанса от конкретного клиентского подключения. Перезагрузку сервера он не переживает как работающий процесс.</span></p>
+        <p class="quiz-reading"><a href="../labs/lx2.html#practice-tmux">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os12-2/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="LX3 · Права файла" data-review="../labs/lx3.html#practice-permissions">
+      <p class="quiz-question" id="foundation-q-9">10. Обычный файл имеет 640, путь к нему доступен, дополнительных ACL нет. Что разрешают эти биты обычному члену группы файла, который не является владельцем?</p>
+      <div class="quiz-options" role="group" aria-labelledby="foundation-q-9">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Чтение и запись</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Только чтение</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Чтение и выполнение</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Никаких действий</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>6 — права владельца rw-, 4 — права группы r--, 0 — отсутствие прав для остальных.</span></p>
+        <p class="quiz-reading"><a href="../labs/lx3.html#practice-permissions">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os13-2/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="3" data-topic="LX3 · Диагностика доступа" data-review="../labs/lx3.html#access-check">
+      <p class="quiz-question" id="foundation-q-10">11. Пользователю не хватает доступа к общему каталогу проекта. Какой подход лучше, чем chmod -R 777?</p>
+      <div class="quiz-options" role="group" aria-labelledby="foundation-q-10">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Поменять только имя каталога без проверки прав</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Всегда запускать приложение от root</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Выдать право записи всем пользователям рекурсивно</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Проверить владельца, группу и минимально необходимые права</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Сначала определяют требуемый доступ и его причину, затем меняют только нужные владельцев, группы или права.</span></p>
+        <p class="quiz-reading"><a href="../labs/lx3.html#access-check">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os13-2/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="0" data-topic="LX3 · Проверка доступа" data-review="../labs/lx3.html#access-check">
+      <p class="quiz-question" id="foundation-q-11">12. Как лучше доказать, что группа получила нужные права на общий каталог?</p>
+      <div class="quiz-options" role="group" aria-labelledby="foundation-q-11">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Выполнить разрешённое и запрещённое действия от обычных пользователей нужных групп</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Проверить разрешённое чтение, но не ограничение записи</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Проверить все действия от root</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Показать только chmod без выполнения операций</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Проверка должна отражать реальный сценарий доступа. Администратор может обходить многие ограничения и не заменяет такую проверку.</span></p>
+        <p class="quiz-reading"><a href="../labs/lx3.html#access-check">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os13-2/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <noscript><p class="callout warning"><strong>Вопросы доступны.</strong> Для мгновенной проверки ответа и подсчёта результата включите JavaScript для этого сайта.</p></noscript>
+  </div>
+</section>

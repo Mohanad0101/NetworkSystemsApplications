@@ -1,0 +1,476 @@
+teacher_email: ''
+labs:
+  lx0:
+    title: Установка Linux в виртуальную машину
+    evidence:
+    - id: LX0-01
+      kind: screenshot
+      stage: Установленная Mint
+      proof: Окно VirtualBox с установленной Linux Mint и терминалом, где видны whoami и hostname. ISO уже извлечён.
+    - id: LX0-02
+      kind: text
+      stage: Паспорт среды
+      proof: 'Вставьте текст из verification.txt: пользователь, hostname, версия ОС, ядро и краткий вывод ip -br a. Секреты
+        и пароли не нужны.'
+    - id: LX0-03
+      kind: screenshot
+      stage: Проверка импортированной копии
+      proof: Видны исходная VM и импортированная copy; в терминале копии читается сохранённый hello.txt. Имя VM отличается;
+        hostname может совпадать.
+    - id: LX0-04
+      kind: screenshot
+      stage: Две VM одновременно
+      proof: Две отдельные VM одновременно имеют состояние Running. Лучше один кадр с менеджером и двумя окнами; допустимы
+        04a/04b, если экран небольшой.
+    - id: LX0-Q
+      kind: text
+      stage: MCQ
+      proof: После ответа на все вопросы MCQ считается завершённым для комплектности. Число правильных ответов остаётся формативной
+        обратной связью и не является автоматической оценкой лабораторной.
+    files: []
+    questions:
+    - Чем установленная VM отличается от live-системы, запущенной с ISO?
+    - Что именно проверяет экспорт и последующий импорт OVA, и почему одного наличия файла OVA недостаточно?
+    - Какие ресурсы компьютера ограничивают одновременный запуск двух VM?
+    complete: Mint установлен; OVA экспортирован и проверен импортом; две VM работали одновременно; тестовая копия безопасно
+      удалена; три основных снимка, паспорт среды и результат MCQ внесены в отчёт.
+    template: /assets/templates/NSA_LX0_Report_Template.docx
+    start_anchor: install
+    route:
+    - n: '1'
+      title: Подготовить VM
+      proof: ISO + VirtualBox
+      anchor: core-download
+    - n: '2'
+      title: Установить Mint
+      proof: LX0-01 + LX0-02
+      anchor: core-install
+    - n: '3'
+      title: Экспорт / импорт
+      proof: LX0-03
+      anchor: core-export
+    - n: '4'
+      title: Проверить две VM
+      proof: LX0-04 + безопасная очистка
+      anchor: core-run-both
+    - n: '5'
+      title: MCQ
+      proof: LX0-Q
+      anchor: quiz
+    delivery:
+      report: Один автоматически сформированный DOCX; PDF — только по требованию преподавателя.
+      extra: []
+  lx1:
+    title: Основы командной строки
+    evidence:
+    - id: LX1-01
+      kind: text
+      stage: Навигация и файлы
+      proof: Вставьте компактные метки WORKSPACE, BASIC_FILE, COPY_MOVE, CLEANUP и ABOUT.
+    - id: LX1-02
+      kind: text
+      stage: Сеанс и пользователь
+      proof: Вставьте компактные метки TTY, USER, PASSWD_RECORD и SESSION_COUNT.
+    - id: LX1-03
+      kind: text
+      stage: Потоки и перенаправление
+      proof: Вставьте компактные метки HOME_LIST, APPEND, PASSWD_COPY, PIPELINE и первые найденные пути.
+    - id: LX1-04
+      kind: text
+      stage: Ссылки и архив
+      proof: Вставьте компактные метки ARCHIVE, RESTORE, HARD_LINK, SYMLINK_OBJECT, SYMLINK_TARGET и RESTORED_TEXT.
+    - id: LX1-Q
+      kind: text
+      stage: MCQ
+      proof: После ответа на все 12 вопросов MCQ считается завершённым для комплектности. Число правильных ответов остаётся
+        формативной обратной связью и не является автоматической оценкой лабораторной.
+    files:
+    - archive/src.tar.gz — единственный дополнительный файл; он уже является архивом, не упаковывайте его ещё раз.
+    questions:
+    - Разберите одну выполненную команду на имя команды, опцию и аргумент.
+    - Чем абсолютный путь отличается от относительного? Приведите пример из своей работы.
+    - Почему после удаления исходного имени hard link работает, а symbolic link может стать битой?
+    - Почему проверка восстановления важнее самого факта создания архива?
+    complete: Понятна структура команды и справка; навигация, операции с файлами, сеанс, потоки, ссылки и архив выполнены;
+      четыре компактных результата и итог MCQ внесены в отчёт; src.tar.gz подготовлен.
+    template: /assets/templates/NSA_LX1_Report_Template.docx
+    start_anchor: practice-basic
+    route:
+    - n: '1'
+      title: Навигация и файлы
+      proof: LX1-01
+      anchor: practice-basic
+    - n: '2'
+      title: Сеанс
+      proof: LX1-02
+      anchor: service-commands
+    - n: '3'
+      title: Потоки
+      proof: LX1-03
+      anchor: redirection
+    - n: '4'
+      title: Ссылки + архив
+      proof: LX1-04
+      anchor: practice-files
+    - n: '5'
+      title: MCQ
+      proof: LX1-Q
+      anchor: quiz
+    delivery:
+      report: Один автоматически сформированный DOCX; PDF — только по требованию преподавателя.
+      extra:
+      - archive/src.tar.gz — приложите рядом с отчётом.
+  lx2:
+    title: Удалённый доступ — SSH и tmux
+    evidence:
+    - id: LX2-01
+      kind: text
+      stage: SSH-сервер готов
+      proof: "Вставьте только короткий вывод сводной проверки с SSH_SERVICE, USER, HOST и ip -br a; одной строкой допишите режим сети и порт. Полный журнал APT не нужен."
+    - id: LX2-02
+      kind: text
+      stage: Удалённый вход и передача файла
+      proof: "Вставьте только подписанные строки REMOTE_USER, REMOTE_HOST, REMOTE_HOME, UPLOAD и DOWNLOAD из сводных проверок. Полный SSH/SCP-транскрипт не нужен."
+    - id: LX2-03
+      kind: text
+      stage: Вход по ключу
+      proof: "Вставьте только строки AUTH=publickey, USER и HOST из проверки с PasswordAuthentication=no. Ключи, fingerprint private key и passphrase не вставляйте."
+    - id: LX2-04
+      kind: text
+      stage: tmux после повторного входа
+      proof: "Вставьте только короткий BEFORE/AFTER_RECONNECT вывод: SESSION, PANE, SHELL_PID и CMD. Совпадающие идентификаторы подтверждают ту же панель, CMD=htop — продолжающуюся программу."
+    - id: LX2-Q
+      kind: text
+      stage: MCQ
+      proof: После ответа на все 12 вопросов MCQ считается завершённым для комплектности. Число правильных ответов остаётся
+        формативной обратной связью и не является автоматической оценкой лабораторной.
+    files: []
+    questions:
+    - Как вы убедились, что команды после SSH выполнялись именно на удалённой машине?
+    - Чем открытый SSH-ключ отличается от закрытого и почему закрытый ключ нельзя отправлять преподавателю?
+    - Почему tmux помогает пережить разрыв SSH, но обычный сеанс tmux не переживает перезагрузку сервера?
+    complete: SSH-сервер доступен; удалённый контекст проверен; файлы переданы в обоих направлениях; public-key authentication подтверждена;
+      tmux-сеанс восстановлен после нового SSH-входа; четыре компактных текстовых результата и итог MCQ внесены в отчёт.
+    template: /assets/templates/NSA_LX2_Report_Template.docx
+    start_anchor: practice-ssh
+    route:
+    - n: '1'
+      title: Поднять SSH
+      proof: LX2-01
+      anchor: practice-ssh
+    - n: '2'
+      title: Войти + передать файл
+      proof: LX2-02
+      anchor: ssh-connect
+    - n: '3'
+      title: Настроить ключ
+      proof: LX2-03
+      anchor: ssh-keys
+    - n: '4'
+      title: Проверить tmux
+      proof: LX2-04
+      anchor: practice-tmux
+    - n: '5'
+      title: MCQ
+      proof: LX2-Q
+      anchor: quiz
+    delivery:
+      report: Один автоматически сформированный DOCX; PDF — только по требованию преподавателя.
+      extra: []
+  lx3:
+    title: Права и пользователи
+    evidence:
+    - id: LX3-01
+      kind: text
+      stage: Пользователи и группы
+      proof: Вставьте whoami, id для user_1, user_3, user_5 и student, затем getent group workers teachers students. Не вставляйте
+        /etc/shadow.
+    - id: LX3-02
+      kind: text
+      stage: Владельцы и режимы
+      proof: Вставьте ls -ld /labs /labs/library /labs/tests и краткий ls -l для книг, /labs/list и test_myname (где myname
+        — ваша фамилия латиницей).
+    - id: LX3-03
+      kind: text
+      stage: Разрешённые и запрещённые действия
+      proof: 'Ключевые проверки: user_5 пишет книгу как member teachers; user_3 читает книгу; user_1 читает, но не пишет /labs/list;
+        user_3 не читает /labs/list и запускает test_myname (где myname — ваша фамилия латиницей).'
+    - id: LX3-04
+      kind: text
+      stage: Sticky bit и umask
+      proof: Вставьте права /labs/shared и ожидаемый отказ удаления чужого файла; затем LAB_UMASK=0027 и права новых umask-file/umask-dir.
+    - id: LX3-Q
+      kind: text
+      stage: MCQ
+      proof: После ответа на все 12 вопросов MCQ считается завершённым для комплектности. Число правильных ответов остаётся
+        формативной обратной связью и не является автоматической оценкой лабораторной.
+    files: []
+    questions:
+    - Чем смысл r, w и x для каталога отличается от этих же прав для обычного файла?
+    - Почему ожидаемый Permission denied иногда является успешным результатом проверки политики доступа?
+    - Чем sticky bit и umask решают разные задачи?
+    complete: Пользователи и группы настроены без ненужных общих паролей; роль teachers и доступ workers/students проверены
+      от непривилегированных пользователей; sticky bit и umask проверены; четыре текстовых результата и итог MCQ внесены в
+      отчёт.
+    template: /assets/templates/NSA_LX3_Report_Template.docx
+    start_anchor: safe-start
+    route:
+    - n: '1'
+      title: Пользователи + группы
+      proof: LX3-01
+      anchor: practice-users
+    - n: '2'
+      title: Владельцы + права
+      proof: LX3-02
+      anchor: practice-permissions
+    - n: '3'
+      title: Проверить политику
+      proof: LX3-03
+      anchor: access-check
+    - n: '4'
+      title: Sticky bit + umask
+      proof: LX3-04
+      anchor: shared-directory
+    - n: '5'
+      title: MCQ
+      proof: LX3-Q
+      anchor: quiz
+    delivery:
+      report: Один автоматически сформированный DOCX; PDF — только по требованию преподавателя.
+      extra: []
+  lx4:
+    title: Процессы и пакеты в Linux
+    evidence:
+    - id: LX4-01
+      kind: text
+      stage: Пакетная среда
+      proof: Вставьте environment.txt, htop-before.txt и первые строки apt-cache policy htop. Полный список пакетов не нужен.
+    - id: LX4-02
+      kind: text
+      stage: Установка и проверка htop
+      proof: Вставьте htop-installed.txt, несколько первых путей dpkg-query -L htop и строку APT_CHECK=OK.
+    - id: LX4-03
+      kind: text
+      stage: Наблюдение за процессом
+      proof: Вставьте LAB_PID, одну строку ps и Name/State/Pid/PPid/Threads из /proc/<PID>/status для вашего sleep.
+    - id: LX4-04
+      kind: text
+      stage: Сигналы и nice
+      proof: Вставьте AFTER_STOP/AFTER_CONT с ps, NICE_AFTER=15 и финальные PID_..._FINISHED=YES для двух тестовых процессов.
+    - id: LX4-Q
+      kind: text
+      stage: MCQ
+      proof: После прохождения всех 12 вопросов MCQ считается завершённым для комплектности. Повторные попытки разрешены и
+        не являются штрафом или оценкой.
+    files: []
+    questions:
+    - Почему для обычной установки из настроенного репозитория APT удобнее прямого dpkg?
+    - Что показали PID, PPID и State вашего sleep и как /proc подтвердил данные ps?
+    - Почему SIGTERM обычно используют перед SIGKILL и что означает увеличение nice value с 10 до 15?
+    complete: Пакетная среда исследована; установка htop предварительно смоделирована и проверена; собственный процесс сопоставлен
+      с /proc; STOP/CONT/TERM и nice выполнены только на контролируемых процессах; четыре текстовых результата и MCQ внесены
+      в отчёт.
+    template: /assets/templates/NSA_LX4_Report_Template.docx
+    start_anchor: packages-environment
+    route:
+    - n: '1'
+      title: Пакетная среда
+      proof: LX4-01
+      anchor: packages-environment
+    - n: '2'
+      title: Установить + проверить
+      proof: LX4-02
+      anchor: packages-install
+    - n: '3'
+      title: Наблюдать процесс
+      proof: LX4-03
+      anchor: process-observe
+    - n: '4'
+      title: Сигналы + nice
+      proof: LX4-04
+      anchor: process-control
+    - n: '5'
+      title: MCQ + очистка
+      proof: LX4-Q
+      anchor: packages-cleanup
+    delivery:
+      report: Один автоматически сформированный DOCX; PDF — только по требованию преподавателя.
+      extra: []
+  lx5:
+    title: Управление загрузкой Linux и службами systemd
+    evidence:
+    - id: LX5-01
+      kind: text
+      stage: Загрузка и targets
+      proof: Вставьте boot-summary.txt и 3–5 строк активных targets/services. Полные списки не нужны.
+    - id: LX5-02
+      kind: text
+      stage: Ручная проверка программы
+      proof: Вставьте PYTHON_CHECK=OK и короткий manual-test.txt с LX5_START, 2–3 heartbeat и корректным завершением.
+    - id: LX5-03
+      kind: text
+      stage: Unit-файл и verify
+      proof: Вставьте UNIT_VERIFY=OK, фактического SERVICE_USER и unit из systemctl cat lx5-heartbeat.service.
+    - id: LX5-04
+      kind: text
+      stage: Enable, start, journal и restart
+      proof: Вставьте lifecycle.txt и 4–6 последних строк journal с heartbeat/restart. Полный journal не нужен.
+    - id: LX5-Q
+      kind: text
+      stage: MCQ
+      proof: После прохождения всех 12 вопросов MCQ считается завершённым для комплектности. Повторные попытки разрешены,
+        помогают учиться и не являются штрафом или оценкой.
+    files: []
+    questions:
+    - Почему enable и start являются разными действиями и что вы увидели после enable до start?
+    - Почему в учебной unit используется Type=exec и когда после изменения unit нужен daemon-reload?
+    - Как изменился MainPID после restart и какие команды вы использовали бы первыми при failed service?
+    complete: Изучены PID 1/default target; программа проверена вручную; unit прошла systemd-analyze verify; enable и start
+      проверены отдельно; active state, MainPID, journal и restart подтверждены; учебная служба очищена; четыре текстовых
+      результата и MCQ внесены в отчёт.
+    template: /assets/templates/NSA_LX5_Report_Template.docx
+    start_anchor: boot-observe
+    route:
+    - n: '1'
+      title: Загрузка и targets
+      proof: LX5-01
+      anchor: boot-observe
+    - n: '2'
+      title: Проверить программу
+      proof: LX5-02
+      anchor: service-program
+    - n: '3'
+      title: Создать unit
+      proof: LX5-03
+      anchor: unit-create
+    - n: '4'
+      title: Enable + lifecycle
+      proof: LX5-04
+      anchor: service-lifecycle
+    - n: '5'
+      title: Очистка + MCQ
+      proof: LX5-Q
+      anchor: service-cleanup
+    delivery:
+      report: Один автоматически сформированный DOCX; PDF — только по требованию преподавателя.
+      extra: []
+  lx6:
+    title: Управление файловыми системами в Linux
+    evidence:
+    - id: LX6-01
+      kind: text
+      stage: Карта хранилища
+      proof: Вставьте storage-summary.txt, одну строку findmnt для / и 5–10 полезных строк lsblk.
+    - id: LX6-02
+      kind: text
+      stage: Loop image и ext4
+      proof: 'Вставьте loop-summary.txt и строку blkid: /dev/loopN, backing file, ext4, LABEL=LX6LAB и UUID.'
+    - id: LX6-03
+      kind: text
+      stage: Mount и сохранность данных
+      proof: Вставьте mount-check.txt с findmnt, UNDERLAY_HIDDEN/UNDERLAY_VISIBLE и PERSIST_AFTER_REMOUNT=YES.
+    - id: LX6-04
+      kind: text
+      stage: Безопасная проверка fstab
+      proof: Вставьте строку fstab.lab, FSTAB_VERIFY=OK и fstab-check.txt с mount через альтернативную таблицу и read-only
+        проверкой.
+    - id: LX6-Q
+      kind: text
+      stage: MCQ
+      proof: После прохождения всех 12 вопросов MCQ считается завершённой для комплектности. Повторные попытки разрешены и
+        не являются оценкой.
+    files: []
+    questions:
+    - Чем block device, раздел, файловая система и точка монтирования отличаются друг от друга в вашей LX6?
+    - Почему UUID обычно удобнее имени вида /dev/sdX для постоянной записи в fstab?
+    - Что показал эксперимент с underlay.txt и persistent.txt о смысле mount/umount и сохранности данных?
+    complete: Карта хранилища прочитана; loop device проверено перед mkfs; ext4 создана и смонтирована; сохранность данных
+      после remount подтверждена; отдельный UUID-based fstab проверен; loop-стенд очищен; четыре текстовых результата и MCQ
+      внесены в отчёт.
+    template: /assets/templates/NSA_LX6_Report_Template.docx
+    start_anchor: storage-map
+    route:
+    - n: '1'
+      title: Прочитать storage map
+      proof: LX6-01
+      anchor: storage-map
+    - n: '2'
+      title: Создать loop + ext4
+      proof: LX6-02
+      anchor: loop-image
+    - n: '3'
+      title: Проверить mount/umount
+      proof: LX6-03
+      anchor: mount-persist
+    - n: '4'
+      title: Проверить fstab безопасно
+      proof: LX6-04
+      anchor: fstab-safe
+    - n: '5'
+      title: NFS-модель + очистка + MCQ
+      proof: LX6-Q
+      anchor: network-cleanup
+    delivery:
+      report: Один автоматически сформированный DOCX; PDF — только по требованию преподавателя.
+      extra: []
+  lx7:
+    title: Основы скриптов на Bash
+    evidence:
+    - id: LX7-01
+      kind: text
+      stage: Первый Bash-сценарий
+      proof: Вставьте environment.txt, SYNTAX_CHECK=OK и короткий вывод hello.sh с вашим собственным именем/фамилией. Полный
+        PATH не нужен.
+    - id: LX7-02
+      kind: text
+      stage: Логика и exit status
+      proof: Вставьте SYNTAX_CHECK=OK, summary.txt из system-report.sh и invalid-mode.txt с ожидаемым INVALID_EXIT=2.
+    - id: LX7-03
+      kind: text
+      stage: SHA-256 и изменение файла
+      proof: 'Вставьте checksum-summary.txt: SHA256, BASELINE_CHECK=OK, AFTER_CHANGE=CHANGED и AFTER_RESTORE=OK.'
+    - id: LX7-04
+      kind: text
+      stage: Пользовательский cron
+      proof: Вставьте cron-summary.txt и блок NSA-LX7-BEGIN/END из user crontab. Достаточно 1–3 строк LX7_CRON; личные cron-задачи
+        не копируйте.
+    - id: LX7-Q
+      kind: text
+      stage: MCQ
+      proof: Для комплектности пройдите все 12 вопросов. Повторные попытки разрешены, помогают учиться и не являются автоматической
+        оценкой.
+    files: []
+    questions:
+    - Зачем в Bash нужны кавычки вокруг переменных и что могло бы измениться без них в вашей LX7?
+    - Чем код завершения отличается от текстового вывода и почему INVALID_EXIT=2 полезен для автоматизации?
+    - Почему SHA-256 checksum и cron-запуск требуют доверенного контекста и явно заданного окружения?
+    complete: Первый Bash-сценарий проверен и запускается; system-report.sh обрабатывает корректный и неверный режим с понятным
+      exit status; изменение файла обнаружено через SHA-256; пользовательская cron-задача выполнилась и затем была удалена
+      без изменения чужих записей; четыре текстовых результата и MCQ внесены в отчёт.
+    template: /assets/templates/NSA_LX7_Report_Template.docx
+    start_anchor: first-script
+    route:
+    - n: '1'
+      title: Первый сценарий
+      proof: LX7-01
+      anchor: first-script
+    - n: '2'
+      title: Логика + exit
+      proof: LX7-02
+      anchor: logic-exit
+    - n: '3'
+      title: SHA-256
+      proof: LX7-03
+      anchor: checksum
+    - n: '4'
+      title: Cron
+      proof: LX7-04
+      anchor: cron-safe
+    - n: '5'
+      title: MCQ
+      proof: LX7-Q
+      anchor: quiz
+    delivery:
+      report: Один автоматически сформированный DOCX; PDF — только по требованию преподавателя.
+      extra: []
+course_name: Сетевые системы и приложения

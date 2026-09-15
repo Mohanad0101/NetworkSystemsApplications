@@ -1,0 +1,143 @@
+<section class="quiz-shell" data-quiz-shell="lx0">
+  <div class="quiz-intro-row">
+    <div>
+      <p class="eyebrow">Проверка понимания</p>
+      <p class="quiz-static-note"><strong>10 вопросов.</strong> Выберите лучший ответ. Если вариант не подошёл, прочитайте объяснение и попробуйте ещё раз; правильный ответ можно найти без штрафа. Итог прохождения автоматически войдёт в отчёт.</p>
+    </div>
+    <div class="quiz-status-badge">1 лучший ответ</div>
+  </div>
+  <div class="quiz" data-quiz="lx0" data-course="Сетевые системы и приложения">
+    <div class="quiz-score" data-quiz-score role="status">Пройдено: 0 / 10 · Можно пробовать снова</div>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Выбор среды" data-review="#vm-containers">
+      <p class="quiz-question" id="lx0-q-0">1. Нужно пройти установку Mint с ISO и перенести готовую гостевую систему через OVA. Какой маршрут соответствует задаче?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx0-q-0">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Скопировать только установочный ISO после работы в live-сеансе</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Установить Mint в VirtualBox, затем экспортировать выключенную VM</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Установить Ubuntu в WSL 2 и переименовать её каталог в .ova</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Создать Docker-контейнер Mint и считать его образ экспортом VM</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>OVA переносит конфигурацию VM и виртуальные диски. ISO содержит установочную среду; экспорт WSL и образ контейнера имеют другое назначение.</span></p>
+        <p class="quiz-reading"><a href="#vm-containers">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os00-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="3" data-topic="Установка и образы" data-review="#core-download">
+      <p class="quiz-question" id="lx0-q-1">2. Вычисленный SHA256 не совпал со значением для скачанного ISO. Что делать?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx0-q-1">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Исправить опубликованную сумму, чтобы она совпала с полученной</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Продолжить: хеш меняется при каждом чтении одного и того же файла</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Переименовать ISO: имя файла определяет его SHA256</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Не использовать ISO, проверить файл и загрузку заново</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Проверка обнаружила несоответствие; переименование или исправление ожидаемой суммы не устраняют его.</span></p>
+        <p class="quiz-reading"><a href="#core-download">Разобрать в материалах курса</a><a href="https://linuxmint-installation-guide.readthedocs.io/en/latest/verify.html" rel="noopener">Документация</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="0" data-topic="Выбор диска" data-review="#core-install">
+      <p class="quiz-question" id="lx0-q-2">3. Когда допустима кнопка «Стереть диск» в основной работе?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx0-q-2">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">В созданной VM после проверки нового пустого VDI</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">На физическом диске с Windows, поскольку Mint сама всегда сохраняет все разделы</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">На любом подключённом диске, если в имени VM есть слово lab</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">На существующем VDI с нужными данными без их проверки</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Безопасность здесь обусловлена конкретно выбранным новым виртуальным диском.</span></p>
+        <p class="quiz-reading"><a href="#core-install">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os00-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="2" data-topic="Установка и образы" data-review="#core-install">
+      <p class="quiz-question" id="lx0-q-3">4. После перезагрузки снова появился live-рабочий стол с Install Linux Mint. Что проверить первым?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx0-q-3">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Импортировать исходный ISO как готовый OVA</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Удалить установленный VDI и оставить только ISO</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Извлечь установочный ISO и загрузиться с установленного VDI</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Переименовать пользователя в live-сеансе</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Возможно, VM снова загрузилась с установочного носителя.</span></p>
+        <p class="quiz-reading"><a href="#core-install">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os00-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="3" data-topic="Команды и обновления" data-review="#install">
+      <p class="quiz-question" id="lx0-q-4">5. После sudo apt update версии установленных программ не изменились. Это ошибка?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx0-q-4">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Нет: update меняет только ядро, оставляя остальные пакеты</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Нет: upgrade только обновляет список, как и update</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Да: update обязана установить все найденные версии</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Нет: update обновляет списки, а upgrade устанавливает доступные обновления</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Эти команды выполняют разные этапы обновления.</span></p>
+        <p class="quiz-reading"><a href="#install">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os00-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="0" data-topic="Проверка результата" data-review="#verify">
+      <p class="quiz-question" id="lx0-q-5">6. Для чего в паспорте среды применён tee?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx0-q-5">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Чтобы одновременно показать вывод и записать его в файл</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Чтобы автоматически отдать файлу права администратора</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Чтобы перенаправить вывод только в файл и убрать его с экрана</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Чтобы собрать только ошибки, не показывая обычный вывод</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Tee сохраняет переданный по каналу вывод и продолжает выводить его на экран.</span></p>
+        <p class="quiz-reading"><a href="#verify">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os00-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="0" data-topic="Перенос VM" data-review="#core-import">
+      <p class="quiz-question" id="lx0-q-6">7. После импорта OVA студент видит свой hello.txt. Что проверено?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx0-q-6">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Сохранение учебного файла в перенесённой среде</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Автоматическое сохранение в OVA изменений, сделанных после экспорта</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Наличие резервной копии любых будущих файлов гостя</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Перенос текущего состояния всех физических устройств хоста</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Экспорт переносит состояние на момент создания OVA, а не все последующие изменения.</span></p>
+        <p class="quiz-reading"><a href="#core-import">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os00-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Перенос VM" data-review="#core-rename">
+      <p class="quiz-question" id="lx0-q-7">8. После импорта VM имя в VirtualBox изменили, а hostname остался прежним. Почему?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx0-q-7">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Совпадение hostname означает, что импорт не создал вторую VM</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Имя VM в менеджере и hostname гостевой ОС — разные настройки</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Переименование в VirtualBox действует только после смены пароля</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Hostname берётся только из имени файла OVA</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Настройка менеджера не переименовывает автоматически операционную систему внутри VM.</span></p>
+        <p class="quiz-reading"><a href="#core-rename">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os00-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="0" data-topic="Одновременная работа VM" data-review="#core-run-both">
+      <p class="quiz-question" id="lx0-q-8">9. Нужно подтвердить, что две VM работают одновременно. Какое доказательство подходит?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx0-q-8">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Оба окна с разными именами VM и состоянием Running, видимые в один момент</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">По одному скриншоту каждой VM, сделанному после выключения другой</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Два файла OVA в проводнике без запуска VM</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Два окна терминала внутри одной VM</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Две оболочки не равны двум ОС. Совместный запуск подтверждают две отдельные работающие VM; память нужна обеим гостевым системам и Windows.</span></p>
+        <p class="quiz-reading"><a href="#core-run-both">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os00-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="2" data-topic="Перенос и проверка VM" data-review="#core-delete">
+      <p class="quiz-question" id="lx0-q-9">10. Из OVA импортировали вторую VM. Нужно закончить опыт и освободить место, сохранив оригинал и OVA. Какой порядок соответствует LX0?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx0-q-9">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Удалить копию до проверки импорта, ориентируясь только на размер OVA</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Убрать копию только из списка VirtualBox и считать её дисковые файлы удалёнными</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Проверить копию и совместный запуск, выключить её, затем удалить именно копию со всеми её файлами</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Удалить оригинал, поскольку импортированная VM автоматически обновляет OVA</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Проверка восстановления предшествует удалению. Remove only убирает регистрацию VM, а Delete all files удаляет файлы выбранной копии; выбор нужно проверить.</span></p>
+        <p class="quiz-reading"><a href="#core-delete">Разобрать в материалах курса</a><a href="https://koroteev.site/text/os00-1/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <noscript><p class="callout warning"><strong>Вопросы доступны.</strong> Для мгновенной проверки ответа и подсчёта результата включите JavaScript для этого сайта.</p></noscript>
+  </div>
+</section>

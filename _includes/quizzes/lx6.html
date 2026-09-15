@@ -1,0 +1,165 @@
+<section class="quiz-shell" data-quiz-shell="lx6">
+  <div class="quiz-shell-head">
+    <div><p class="eyebrow">Проверка понимания</p><h3>LX6 · 12 вопросов</h3></div>
+    <p>Можно пробовать другой вариант и проходить тест повторно. Цель — понять файловые системы и безопасную работу с mount, а не получить оценку с первой попытки.</p>
+  </div>
+  <div class="quiz" data-quiz="lx6" data-course="Сетевые системы и приложения">
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="df vs du" data-review="#storage-map">
+      <p class="quiz-question" id="lx6-q-0">1. Что точнее всего показывает df для указанного пути?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx6-q-0">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Размер только одного файла</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Ёмкость и доступное место файловой системы, в которой находится путь</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Количество процессов, открывших файл</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Только размер домашнего каталога</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>df сообщает filesystem-level использование и свободное место. Для размера конкретного дерева файлов используют du.</span></p>
+        <p class="quiz-reading"><a href="#storage-map">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man1/df.1p.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Loop device" data-review="#loop-image">
+      <p class="quiz-question" id="lx6-q-1">2. Что делает loop device в LX6?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx6-q-1">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Физически добавляет новый SSD в VM</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Отображает обычный image-файл как блочное устройство, с которым можно работать как с диском</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Шифрует домашний каталог</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Создаёт сетевой NFS-сервер</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Loop device связывает блоки виртуального block device с обычным файлом. Поэтому filesystem image можно форматировать и монтировать без отдельного физического диска.</span></p>
+        <p class="quiz-reading"><a href="#loop-image">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man4/loop.4.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Безопасность mkfs" data-review="#loop-image">
+      <p class="quiz-question" id="lx6-q-2">3. Почему перед mkfs.ext4 в LX6 обязательно проверяется backing file loop-устройства?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx6-q-2">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Чтобы увеличить скорость сети</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Чтобы подтвердить, что форматируется именно учебный image, а не другое устройство</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Чтобы изменить hostname</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Чтобы включить swap</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>mkfs изменяет структуру выбранного устройства. Проверка /dev/loopN и backing file уменьшает риск форматирования неправильного устройства.</span></p>
+        <p class="quiz-reading"><a href="#loop-image">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man8/losetup.8.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Mount point" data-review="#mount-persist">
+      <p class="quiz-question" id="lx6-q-3">4. Что происходит с файлом underlay.txt, когда другая файловая система монтируется поверх его каталога?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx6-q-3">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Файл автоматически удаляется</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Он временно становится невидим через эту pathname, пока mount активен</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Он переносится в новую файловую систему</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Он превращается в symbolic link</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>mount присоединяет новую filesystem к каталогу. Прежнее содержимое mount point становится невидимым через этот путь и снова появляется после umount.</span></p>
+        <p class="quiz-reading"><a href="#mount-persist">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man8/mount.8.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="umount и данные" data-review="#mount-persist">
+      <p class="quiz-question" id="lx6-q-4">5. Что доказал PERSIST_AFTER_REMOUNT=YES?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx6-q-4">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">umount удаляет все файлы</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Файл, записанный внутрь ext4, сохранился в файловой системе и снова доступен после повторного mount</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Файл хранится только в shell history</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Loop device всегда является read-only</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>umount отсоединяет filesystem от mount point, но не стирает её данные. Повторный mount снова делает persistent.txt доступным.</span></p>
+        <p class="quiz-reading"><a href="#mount-persist">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man8/umount.8.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="UUID и fstab" data-review="#fstab-safe">
+      <p class="quiz-question" id="lx6-q-5">6. Почему для постоянной записи в fstab часто используют UUID вместо /dev/sdb1?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx6-q-5">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">UUID всегда короче</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Имя /dev/sdX может измениться при другом порядке обнаружения устройств, а UUID идентифицирует файловую систему устойчивее</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">UUID автоматически шифрует данные</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">/dev/sdX нельзя использовать с ext4</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Документация fstab/mount рекомендует UUID или LABEL, потому что device names могут зависеть от порядка обнаружения оборудования.</span></p>
+        <p class="quiz-reading"><a href="#fstab-safe">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man5/fstab.5.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Проверка fstab" data-review="#fstab-safe">
+      <p class="quiz-question" id="lx6-q-6">7. Зачем в LX6 используется findmnt --verify --tab-file fstab.lab?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx6-q-6">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Чтобы переформатировать root filesystem</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Чтобы проверить синтаксис и пригодность отдельной учебной mount table до изменения системного /etc/fstab</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Чтобы удалить UUID</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Чтобы запустить NFS server</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>findmnt умеет проверять альтернативную таблицу через --tab-file. Это позволяет безопасно учиться на отдельном fstab.lab.</span></p>
+        <p class="quiz-reading"><a href="#fstab-safe">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man8/findmnt.8.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Mount options" data-review="#fstab-safe">
+      <p class="quiz-question" id="lx6-q-7">8. Как интерпретировать READONLY_WRITE_BLOCKED=YES после remount,ro?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx6-q-7">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Как ошибку лабораторной</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Как ожидаемое подтверждение, что файловая система действительно read-only</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Как признак удаления ext4</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Как необходимость chmod 777</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>При read-only mount запись должна быть отклонена. Ожидаемый отказ здесь является успешной проверкой mount option.</span></p>
+        <p class="quiz-reading"><a href="#fstab-safe">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man8/mount.8.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="lsblk" data-review="#storage-map">
+      <p class="quiz-question" id="lx6-q-8">9. Что точнее всего делает lsblk -f?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx6-q-8">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Показывает только процессы</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Показывает block devices и информацию о найденных файловых системах, включая FSTYPE/LABEL/UUID/MOUNTPOINTS</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Редактирует /etc/fstab</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Форматирует все диски</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>lsblk отображает block devices; -f добавляет filesystem information. Для scripts документация рекомендует явно задавать нужные columns.</span></p>
+        <p class="quiz-reading"><a href="#storage-map">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man8/lsblk.8.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="0" data-topic="Безопасность dd" data-review="#storage-map">
+      <p class="quiz-question" id="lx6-q-9">10. Почему команда dd особенно опасна при ошибке в параметре of=?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx6-q-9">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">of= задаёт output; если указать реальное block device, dd может перезаписать его данные</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">of= только меняет цвет терминала</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">dd никогда не пишет данные</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">of= задаёт DNS server</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>dd копирует блоки в указанный output. Поэтому в LX6 он используется только с обычным файлом внутри учебной папки и никогда с /dev/sdX.</span></p>
+        <p class="quiz-reading"><a href="#storage-map">Разобрать в лабораторной</a><a href="https://koroteev.site/os/2/2-filesystems/" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="NFS" data-review="#network-cleanup">
+      <p class="quiz-question" id="lx6-q-10">11. Как выглядит типичный источник NFS при монтировании?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx6-q-10">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">/dev/loop3:ext4</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">server:/export/path</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">PID:1234</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">UUID:/proc</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Для NFS источник обычно задаётся как server:/export/path, а на клиенте он монтируется в обычную локальную точку дерева каталогов.</span></p>
+        <p class="quiz-reading"><a href="#network-cleanup">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man5/nfs.5.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Модель хранилища" data-review="#storage-map">
+      <p class="quiz-question" id="lx6-q-11">12. Какое утверждение о filesystem и partition наиболее корректно?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx6-q-11">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Это всегда одно и то же</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Partition задаёт область диска, а filesystem организует данные; filesystem может находиться и на другом block device, например loop/LVM</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Filesystem существует только на USB</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Partition является каталогом в /home</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Раздел — один из способов выделить block storage. Файловая система — отдельный уровень организации данных и может быть создана на разных типах block devices.</span></p>
+        <p class="quiz-reading"><a href="#storage-map">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man8/mount.8.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <noscript><p class="callout warning"><strong>Вопросы доступны.</strong> Для мгновенной проверки ответа и учебной обратной связи включите JavaScript для этого сайта.</p></noscript>
+  </div>
+</section>

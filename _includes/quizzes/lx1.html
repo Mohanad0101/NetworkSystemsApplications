@@ -1,0 +1,169 @@
+<section class="quiz-shell" data-quiz-shell="lx1">
+  <div class="quiz-intro-row">
+    <div>
+      <p class="eyebrow">Проверка понимания</p>
+      <p class="quiz-static-note"><strong>12 вопросов.</strong> Выберите лучший ответ. Если вариант не подошёл, прочитайте объяснение и попробуйте ещё раз; правильный ответ можно найти без штрафа. Итог прохождения автоматически войдёт в отчёт.</p>
+    </div>
+    <div class="quiz-status-badge">1 лучший ответ</div>
+  </div>
+  <div class="quiz" data-quiz="lx1" data-course="Сетевые системы и приложения">
+    <div class="quiz-score" data-quiz-score role="status">Пройдено: 0 / 12 · Можно пробовать снова</div>
+    <section class="quiz-card" data-quiz-card data-answer="2" data-topic="Структура команды" data-review="#practice-basic">
+      <p class="quiz-question" id="lx1-q-0">1. В строке ls -l /etc что является операндом-путём — объектом, который должна показать команда ls?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx1-q-0">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">ls</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">-l</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">/etc</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">$</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Bash передаёт и -l, и /etc команде ls как аргументы. Сама ls распознаёт -l как опцию формата, а /etc — как операнд-путь, который нужно показать.</span></p>
+        <p class="quiz-reading"><a href="#practice-basic">Разобрать в материалах курса</a><a href="https://koroteev.site/os/1/1-cli/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="0" data-topic="Справка" data-review="#practice-basic">
+      <p class="quiz-question" id="lx1-q-1">2. Вы забыли синтаксис встроенной команды Bash cd. Какой вариант даёт наиболее прямую справку именно оболочки?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx1-q-1">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">help cd</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">cat cd</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">history cd</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">pwd --help</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>cd — builtin Bash, поэтому help cd показывает встроенную справку оболочки. man и --help также важны, но выбор механизма зависит от команды.</span></p>
+        <p class="quiz-reading"><a href="#practice-basic">Разобрать в материалах курса</a><a href="https://koroteev.site/os/1/1-cli/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Относительные пути" data-review="#practice-basic">
+      <p class="quiz-question" id="lx1-q-2">3. pwd показывает /var. Вы выполняете cd log. Какой каталог станет текущим, если он существует?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx1-q-2">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">/log</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">/var/log</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">/home/log</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">~/log</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>log — относительный путь: он начинается от текущего каталога /var. Поэтому результат — /var/log.</span></p>
+        <p class="quiz-reading"><a href="#practice-basic">Разобрать в материалах курса</a><a href="https://koroteev.site/os/1/1-cli/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Абсолютные пути" data-review="#practice-basic">
+      <p class="quiz-question" id="lx1-q-3">4. Находясь в домашнем каталоге, студент вводит cat etc/passwd и получает «No such file or directory». Какое объяснение наиболее вероятно?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx1-q-3">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">cat не умеет читать системные файлы</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">etc/passwd — относительный путь; нужен /etc/passwd</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Linux запрещает имена без расширения</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Нужно обязательно использовать sudo</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Начальный / меняет точку старта. /etc/passwd — абсолютный путь от корня; etc/passwd ищется внутри текущего каталога. Ошибка пути не исправляется sudo.</span></p>
+        <p class="quiz-reading"><a href="#practice-basic">Разобрать в материалах курса</a><a href="https://koroteev.site/os/1/1-cli/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="0" data-topic="Опции ls" data-review="#practice-basic">
+      <p class="quiz-question" id="lx1-q-4">5. Нужно увидеть скрытые имена домашнего каталога, но не специальные записи . и .. Какой вариант подходит?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx1-q-4">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">ls -A ~</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">ls -r ~</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">ls -t ~</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">pwd -A</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>ls -A (almost all) показывает имена, начинающиеся с точки, но исключает специальные записи . и .. Тильда указывает на домашний каталог.</span></p>
+        <p class="quiz-reading"><a href="#practice-basic">Разобрать в материалах курса</a><a href="https://koroteev.site/os/1/1-cli/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Копирование" data-review="#file-operations">
+      <p class="quiz-question" id="lx1-q-5">6. После cp basic/user.txt work/profile.txt что должно быть верно?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx1-q-5">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Исходный basic/user.txt исчезает</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Существуют и исходник, и копия</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Файл только переименовывается</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Команда лишь выводит текст файла</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>cp создаёт копию в назначении и сохраняет источник. Именно наблюдение состояния до/после помогает отличать cp от mv.</span></p>
+        <p class="quiz-reading"><a href="#file-operations">Разобрать в материалах курса</a><a href="https://koroteev.site/os/1/1-cli/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Безопасное удаление" data-review="#file-operations">
+      <p class="quiz-question" id="lx1-q-6">7. Вы собираетесь выполнить rm -r ~/NSA/LX1/work-copy, но сомневаетесь в пути. Какое действие наиболее профессионально?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx1-q-6">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Добавить sudo</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Сначала проверить цель через ls -ld</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Заменить путь на *</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Запустить rm дважды</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Рекурсивное удаление требует проверки объекта до выполнения. sudo повышает последствия ошибки, а * расширяет область удаления.</span></p>
+        <p class="quiz-reading"><a href="#file-operations">Разобрать в материалах курса</a><a href="https://koroteev.site/os/1/1-cli/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Управление терминалом" data-review="#practice-basic">
+      <p class="quiz-question" id="lx1-q-7">8. Во время ping 127.0.0.1 вы нажимаете Ctrl+C. Что обычно происходит?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx1-q-7">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Копирует текст</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Foreground-процессам обычно доставляется прерывание SIGINT</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Удаляет историю</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Закрывает виртуальную машину</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>В обычном интерактивном терминале Ctrl+C распознаётся как interrupt character и обычно приводит к SIGINT для foreground process group. Это не команда копирования и не выключение системы.</span></p>
+        <p class="quiz-reading"><a href="#practice-basic">Разобрать в материалах курса</a><a href="https://koroteev.site/os/1/1-cli/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Пользователь и терминал" data-review="#service-commands">
+      <p class="quiz-question" id="lx1-q-8">9. Что выбрать, если нужно узнать именно имя терминального устройства текущего сеанса, например /dev/pts/0?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx1-q-8">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">whoami</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">tty</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">who</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">pwd</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>tty отвечает «через какой терминал идёт текущий ввод». whoami отвечает «кто я», а who показывает учтённые пользовательские сеансы.</span></p>
+        <p class="quiz-reading"><a href="#service-commands">Разобрать в материалах курса</a><a href="https://koroteev.site/os/1/1-cli/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="2" data-topic="Перенаправление" data-review="#redirection">
+      <p class="quiz-question" id="lx1-q-9">10. В строке ls -la ~ &gt; home-list.txt что такое &gt; ?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx1-q-9">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Опция команды ls</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Имя каталога</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Оператор перенаправления, который интерпретирует Bash</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Способ сделать файл исполняемым</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>&gt; — оператор оболочки. Bash связывает stdout команды с файлом; это не опция ls. Такой разбор помогает понимать длинные команды без слепого копирования.</span></p>
+        <p class="quiz-reading"><a href="#redirection">Разобрать в материалах курса</a><a href="https://koroteev.site/os/1/1-cli/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="0" data-topic="Шаблоны и поиск" data-review="#redirection">
+      <p class="quiz-question" id="lx1-q-10">11. Почему в find ~/NSA/LX1 -name &quot;*.txt&quot; шаблон *.txt заключён в кавычки?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx1-q-10">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Чтобы find, а не Bash, сопоставлял шаблон имён</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Чтобы команда работала только от root</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Чтобы скрыть ошибки</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Чтобы превратить вывод в архив</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Без кавычек shell может раскрыть * до запуска find. Кавычки оставляют шаблон аргументом для -name, и сопоставление выполняет find.</span></p>
+        <p class="quiz-reading"><a href="#redirection">Разобрать в материалах курса</a><a href="https://koroteev.site/os/1/1-cli/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="0" data-topic="Ссылки" data-review="#practice-files">
+      <p class="quiz-question" id="lx1-q-11">12. После создания hard link и symlink исходное имя src/user.txt удалено. Что ожидается?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx1-q-11">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Hard link продолжает читать данные, symlink на удалённый путь становится битой</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Symlink хранит копию данных, hard link ломается</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Обе ссылки являются независимыми копиями</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Обе автоматически перенаправляются в backup</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Hard link — ещё одно имя того же inode; данные остаются доступны, пока существует хотя бы одна жёсткая ссылка. Symlink хранит путь, поэтому после исчезновения цели этот путь перестаёт разрешаться.</span></p>
+        <p class="quiz-reading"><a href="#practice-files">Разобрать в материалах курса</a><a href="https://koroteev.site/os/1/1-cli/" rel="noopener">Исходная тема</a></p>
+      </div>
+    </section>
+    <noscript><p class="callout warning"><strong>Вопросы доступны.</strong> Для мгновенной проверки ответа и подсчёта результата включите JavaScript для этого сайта.</p></noscript>
+  </div>
+</section>

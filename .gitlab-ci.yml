@@ -1,0 +1,100 @@
+image: ruby:3.3
+
+stages:
+  - deploy
+
+deploy-course:
+  stage: deploy
+  tags:
+    - edu-pages
+  variables:
+    JEKYLL_ENV: production
+  before_script:
+    - ruby qa/validate_course.rb
+    - gem install jekyll --version "~> 4.4" --no-document
+  script:
+    - |
+      PAGES_BASE_PATH="$(ruby -ruri -e 'print URI.parse(ENV.fetch("CI_PAGES_URL")).path.sub(%r{/$}, "")')"
+      jekyll build --destination public --baseurl "$PAGES_BASE_PATH"
+    - test -s public/index.html
+    - test -s public/labs/lx0.html
+    - test -s public/labs/lx1.html
+    - test -s public/labs/lx2.html
+    - test -s public/assessments/foundation.html
+    - test -s public/labs/lx3.html
+    - test -s public/labs/lx4.html
+    - test -s public/labs/lx5.html
+    - test -s public/labs/lx6.html
+    - test -s public/labs/lx7.html
+    - test -s public/assets/js/report-builder.js
+    - test -s public/assets/js/quiz.js
+    - test -s public/assets/js/evidence-pad.js
+    - test -s public/assets/js/progress.js
+    - test -s public/assets/css/style.css
+    - grep -q 'data-evidence-editor="LX0-02"' public/labs/lx0.html
+    - grep -q 'data-evidence-editor="LX1-01"' public/labs/lx1.html
+    - grep -q 'data-evidence-editor="LX2-01"' public/labs/lx2.html
+    - grep -q 'data-evidence-editor="LX3-01"' public/labs/lx3.html
+    - grep -q 'data-evidence-editor="LX4-01"' public/labs/lx4.html
+    - grep -q 'data-evidence-editor="LX5-01"' public/labs/lx5.html
+    - grep -q 'data-evidence-editor="LX6-01"' public/labs/lx6.html
+    - grep -q 'data-evidence-editor="LX7-01"' public/labs/lx7.html
+    - grep -q 'data-report-builder' public/labs/lx6.html
+    - grep -q 'data-learning-progress' public/labs/lx6.html
+    - grep -q 'data-build-report' public/labs/lx6.html
+    - grep -q 'data-report-builder' public/labs/lx7.html
+    - grep -q 'data-learning-progress' public/labs/lx7.html
+    - grep -q 'data-build-report' public/labs/lx7.html
+    - test "$(grep -c 'data-quiz-card' public/labs/lx0.html)" -eq 10
+    - test "$(grep -c 'data-quiz-card' public/labs/lx1.html)" -eq 12
+    - test "$(grep -c 'data-quiz-card' public/labs/lx2.html)" -eq 12
+    - test "$(grep -c 'data-quiz-card' public/labs/lx3.html)" -eq 12
+    - test "$(grep -c 'data-quiz-card' public/labs/lx4.html)" -eq 12
+    - test "$(grep -c 'data-quiz-card' public/labs/lx5.html)" -eq 12
+    - test "$(grep -c 'data-quiz-card' public/labs/lx6.html)" -eq 12
+    - test "$(grep -c 'data-quiz-card' public/labs/lx7.html)" -eq 12
+    - test "$(grep -c 'data-quiz-card' public/assessments/foundation.html)" -eq 12
+    - grep -q 'data-report-quiz-preview' public/labs/lx0.html
+    - grep -q 'data-report-builder' public/labs/lx0.html
+    - grep -q 'data-completeness-percent' public/labs/lx0.html
+    - grep -q 'data-learning-progress' public/labs/lx0.html
+    - grep -q 'data-progress-toggle="1"' public/labs/lx0.html
+    - grep -q 'data-home-progress-lab="lx0"' public/index.html
+    - grep -q 'data-home-progress-lab="lx4"' public/index.html
+    - grep -q 'data-home-progress-lab="lx5"' public/index.html
+    - grep -q 'data-home-progress-lab="lx6"' public/index.html
+    - grep -q 'data-home-progress-lab="lx7"' public/index.html
+    - grep -q 'data-home-completeness-text' public/index.html
+    - grep -q 'data-home-completeness-bar' public/index.html
+    - grep -q 'data-overall-completeness-text' public/index.html
+    - grep -q 'nsa-submission-completeness:v1:' public/assets/js/progress.js
+    - grep -q 'nsa-submission-completeness:v1:' public/assets/js/report-builder.js
+    - grep -q 'course-naming-note' public/index.html
+    - grep -q '← К курсу' public/labs/lx0.html
+    - grep -q 'lab-name-guide' public/labs/lx0.html
+    - grep -q 'lab-name-guide' public/labs/lx3.html
+    - grep -q 'lab-name-guide' public/labs/lx4.html
+    - grep -q 'lab-name-guide' public/labs/lx5.html
+    - grep -q 'lab-name-guide' public/labs/lx6.html
+    - grep -q 'lab-name-guide' public/labs/lx7.html
+    - test -s public/assets/templates/NSA_LX4_Report_Template.docx
+    - test -s public/assets/templates/NSA_LX5_Report_Template.docx
+    - test -s public/assets/templates/NSA_LX6_Report_Template.docx
+    - test -s public/assets/templates/NSA_LX7_Report_Template.docx
+    - grep -q 'Скачать пустой шаблон' public/labs/lx0.html
+    - '! grep -qE "data-build-report[^>]*disabled" public/labs/lx0.html'
+    - grep -q 'EVIDENCE_RULES' public/assets/js/report-builder.js
+    - grep -q 'quiz-meta' public/assets/js/quiz.js
+    - grep -q 'nsa-learning-progress:v1:' public/assets/js/progress.js
+    - grep -q 'Пройти ещё раз для закрепления' public/assets/js/quiz.js
+    - grep -q 'try-again' public/assets/js/quiz.js
+    - grep -q 'Content-Security-Policy' public/labs/lx0.html
+    - grep -q 'achievement-board' public/index.html
+    - grep -q 'Достижения практикума' public/index.html
+    - grep -q 'Это не рейтинг' public/index.html
+    - grep -q 'data-public-board-consent' public/labs/lx0.html
+    - grep -q 'NSA.PublicBoardConsent' public/assets/js/report-builder.js
+  pages:
+    publish: public
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'

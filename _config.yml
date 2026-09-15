@@ -1,0 +1,31 @@
+title: "Linux Systems & Applications Labs"
+description: "Практикум по Linux"
+course_id: "network-systems-applications"
+baseurl: "/network-systems-course"
+markdown: kramdown
+kramdown:
+  input: GFM
+exclude:
+  - README.md
+  - ACADEMIC_REVIEW.md
+  - STUDENT_EXPERIENCE_UPDATE.md
+  - DEPLOYMENT.md
+  - CHANGELOG.md
+  - VALIDATION.md
+  - UPDATE_GUIDE.md
+  - AUTHORING.md
+  - MCQ_REVIEW.md
+  - public
+  - site
+  - vendor
+  - Gemfile
+  - Gemfile.lock
+  - qa_validation.js
+  - SKILL.md
+  - skills.md
+  - COURSE_DEEP_REVIEW.md
+  - SECURITY_REVIEW.md
+  - qa
+  - tools
+  - teacher
+  - ACHIEVEMENT_BOARD.md

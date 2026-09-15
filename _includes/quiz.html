@@ -1,0 +1,12 @@
+{% case include.quiz_id %}
+{% when "lx0" %}{% include quizzes/lx0.html %}
+{% when "lx1" %}{% include quizzes/lx1.html %}
+{% when "lx2" %}{% include quizzes/lx2.html %}
+{% when "lx3" %}{% include quizzes/lx3.html %}
+{% when "lx4" %}{% include quizzes/lx4.html %}
+{% when "lx5" %}{% include quizzes/lx5.html %}
+{% when "lx6" %}{% include quizzes/lx6.html %}
+{% when "lx7" %}{% include quizzes/lx7.html %}
+{% when "foundation" %}{% include quizzes/foundation.html %}
+{% else %}<p class="callout warning">Тест временно недоступен. Сообщите преподавателю код лабораторной: {{ include.quiz_id | upcase }}.</p>
+{% endcase %}

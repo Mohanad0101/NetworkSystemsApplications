@@ -1,0 +1,165 @@
+<section class="quiz-shell" data-quiz-shell="lx5">
+  <div class="quiz-shell-head">
+    <div><p class="eyebrow">Проверка понимания</p><h3>LX5 · 12 вопросов</h3></div>
+    <p>Можно пробовать другой вариант и проходить тест повторно. Цель — понять systemd, а не получить оценку с первой попытки.</p>
+  </div>
+  <div class="quiz" data-quiz="lx5" data-course="Сетевые системы и приложения">
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Загрузка · default.target" data-review="#boot-observe">
+      <p class="quiz-question" id="lx5-q-0">1. Что точнее всего описывает роль default.target в systemd?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx5-q-0">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Это файл с паролями пользователей</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Это основная цель загрузки, зависимости которой systemd активирует при обычном старте</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Это PID первого пользовательского процесса</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Это журнал предыдущей загрузки</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>При загрузке systemd активирует default.target и рекурсивно необходимые зависимости. Обычно default.target является alias на graphical.target или multi-user.target.</span></p>
+        <p class="quiz-reading"><a href="#boot-observe">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man7/bootup.7.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Targets" data-review="#boot-observe">
+      <p class="quiz-question" id="lx5-q-1">2. Что показывает systemctl get-default?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx5-q-1">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Текущую версию kernel</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Unit/target, выбранную как default target для обычной загрузки</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Все failed services</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Только службы текущего пользователя</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>get-default сообщает default target system manager. Это помогает понять, к какой основной цели система стремится при обычной загрузке.</span></p>
+        <p class="quiz-reading"><a href="#boot-observe">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man1/systemctl.1.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Диагностика загрузки" data-review="#boot-observe">
+      <p class="quiz-question" id="lx5-q-2">3. Почему результат systemd-analyze time нельзя трактовать как точное время до полной готовности абсолютно всех приложений?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx5-q-2">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Потому что команда показывает только размер диска</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Потому что она измеряет этапы загрузки systemd до запуска необходимых system services, но не гарантирует завершение всей внутренней инициализации приложений</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Потому что она всегда возвращает случайное число</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Потому что systemd-analyze работает только в Windows</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Документация systemd-analyze предупреждает: измерение отражает время до запуска необходимых system services, а не обязательно до завершения всей их внутренней инициализации.</span></p>
+        <p class="quiz-reading"><a href="#boot-observe">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man1/systemd-analyze.1.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Unit file" data-review="#unit-create">
+      <p class="quiz-question" id="lx5-q-3">4. Какую роль выполняют секции [Unit], [Service] и [Install] в service unit?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx5-q-3">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">[Unit] хранит пароли, [Service] IP-адрес, [Install] kernel modules</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">[Unit] задаёт общие свойства/зависимости, [Service] описывает процесс службы, [Install] определяет правила enable/disable</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Все три секции полностью взаимозаменяемы</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">[Install] запускает программу при каждом systemctl status</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>[Unit] содержит общие свойства и зависимости, [Service] — параметры запуска/процесса, а [Install] используется systemctl enable/disable для создания нужных связей.</span></p>
+        <p class="quiz-reading"><a href="#unit-create">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man5/systemd.unit.5.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Type=exec" data-review="#unit-create">
+      <p class="quiz-question" id="lx5-q-4">5. Почему в LX5 для длительной учебной службы выбран Type=exec, а не Type=simple?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx5-q-4">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Type=exec автоматически запускает службу от root</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Type=exec позволяет systemd считать запуск успешным только после успешного exec основного binary, поэтому ошибки executable/user обнаруживаются точнее</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Type=exec означает выполнить программу один раз и выйти</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Type=simple запрещён в современных Linux</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Type=simple остаётся допустимым. Но документация systemd отмечает, что Type=exec часто лучше для long-running services, потому что systemctl start может сообщить об ошибке, если exec или подготовка пользователя не удались.</span></p>
+        <p class="quiz-reading"><a href="#unit-create">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man5/systemd.service.5.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="daemon-reload" data-review="#unit-create">
+      <p class="quiz-question" id="lx5-q-5">6. Вы изменили файл /etc/systemd/system/lx5-heartbeat.service. Какая команда нужна, чтобы systemd перечитал unit-файлы?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx5-q-5">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">systemctl reload lx5-heartbeat.service</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">systemctl daemon-reload</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">journalctl --rotate</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">systemctl get-default</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>daemon-reload перечитывает unit configuration system manager. systemctl reload просит конкретную работающую службу перечитать её собственную конфигурацию и работает только если она это поддерживает.</span></p>
+        <p class="quiz-reading"><a href="#unit-create">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man1/systemctl.1.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="enable vs start" data-review="#service-lifecycle">
+      <p class="quiz-question" id="lx5-q-6">7. Что произошло в LX5 после systemctl enable lx5-heartbeat.service, но до systemctl start?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx5-q-6">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Служба обязательно уже стала active</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Была настроена связь автозапуска, но служба могла оставаться inactive</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Unit была удалена</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">systemd автоматически перезагрузил VM</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>enable создаёт symlinks согласно [Install] и не обязан запускать unit. Для enable + немедленный start существует --now, но в лабораторной действия разделены специально.</span></p>
+        <p class="quiz-reading"><a href="#service-lifecycle">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man1/systemctl.1.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Autostart · WantedBy" data-review="#service-lifecycle">
+      <p class="quiz-question" id="lx5-q-7">8. Что делает WantedBy=multi-user.target в [Install] после systemctl enable?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx5-q-7">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Меняет PID процесса на multi-user</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Помогает создать symlink в multi-user.target.wants, чтобы target мог подтянуть unit при загрузке</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Принудительно запускает unit прямо во время чтения файла</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Запрещает ручной start</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>WantedBy в [Install] используется при enable: systemctl создаёт соответствующую ссылку в .wants/ target. Секция [Install] сама по себе не исполняется во время runtime.</span></p>
+        <p class="quiz-reading"><a href="#service-lifecycle">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man5/systemd.unit.5.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Диагностика службы" data-review="#service-lifecycle">
+      <p class="quiz-question" id="lx5-q-8">9. Служба не стартует. Какой первый диагностический цикл наиболее разумен?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx5-q-8">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Сразу перезагрузить VM несколько раз</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">status → journalctl -u → systemctl cat; после изменения unit — verify и daemon-reload</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Удалить /etc/systemd целиком</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Выполнить chmod 777 для всех файлов</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Сначала наблюдают состояние, журнал и фактическую unit-конфигурацию. После правки unit полезно выполнить systemd-analyze verify и daemon-reload.</span></p>
+        <p class="quiz-reading"><a href="#service-lifecycle">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man1/journalctl.1.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Journal" data-review="#service-lifecycle">
+      <p class="quiz-question" id="lx5-q-9">10. Что точнее всего делает journalctl -u lx5-heartbeat.service?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx5-q-9">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Редактирует unit-файл</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Показывает journal messages, связанные с указанной systemd unit</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Включает службу в автозапуск</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Меняет default target</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Опция -u/--unit фильтрует journal по systemd unit и включает сообщения самой unit и связанные сообщения systemd.</span></p>
+        <p class="quiz-reading"><a href="#service-lifecycle">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man1/journalctl.1.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Restart policy" data-review="#service-lifecycle">
+      <p class="quiz-question" id="lx5-q-10">11. Как ведёт себя Restart=on-failure, если администратор выполняет systemctl stop lx5-heartbeat.service?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx5-q-10">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Служба обязательно мгновенно стартует снова</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Обычная остановка через systemctl не считается причиной автоматического restart</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">systemctl stop меняет Restart= на no навсегда</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Служба автоматически удаляет unit-файл</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>systemd не выполняет автоматический restart, когда завершение является результатом операции systemd, например systemctl stop/restart. on-failure предназначен для восстановления после фактических сбоев.</span></p>
+        <p class="quiz-reading"><a href="#service-lifecycle">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man5/systemd.service.5.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <section class="quiz-card" data-quiz-card data-answer="1" data-topic="Безопасность службы" data-review="#unit-create">
+      <p class="quiz-question" id="lx5-q-11">12. Почему в учебной unit полезно сочетание User=обычный_пользователь и NoNewPrivileges=yes?</p>
+      <div class="quiz-options" role="group" aria-labelledby="lx5-q-11">
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="0">Чтобы процесс автоматически получил root после запуска</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="1">Чтобы уменьшить привилегии службы и запретить ей получать новые привилегии через execve()</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="2">Чтобы отключить journal</button>
+        <button class="quiz-option" type="button" data-quiz-option data-option-index="3">Чтобы разрешить службу только при graphical.target</button>
+      </div>
+      <div class="feedback" data-feedback aria-live="polite">
+        <p><strong data-feedback-prefix></strong><span data-feedback-explain>Запуск от непривилегированного пользователя уменьшает последствия ошибки, а NoNewPrivileges запрещает процессу и потомкам повышать привилегии через execve() (например, setuid/capabilities).</span></p>
+        <p class="quiz-reading"><a href="#unit-create">Разобрать в лабораторной</a><a href="https://man7.org/linux/man-pages/man5/systemd.exec.5.html" rel="noopener">Проверенный источник</a></p>
+      </div>
+    </section>
+    <noscript><p class="callout warning"><strong>Вопросы доступны.</strong> Для мгновенной проверки ответа и учебной обратной связи включите JavaScript для этого сайта.</p></noscript>
+  </div>
+</section>

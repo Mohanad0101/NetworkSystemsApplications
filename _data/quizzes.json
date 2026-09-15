@@ -1,0 +1,1839 @@
+{
+  "lx0": [
+    {
+      "q": "Нужно пройти установку Mint с ISO и перенести готовую гостевую систему через OVA. Какой маршрут соответствует задаче?",
+      "options": [
+        "Скопировать только установочный ISO после работы в live-сеансе",
+        "Установить Mint в VirtualBox, затем экспортировать выключенную VM",
+        "Установить Ubuntu в WSL 2 и переименовать её каталог в .ova",
+        "Создать Docker-контейнер Mint и считать его образ экспортом VM"
+      ],
+      "answer": 1,
+      "explain": "OVA переносит конфигурацию VM и виртуальные диски. ISO содержит установочную среду; экспорт WSL и образ контейнера имеют другое назначение.",
+      "topic": "Выбор среды",
+      "skill": "application",
+      "source": "https://koroteev.site/text/os00-1/",
+      "basis": "reference-and-lab",
+      "id": "LX0-01",
+      "review": "#vm-containers"
+    },
+    {
+      "q": "Вычисленный SHA256 не совпал со значением для скачанного ISO. Что делать?",
+      "options": [
+        "Исправить опубликованную сумму, чтобы она совпала с полученной",
+        "Продолжить: хеш меняется при каждом чтении одного и того же файла",
+        "Переименовать ISO: имя файла определяет его SHA256",
+        "Не использовать ISO, проверить файл и загрузку заново"
+      ],
+      "answer": 3,
+      "explain": "Проверка обнаружила несоответствие; переименование или исправление ожидаемой суммы не устраняют его.",
+      "topic": "Установка и образы",
+      "skill": "diagnosis",
+      "source": "https://linuxmint-installation-guide.readthedocs.io/en/latest/verify.html",
+      "basis": "lab-extension",
+      "id": "LX0-02",
+      "review": "#core-download"
+    },
+    {
+      "q": "Когда допустима кнопка «Стереть диск» в основной работе?",
+      "options": [
+        "В созданной VM после проверки нового пустого VDI",
+        "На физическом диске с Windows, поскольку Mint сама всегда сохраняет все разделы",
+        "На любом подключённом диске, если в имени VM есть слово lab",
+        "На существующем VDI с нужными данными без их проверки"
+      ],
+      "answer": 0,
+      "explain": "Безопасность здесь обусловлена конкретно выбранным новым виртуальным диском.",
+      "topic": "Выбор диска",
+      "skill": "application",
+      "source": "https://koroteev.site/text/os00-1/",
+      "basis": "reference-and-lab",
+      "id": "LX0-03",
+      "review": "#core-install"
+    },
+    {
+      "q": "После перезагрузки снова появился live-рабочий стол с Install Linux Mint. Что проверить первым?",
+      "options": [
+        "Импортировать исходный ISO как готовый OVA",
+        "Удалить установленный VDI и оставить только ISO",
+        "Извлечь установочный ISO и загрузиться с установленного VDI",
+        "Переименовать пользователя в live-сеансе"
+      ],
+      "answer": 2,
+      "explain": "Возможно, VM снова загрузилась с установочного носителя.",
+      "topic": "Установка и образы",
+      "skill": "diagnosis",
+      "source": "https://koroteev.site/text/os00-1/",
+      "basis": "reference-and-lab",
+      "id": "LX0-04",
+      "review": "#core-install"
+    },
+    {
+      "q": "После sudo apt update версии установленных программ не изменились. Это ошибка?",
+      "options": [
+        "Нет: update меняет только ядро, оставляя остальные пакеты",
+        "Нет: upgrade только обновляет список, как и update",
+        "Да: update обязана установить все найденные версии",
+        "Нет: update обновляет списки, а upgrade устанавливает доступные обновления"
+      ],
+      "answer": 3,
+      "explain": "Эти команды выполняют разные этапы обновления.",
+      "topic": "Команды и обновления",
+      "skill": "diagnosis",
+      "source": "https://koroteev.site/text/os00-1/",
+      "basis": "lab-extension",
+      "id": "LX0-05",
+      "review": "#install",
+      "technical_source": "https://manpages.debian.org/bookworm/apt/apt.8.en.html"
+    },
+    {
+      "q": "Для чего в паспорте среды применён tee?",
+      "options": [
+        "Чтобы одновременно показать вывод и записать его в файл",
+        "Чтобы автоматически отдать файлу права администратора",
+        "Чтобы перенаправить вывод только в файл и убрать его с экрана",
+        "Чтобы собрать только ошибки, не показывая обычный вывод"
+      ],
+      "answer": 0,
+      "explain": "Tee сохраняет переданный по каналу вывод и продолжает выводить его на экран.",
+      "topic": "Проверка результата",
+      "skill": "interpretation",
+      "source": "https://koroteev.site/text/os00-1/",
+      "basis": "lab-extension",
+      "id": "LX0-06",
+      "review": "#verify"
+    },
+    {
+      "q": "После импорта OVA студент видит свой hello.txt. Что проверено?",
+      "options": [
+        "Сохранение учебного файла в перенесённой среде",
+        "Автоматическое сохранение в OVA изменений, сделанных после экспорта",
+        "Наличие резервной копии любых будущих файлов гостя",
+        "Перенос текущего состояния всех физических устройств хоста"
+      ],
+      "answer": 0,
+      "explain": "Экспорт переносит состояние на момент создания OVA, а не все последующие изменения.",
+      "topic": "Перенос VM",
+      "skill": "interpretation",
+      "source": "https://koroteev.site/text/os00-1/",
+      "basis": "reference-and-lab",
+      "id": "LX0-07",
+      "review": "#core-import"
+    },
+    {
+      "q": "После импорта VM имя в VirtualBox изменили, а hostname остался прежним. Почему?",
+      "options": [
+        "Совпадение hostname означает, что импорт не создал вторую VM",
+        "Имя VM в менеджере и hostname гостевой ОС — разные настройки",
+        "Переименование в VirtualBox действует только после смены пароля",
+        "Hostname берётся только из имени файла OVA"
+      ],
+      "answer": 1,
+      "explain": "Настройка менеджера не переименовывает автоматически операционную систему внутри VM.",
+      "topic": "Перенос VM",
+      "skill": "diagnosis",
+      "source": "https://koroteev.site/text/os00-1/",
+      "basis": "reference-and-lab",
+      "id": "LX0-08",
+      "review": "#core-rename"
+    },
+    {
+      "q": "Нужно подтвердить, что две VM работают одновременно. Какое доказательство подходит?",
+      "options": [
+        "Оба окна с разными именами VM и состоянием Running, видимые в один момент",
+        "По одному скриншоту каждой VM, сделанному после выключения другой",
+        "Два файла OVA в проводнике без запуска VM",
+        "Два окна терминала внутри одной VM"
+      ],
+      "answer": 0,
+      "explain": "Две оболочки не равны двум ОС. Совместный запуск подтверждают две отдельные работающие VM; память нужна обеим гостевым системам и Windows.",
+      "topic": "Одновременная работа VM",
+      "review": "#core-run-both",
+      "skill": "application",
+      "source": "https://koroteev.site/text/os00-1/",
+      "basis": "reference-and-lab",
+      "id": "LX0-09"
+    },
+    {
+      "q": "Из OVA импортировали вторую VM. Нужно закончить опыт и освободить место, сохранив оригинал и OVA. Какой порядок соответствует LX0?",
+      "options": [
+        "Удалить копию до проверки импорта, ориентируясь только на размер OVA",
+        "Убрать копию только из списка VirtualBox и считать её дисковые файлы удалёнными",
+        "Проверить копию и совместный запуск, выключить её, затем удалить именно копию со всеми её файлами",
+        "Удалить оригинал, поскольку импортированная VM автоматически обновляет OVA"
+      ],
+      "answer": 2,
+      "explain": "Проверка восстановления предшествует удалению. Remove only убирает регистрацию VM, а Delete all files удаляет файлы выбранной копии; выбор нужно проверить.",
+      "topic": "Перенос и проверка VM",
+      "review": "#core-delete",
+      "skill": "application",
+      "source": "https://koroteev.site/text/os00-1/",
+      "basis": "reference-and-lab",
+      "id": "LX0-10"
+    }
+  ],
+  "lx1": [
+    {
+      "id": "LX1-M01",
+      "q": "В строке ls -l /etc что является операндом-путём — объектом, который должна показать команда ls?",
+      "options": [
+        "ls",
+        "-l",
+        "/etc",
+        "$"
+      ],
+      "answer": 2,
+      "explain": "Bash передаёт и -l, и /etc команде ls как аргументы. Сама ls распознаёт -l как опцию формата, а /etc — как операнд-путь, который нужно показать.",
+      "topic": "Структура команды",
+      "review": "#practice-basic",
+      "skill": "interpretation",
+      "source": "https://koroteev.site/os/1/1-cli/",
+      "basis": "reference-and-lab",
+      "technical_source": "https://www.gnu.org/software/coreutils/manual/html_node/ls-invocation.html"
+    },
+    {
+      "id": "LX1-M02",
+      "q": "Вы забыли синтаксис встроенной команды Bash cd. Какой вариант даёт наиболее прямую справку именно оболочки?",
+      "options": [
+        "help cd",
+        "cat cd",
+        "history cd",
+        "pwd --help"
+      ],
+      "answer": 0,
+      "explain": "cd — builtin Bash, поэтому help cd показывает встроенную справку оболочки. man и --help также важны, но выбор механизма зависит от команды.",
+      "topic": "Справка",
+      "review": "#practice-basic",
+      "skill": "application",
+      "source": "https://koroteev.site/os/1/1-cli/",
+      "basis": "reference-and-lab",
+      "technical_source": "https://www.gnu.org/software/bash/manual/html_node/Bash-Builtins.html"
+    },
+    {
+      "id": "LX1-M03",
+      "q": "pwd показывает /var. Вы выполняете cd log. Какой каталог станет текущим, если он существует?",
+      "options": [
+        "/log",
+        "/var/log",
+        "/home/log",
+        "~/log"
+      ],
+      "answer": 1,
+      "explain": "log — относительный путь: он начинается от текущего каталога /var. Поэтому результат — /var/log.",
+      "topic": "Относительные пути",
+      "review": "#practice-basic",
+      "skill": "application",
+      "source": "https://koroteev.site/os/1/1-cli/",
+      "basis": "reference-and-lab",
+      "technical_source": "https://ubuntu.com/desktop/docs/en/26.04/tutorial/the-linux-command-line-for-beginners/"
+    },
+    {
+      "id": "LX1-M04",
+      "q": "Находясь в домашнем каталоге, студент вводит cat etc/passwd и получает «No such file or directory». Какое объяснение наиболее вероятно?",
+      "options": [
+        "cat не умеет читать системные файлы",
+        "etc/passwd — относительный путь; нужен /etc/passwd",
+        "Linux запрещает имена без расширения",
+        "Нужно обязательно использовать sudo"
+      ],
+      "answer": 1,
+      "explain": "Начальный / меняет точку старта. /etc/passwd — абсолютный путь от корня; etc/passwd ищется внутри текущего каталога. Ошибка пути не исправляется sudo.",
+      "topic": "Абсолютные пути",
+      "review": "#practice-basic",
+      "skill": "diagnosis",
+      "source": "https://koroteev.site/os/1/1-cli/",
+      "basis": "reference-and-lab",
+      "technical_source": "https://ubuntu.com/desktop/docs/en/26.04/tutorial/the-linux-command-line-for-beginners/"
+    },
+    {
+      "id": "LX1-M05",
+      "q": "Нужно увидеть скрытые имена домашнего каталога, но не специальные записи . и .. Какой вариант подходит?",
+      "options": [
+        "ls -A ~",
+        "ls -r ~",
+        "ls -t ~",
+        "pwd -A"
+      ],
+      "answer": 0,
+      "explain": "ls -A (almost all) показывает имена, начинающиеся с точки, но исключает специальные записи . и .. Тильда указывает на домашний каталог.",
+      "topic": "Опции ls",
+      "review": "#practice-basic",
+      "skill": "application",
+      "source": "https://koroteev.site/os/1/1-cli/",
+      "basis": "reference-and-lab",
+      "technical_source": "https://www.gnu.org/software/coreutils/manual/html_node/Which-files-are-listed.html"
+    },
+    {
+      "id": "LX1-M06",
+      "q": "После cp basic/user.txt work/profile.txt что должно быть верно?",
+      "options": [
+        "Исходный basic/user.txt исчезает",
+        "Существуют и исходник, и копия",
+        "Файл только переименовывается",
+        "Команда лишь выводит текст файла"
+      ],
+      "answer": 1,
+      "explain": "cp создаёт копию в назначении и сохраняет источник. Именно наблюдение состояния до/после помогает отличать cp от mv.",
+      "topic": "Копирование",
+      "review": "#file-operations",
+      "skill": "interpretation",
+      "source": "https://koroteev.site/os/1/1-cli/",
+      "basis": "reference-and-lab",
+      "technical_source": "https://www.gnu.org/software/coreutils/manual/html_node/cp-invocation.html"
+    },
+    {
+      "id": "LX1-M07",
+      "q": "Вы собираетесь выполнить rm -r ~/NSA/LX1/work-copy, но сомневаетесь в пути. Какое действие наиболее профессионально?",
+      "options": [
+        "Добавить sudo",
+        "Сначала проверить цель через ls -ld",
+        "Заменить путь на *",
+        "Запустить rm дважды"
+      ],
+      "answer": 1,
+      "explain": "Рекурсивное удаление требует проверки объекта до выполнения. sudo повышает последствия ошибки, а * расширяет область удаления.",
+      "topic": "Безопасное удаление",
+      "review": "#file-operations",
+      "skill": "diagnosis",
+      "source": "https://koroteev.site/os/1/1-cli/",
+      "basis": "reference-and-lab",
+      "technical_source": "https://www.gnu.org/software/coreutils/manual/html_node/rm-invocation.html"
+    },
+    {
+      "id": "LX1-M08",
+      "q": "Во время ping 127.0.0.1 вы нажимаете Ctrl+C. Что обычно происходит?",
+      "options": [
+        "Копирует текст",
+        "Foreground-процессам обычно доставляется прерывание SIGINT",
+        "Удаляет историю",
+        "Закрывает виртуальную машину"
+      ],
+      "answer": 1,
+      "explain": "В обычном интерактивном терминале Ctrl+C распознаётся как interrupt character и обычно приводит к SIGINT для foreground process group. Это не команда копирования и не выключение системы.",
+      "topic": "Управление терминалом",
+      "review": "#practice-basic",
+      "skill": "interpretation",
+      "source": "https://koroteev.site/os/1/1-cli/",
+      "basis": "reference-and-lab",
+      "technical_source": "https://www.gnu.org/software/bash/manual/html_node/Signals.html"
+    },
+    {
+      "id": "LX1-M09",
+      "q": "Что выбрать, если нужно узнать именно имя терминального устройства текущего сеанса, например /dev/pts/0?",
+      "options": [
+        "whoami",
+        "tty",
+        "who",
+        "pwd"
+      ],
+      "answer": 1,
+      "explain": "tty отвечает «через какой терминал идёт текущий ввод». whoami отвечает «кто я», а who показывает учтённые пользовательские сеансы.",
+      "topic": "Пользователь и терминал",
+      "review": "#service-commands",
+      "skill": "application",
+      "source": "https://koroteev.site/os/1/1-cli/",
+      "basis": "reference-and-lab",
+      "technical_source": "https://man7.org/linux/man-pages/man1/tty.1.html"
+    },
+    {
+      "id": "LX1-M10",
+      "q": "В строке ls -la ~ > home-list.txt что такое > ?",
+      "options": [
+        "Опция команды ls",
+        "Имя каталога",
+        "Оператор перенаправления, который интерпретирует Bash",
+        "Способ сделать файл исполняемым"
+      ],
+      "answer": 2,
+      "explain": "> — оператор оболочки. Bash связывает stdout команды с файлом; это не опция ls. Такой разбор помогает понимать длинные команды без слепого копирования.",
+      "topic": "Перенаправление",
+      "review": "#redirection",
+      "skill": "interpretation",
+      "source": "https://koroteev.site/os/1/1-cli/",
+      "basis": "reference-and-lab",
+      "technical_source": "https://www.gnu.org/software/bash/manual/html_node/Redirections.html"
+    },
+    {
+      "id": "LX1-M11",
+      "q": "Почему в find ~/NSA/LX1 -name \"*.txt\" шаблон *.txt заключён в кавычки?",
+      "options": [
+        "Чтобы find, а не Bash, сопоставлял шаблон имён",
+        "Чтобы команда работала только от root",
+        "Чтобы скрыть ошибки",
+        "Чтобы превратить вывод в архив"
+      ],
+      "answer": 0,
+      "explain": "Без кавычек shell может раскрыть * до запуска find. Кавычки оставляют шаблон аргументом для -name, и сопоставление выполняет find.",
+      "topic": "Шаблоны и поиск",
+      "review": "#redirection",
+      "skill": "interpretation",
+      "source": "https://koroteev.site/os/1/1-cli/",
+      "basis": "lab",
+      "technical_source": "https://www.gnu.org/software/findutils/manual/html_mono/find.html"
+    },
+    {
+      "id": "LX1-M12",
+      "q": "После создания hard link и symlink исходное имя src/user.txt удалено. Что ожидается?",
+      "options": [
+        "Hard link продолжает читать данные, symlink на удалённый путь становится битой",
+        "Symlink хранит копию данных, hard link ломается",
+        "Обе ссылки являются независимыми копиями",
+        "Обе автоматически перенаправляются в backup"
+      ],
+      "answer": 0,
+      "explain": "Hard link — ещё одно имя того же inode; данные остаются доступны, пока существует хотя бы одна жёсткая ссылка. Symlink хранит путь, поэтому после исчезновения цели этот путь перестаёт разрешаться.",
+      "topic": "Ссылки",
+      "review": "#practice-files",
+      "skill": "interpretation",
+      "source": "https://koroteev.site/os/1/1-cli/",
+      "basis": "reference-and-lab",
+      "technical_source": "https://www.gnu.org/software/coreutils/manual/html_node/ln-invocation.html"
+    }
+  ],
+  "lx2": [
+    {
+      "q": "Нужно управлять учебной Mint VM из терминала Windows. Как распределяются роли?",
+      "options": [
+        "В Windows нужен только SSH-сервер, в Mint — только клиент",
+        "В Windows работает SSH-клиент, в Mint — SSH-сервер",
+        "Достаточно установить клиент в Mint, не запуская сервер",
+        "Оба терминала должны быть открыты внутри Mint"
+      ],
+      "answer": 1,
+      "explain": "Клиент инициирует соединение, а сервер принимает его и запускает удалённую оболочку после аутентификации.",
+      "topic": "Клиент и сервер SSH",
+      "review": "#ssh-concept",
+      "skill": "application",
+      "source": "https://koroteev.site/text/os12-1/",
+      "basis": "reference-and-lab",
+      "id": "LX2-01"
+    },
+    {
+      "q": "SSH немедленно сообщает Connection refused. Какой первый шаг наиболее уместен?",
+      "options": [
+        "Сразу менять пароль Linux-пользователя",
+        "Изменить права на файл, который собирались копировать",
+        "Пересоздать пару ключей до проверки сети",
+        "Проверить адрес, порт, слушающую службу и правила отклонения соединений"
+      ],
+      "answer": 3,
+      "explain": "Соединение отвергнуто до аутентификации. Причиной может быть отсутствие слушающего сервиса, неверный порт или активное отклонение фильтром.",
+      "topic": "Диагностика соединения",
+      "review": "#ssh-errors",
+      "skill": "diagnosis",
+      "source": "https://koroteev.site/text/os12-1/",
+      "basis": "reference-and-lab",
+      "id": "LX2-03",
+      "technical_source": "https://man7.org/linux/man-pages/man2/connect.2.html"
+    },
+    {
+      "q": "Внутри VM systemctl status ssh показывает active (running). Доказывает ли это доступность SSH с клиента?",
+      "options": [
+        "Нет: статус означает только наличие SSH-клиента",
+        "Да: все открытые ключи автоматически разрешены",
+        "Да: любой клиент в интернете теперь может войти",
+        "Нет: нужно ещё проверить адрес, порт, режим сети и подключение"
+      ],
+      "answer": 3,
+      "explain": "Работающий сервис — одно условие. Сеть и аутентификация проверяются отдельно реальным подключением.",
+      "topic": "Диагностика службы",
+      "review": "#practice-ssh",
+      "skill": "interpretation",
+      "source": "https://koroteev.site/text/os12-1/",
+      "basis": "reference-and-lab",
+      "id": "LX2-05"
+    },
+    {
+      "q": "Команда scp lx2-local.txt user@vm:~/NSA/LX2/ssh/ запущена на клиенте. Где находится исходный файл?",
+      "options": [
+        "В текущем каталоге клиента",
+        "В домашнем каталоге сервера",
+        "В ~/.ssh клиента",
+        "В каталоге установки OpenSSH на сервере"
+      ],
+      "answer": 0,
+      "explain": "Локальный относительный путь берётся из текущего каталога клиента. Часть user@vm: у второго аргумента обозначает удалённое назначение.",
+      "topic": "Передача файлов",
+      "review": "#ssh-transfer",
+      "skill": "interpretation",
+      "source": "https://koroteev.site/text/os12-1/",
+      "basis": "reference-and-lab",
+      "id": "LX2-07"
+    },
+    {
+      "q": "Есть id_ed25519 и id_ed25519.pub. Что передают на сервер для входа по ключу в этой работе?",
+      "options": [
+        "Содержимое id_ed25519.pub",
+        "Только passphrase от id_ed25519",
+        "Содержимое id_ed25519",
+        "Оба файла в одном архиве"
+      ],
+      "answer": 0,
+      "explain": "На сервер добавляют открытый ключ. Закрытая часть и её passphrase остаются под контролем владельца и не включаются в отчёт.",
+      "topic": "Пара ключей",
+      "review": "#ssh-keys",
+      "skill": "application",
+      "source": "https://koroteev.site/text/os12-1/",
+      "basis": "reference-and-lab",
+      "id": "LX2-10"
+    },
+    {
+      "q": "Проверка входа с PreferredAuthentications=publickey и PasswordAuthentication=no запросила passphrase закрытого ключа. Что это означает?",
+      "options": [
+        "Опция PasswordAuthentication=no отключила шифрование",
+        "Сервер обязательно переключился на вход по паролю",
+        "Открытый ключ нужно отправить вместе с passphrase",
+        "Клиенту нужно разблокировать локальный ключ; это не пароль учётной записи сервера"
+      ],
+      "answer": 3,
+      "explain": "Passphrase защищает закрытый ключ. Она может требоваться и при полностью успешной аутентификации по открытому ключу.",
+      "topic": "Пароль и passphrase",
+      "review": "#ssh-config",
+      "skill": "diagnosis",
+      "source": "https://koroteev.site/text/os12-1/",
+      "basis": "reference-and-lab",
+      "id": "LX2-12"
+    },
+    {
+      "q": "Нужно подключаться командой ssh mint-lab с сохранёнными адресом, пользователем и портом. Где задать эти параметры?",
+      "options": [
+        "В /etc/hostname сервера",
+        "В ~/.ssh/config на клиенте, в блоке Host mint-lab",
+        "В ~/.ssh/authorized_keys на сервере",
+        "В имени файла id_ed25519.pub"
+      ],
+      "answer": 1,
+      "explain": "Config хранит клиентские параметры подключения. Authorized_keys разрешает ключи, а hostname задаёт имя машины.",
+      "topic": "Конфигурация клиента",
+      "review": "#ssh-config",
+      "skill": "application",
+      "source": "https://koroteev.site/text/os12-1/",
+      "basis": "reference-and-lab",
+      "id": "LX2-14"
+    },
+    {
+      "q": "В VirtualBox настроен проброс 127.0.0.1:2222 → порт 22 гостя. Как отправить file.txt с хоста, не используя псевдоним config?",
+      "options": [
+        "scp -P 22 file.txt user@127.0.0.1:~/NSA/LX2/ssh/",
+        "scp -p 2222 file.txt user@127.0.0.1:~/NSA/LX2/ssh/",
+        "scp file.txt user@127.0.0.1:2222",
+        "scp -P 2222 file.txt user@127.0.0.1:~/NSA/LX2/ssh/"
+      ],
+      "answer": 3,
+      "explain": "У scp порт задаётся заглавной -P; у ssh — строчной -p. Часть после двоеточия в обычном синтаксисе scp является путём, а не портом.",
+      "topic": "Порт SSH и SCP",
+      "review": "#ssh-transfer",
+      "skill": "application",
+      "source": "https://koroteev.site/text/os12-1/",
+      "basis": "lab-extension",
+      "id": "LX2-16"
+    },
+    {
+      "q": "Нужно наблюдать htop и вернуться к нему после закрытия SSH. Где следует запустить tmux для опыта LX2?",
+      "options": [
+        "На VM после завершения htop",
+        "Только на клиенте, запустив htop вне tmux на VM",
+        "На удалённой VM, затем запустить htop внутри его сеанса",
+        "В любом месте: tmux автоматически переносит процессы между ПК"
+      ],
+      "answer": 2,
+      "explain": "Сеанс и его процессы живут там, где запущен tmux. Локальный tmux не переносит в себя процессы удалённой оболочки.",
+      "topic": "Сохранение удалённой работы",
+      "review": "#practice-tmux",
+      "skill": "application",
+      "source": "https://koroteev.site/text/os12-2/",
+      "basis": "reference-and-lab",
+      "id": "LX2-19"
+    },
+    {
+      "q": "Во время перерыва VM перезагрузилась. Почему обычный tmux не восстановил работающий htop?",
+      "options": [
+        "Именованный сеанс обязательно переживает выключение",
+        "После перезагрузки нужно только заново ввести префикс Ctrl+b",
+        "Tmux хранит процессы внутри SSH-ключа",
+        "Перезагрузка завершает процессы VM, включая tmux и htop"
+      ],
+      "answer": 3,
+      "explain": "Tmux отделяет жизнь сеанса от клиентского подключения, но сам остаётся процессом ОС. Перезапуск VM отличается от разрыва SSH.",
+      "topic": "Ограничения tmux",
+      "review": "#practice-tmux",
+      "skill": "diagnosis",
+      "source": "https://koroteev.site/text/os12-2/",
+      "basis": "reference-and-lab",
+      "id": "LX2-23"
+    },
+    {
+      "q": "При подключении появилось REMOTE HOST IDENTIFICATION HAS CHANGED. Какой порядок действий правильный?",
+      "options": [
+        "Отключить проверку ключа сервера во всех подключениях",
+        "Отправить серверу закрытый ключ для проверки",
+        "Сразу удалить known_hosts целиком и согласиться с новым ключом",
+        "Проверить причину и новый отпечаток через доверенный канал; затем обновить запись, если замена подтверждена"
+      ],
+      "answer": 3,
+      "explain": "Предупреждение возможно после переустановки, смены адреса или при подмене. Удаление записи без проверки не устанавливает доверие к новому серверу.",
+      "topic": "Проверка ключа сервера",
+      "review": "#ssh-errors",
+      "skill": "diagnosis",
+      "source": "https://koroteev.site/text/os12-1/",
+      "basis": "reference-and-lab",
+      "id": "LX2-26",
+      "technical_source": "https://man.openbsd.org/ssh"
+    },
+    {
+      "q": "SSH-вход успешен, но scp сообщает Permission denied при создании файла в каталоге сервера. Что проверять теперь?",
+      "options": [
+        "Пользователя, путь назначения и права записи/прохода на сервере",
+        "Менять клиентский порт, хотя соединение уже работает",
+        "Генерировать новый ключ, не проверяя путь",
+        "Переустанавливать SSH-клиент до проверки прав"
+      ],
+      "answer": 0,
+      "explain": "Успешный вход не даёт права писать в любой каталог. Авторизация файловых операций проверяется отдельно от аутентификации SSH.",
+      "topic": "Доступ после входа",
+      "review": "#ssh-transfer",
+      "skill": "diagnosis",
+      "source": "https://koroteev.site/text/os12-1/",
+      "basis": "reference-and-lab",
+      "id": "LX2-30"
+    }
+  ],
+  "lx3": [
+    {
+      "q": "Id показывает uid=2003(user_3), gid=2003(user_3), groups=2003(user_3),1002(students). Как это прочитать?",
+      "options": [
+        "UID пользователя — 1002; основная группа — students",
+        "UID пользователя — 2003; основная группа — user_3; students — дополнительная",
+        "Пользователь имеет две разные учётные записи",
+        "GID 2003 означает наличие административных прав"
+      ],
+      "answer": 1,
+      "explain": "UID идентифицирует пользователя, GID — группу. В дополнительных группах можно состоять независимо от основной группы.",
+      "topic": "UID и группы",
+      "review": "#practice-users",
+      "skill": "interpretation",
+      "source": "https://koroteev.site/text/os13-1/",
+      "basis": "reference-and-lab",
+      "id": "LX3-02"
+    },
+    {
+      "q": "Почему обычному пользователю обычно разрешено читать /etc/passwd, но не /etc/shadow?",
+      "options": [
+        "Cat скрывает секретные поля passwd автоматически",
+        "Общие сведения о пользователях нужны программам, а хеши паролей требуют защиты",
+        "Passwd содержит только данные того, кто его читает",
+        "Shadow хранит лишь список открытых терминалов"
+      ],
+      "answer": 1,
+      "explain": "В passwd находятся логин, UID, GID, домашний каталог и оболочка. При shadow-паролях секретные сведения отделены от этих общих данных.",
+      "topic": "Разделение учётных данных",
+      "review": "#practice-users",
+      "skill": "interpretation",
+      "source": "https://koroteev.site/text/os13-1/",
+      "basis": "reference-and-lab",
+      "id": "LX3-04"
+    },
+    {
+      "q": "Нужно добавить user_3 в students, сохранив прежние дополнительные группы. Какая форма подходит?",
+      "options": [
+        "sudo groupadd students user_3",
+        "sudo usermod -G students user_3",
+        "sudo usermod -aG students user_3",
+        "sudo passwd user_3"
+      ],
+      "answer": 2,
+      "explain": "-a добавляет группы к существующему списку. Без -a параметр -G заменяет список дополнительных групп.",
+      "topic": "Дополнительные группы",
+      "review": "#users-create",
+      "skill": "diagnosis",
+      "source": "https://koroteev.site/text/os13-1/",
+      "basis": "reference-and-lab",
+      "id": "LX3-09"
+    },
+    {
+      "q": "Администратор выполняет sudo -u user_3 cat /labs/list. От чьего имени читается файл?",
+      "options": [
+        "От владельца файла независимо от -u",
+        "Обязательно от root, потому что присутствует слово sudo",
+        "От имени user_3 с его учётными данными",
+        "От группы workers независимо от пользователя"
+      ],
+      "answer": 2,
+      "explain": "-u выбирает целевого пользователя. Такая проверка моделирует его доступ; обычное sudo cat без -u обычно проверяло бы доступ root.",
+      "topic": "Контекст выполнения",
+      "review": "#access-check",
+      "skill": "interpretation",
+      "source": "https://koroteev.site/text/os13-1/",
+      "basis": "reference-and-lab",
+      "id": "LX3-11"
+    },
+    {
+      "q": "Скрипт принадлежит группе students и имеет 750, но user_3 не может пройти через /labs/tests. Достаточно ли ещё раз выполнить chgrp students для скрипта?",
+      "options": [
+        "Нет: нужно проверить право прохода x у каталогов пути",
+        "Да: группа файла отменяет права каталогов",
+        "Да: chgrp автоматически открывает родительские каталоги",
+        "Нет: всем каталогам обязательно нужны права 777"
+      ],
+      "answer": 0,
+      "explain": "Доступ проверяется и на пути к файлу. Изменение группы конечного объекта не изменяет права его родителей.",
+      "topic": "Группа и проход по пути",
+      "review": "#practice-permissions",
+      "skill": "diagnosis",
+      "source": "https://koroteev.site/text/os13-1/",
+      "basis": "reference-and-lab",
+      "id": "LX3-13"
+    },
+    {
+      "q": "У обычного файла root:workers права 640. User_1 состоит в workers, не является владельцем, путь доступен. Что разрешают эти биты?",
+      "options": [
+        "Читать и изменять файл",
+        "Только выполнять файл",
+        "Читать, но не изменять и не выполнять файл",
+        "Ничего, поскольку владельцем является root"
+      ],
+      "answer": 2,
+      "explain": "Групповая тройка 4 означает r--. Первая цифра относится к владельцу, а не ко всем пользователям.",
+      "topic": "Числовые права файла",
+      "review": "#practice-permissions",
+      "skill": "interpretation",
+      "source": "https://koroteev.site/text/os13-2/",
+      "basis": "reference-and-lab",
+      "id": "LX3-14"
+    },
+    {
+      "q": "В LX3 каталог /labs/tests имеет 771. Почему student вне teachers может запустить разрешённый скрипт по известному полному пути, но не получить список имён через ls?",
+      "options": [
+        "У остальных есть x на каталог, но нет r; права скрипта проверяются отдельно",
+        "X автоматически даёт чтение списка каталога",
+        "Права каталога полностью игнорируются для скриптов",
+        "Группа скрипта автоматически становится группой каталога"
+      ],
+      "answer": 0,
+      "explain": "X позволяет проходить к известному имени, r — читать список имён. Для Bash-скрипта нужны также подходящие права самого файла.",
+      "topic": "Проход без списка",
+      "review": "#practice-permissions",
+      "skill": "interpretation",
+      "source": "https://koroteev.site/text/os13-2/",
+      "basis": "reference-and-lab",
+      "id": "LX3-16",
+      "technical_source": "https://man7.org/linux/man-pages/man7/path_resolution.7.html"
+    },
+    {
+      "q": "В доступном каталоге без sticky bit у пользователя есть w и x. На чужой обычный файл внутри — только r. Что в рамках обычных прав возможно?",
+      "options": [
+        "Изменить владельца файла благодаря x у каталога",
+        "Изменить содержимое только потому, что каталог доступен для записи",
+        "Удалить файл только при наличии w у самого файла",
+        "Удалить имя файла из каталога, хотя изменить содержимое нельзя"
+      ],
+      "answer": 3,
+      "explain": "Удаление имени определяется правами родительского каталога. Запись в содержимое — отдельная операция с проверкой прав файла.",
+      "topic": "Файл и его имя",
+      "review": "#file-modes",
+      "skill": "interpretation",
+      "source": "https://koroteev.site/text/os13-2/",
+      "basis": "reference-and-lab",
+      "id": "LX3-17"
+    },
+    {
+      "q": "Нужно доказать, что user_1 читает /labs/list, но не пишет в него. Какой набор проверок подходит?",
+      "options": [
+        "Только команда chmod без проверки результата",
+        "Чтение и попытка записи от user_1 с фиксацией успеха и отказа",
+        "Чтение от user_1 и запись от root",
+        "Только успешное чтение от root"
+      ],
+      "answer": 1,
+      "explain": "Проверка должна воспроизводить действия целевого пользователя. Разные полномочия у двух проверок не доказывают нужное ограничение.",
+      "topic": "Проверка разграничения",
+      "review": "#access-check",
+      "skill": "application",
+      "source": "https://koroteev.site/text/os13-2/",
+      "basis": "reference-and-lab",
+      "id": "LX3-18"
+    },
+    {
+      "q": "Каталог root:root имеет 1777. User_3 и user_4 создали по файлу. Почему user_3 не может удалить файл user_4?",
+      "options": [
+        "Бит 1 шифрует содержимое всех файлов",
+        "Режим 1777 запрещает создание новых файлов",
+        "Sticky bit меняет владельцев файлов на root",
+        "Sticky bit ограничивает удаление чужих имён, даже при w и x на каталог"
+      ],
+      "answer": 3,
+      "explain": "При обычных условиях удалить такой файл может его владелец, владелец каталога или привилегированный процесс. User_3 к ним не относится.",
+      "topic": "Sticky bit",
+      "review": "#shared-directory",
+      "skill": "interpretation",
+      "source": "https://koroteev.site/text/os13-2/",
+      "basis": "lab-extension",
+      "id": "LX3-20"
+    },
+    {
+      "q": "Новый обычный файл запрашивает режим 0666, umask равна 0027. При отсутствии default ACL какие права получатся?",
+      "options": [
+        "0637",
+        "0640",
+        "0750",
+        "0666"
+      ],
+      "answer": 1,
+      "explain": "Маска убирает выбранные биты: группе запрещена запись, остальным — весь доступ. Это побитовая операция, а не десятичное или обычное восьмеричное вычитание.",
+      "topic": "Маска создания",
+      "review": "#creation-mask",
+      "skill": "interpretation",
+      "source": "https://koroteev.site/text/os13-2/",
+      "basis": "lab-extension",
+      "id": "LX3-23",
+      "technical_source": "https://man7.org/linux/man-pages/man2/umask.2.html"
+    },
+    {
+      "q": "Почему в опыте записи используется sudo -u user_1 bash -c 'echo try >> /labs/list', а не только sudo -u user_1 echo try >> /labs/list?",
+      "options": [
+        "В первом варианте файл для перенаправления открывает оболочка user_1",
+        "Кавычки сами по себе выдают право записи",
+        "Во втором варианте >> означает чтение вместо записи",
+        "В первом варианте echo автоматически работает от root"
+      ],
+      "answer": 0,
+      "explain": "Перенаправление выполняет оболочка, которая его разбирает. Bash под -u проверяет запись в контексте целевого пользователя.",
+      "topic": "Полномочия и перенаправление",
+      "review": "#lab-structure",
+      "skill": "interpretation",
+      "source": "https://koroteev.site/text/os13-2/",
+      "basis": "lab-extension",
+      "id": "LX3-28"
+    }
+  ],
+  "foundation": [
+    {
+      "q": "После импорта OVA вы получили вторую VM. Что лучше проверить перед удалением тестовой копии?",
+      "options": [
+        "Только совпадение размера OVA с виртуальным диском",
+        "Только возможность открыть окно настроек, без загрузки гостя",
+        "Загрузку копии, учётную запись и сохранённый учебный файл",
+        "Только новое имя VM, без проверки данных"
+      ],
+      "answer": 2,
+      "explain": "Экспорт имеет смысл, если из него действительно восстанавливается работоспособная среда с ожидаемыми данными.",
+      "topic": "LX0 · Перенос VM",
+      "review": "../labs/lx0.html#verify",
+      "skill": "application",
+      "source": "https://koroteev.site/text/os00-1/",
+      "basis": "reference-and-lab",
+      "id": "FOUNDATION-01"
+    },
+    {
+      "q": "VM использует обычный NAT VirtualBox, SSH-сервер в ней работает. Нужно подключиться с Windows-хоста через выбранный NAT-маршрут. Какое действие подходит?",
+      "options": [
+        "Использовать гостевой 127.0.0.1 как адрес VM с другого ПК",
+        "Считать исходящий NAT достаточным для любого входящего подключения",
+        "Настроить проброс подходящего порта к SSH-серверу гостя",
+        "Сменить пароль пользователя, не настраивая путь подключения"
+      ],
+      "answer": 2,
+      "explain": "Исходящий доступ через NAT не настраивает автоматически входящий SSH. Нужен маршрут подключения и работающий SSH-сервер.",
+      "topic": "LX2 · NAT и SSH",
+      "review": "../labs/lx2.html#practice-ssh",
+      "skill": "application",
+      "source": "https://koroteev.site/text/os12-1/",
+      "basis": "reference-and-lab",
+      "id": "FOUNDATION-02"
+    },
+    {
+      "q": "Студент сделал apt update и решил, что установлены все обновления. Как уточнить результат?",
+      "options": [
+        "Update обновляет списки; установку доступных обновлений выполняет upgrade",
+        "Update гарантирует установку всех пакетов после следующего входа",
+        "Update устанавливает всё, а upgrade только обновляет список",
+        "Обе команды меняют только версию ядра"
+      ],
+      "answer": 0,
+      "explain": "Сведения о доступных версиях и изменение установленных пакетов — разные этапы.",
+      "topic": "LX0 · Обновление пакетов",
+      "review": "../labs/lx0.html#install",
+      "skill": "application",
+      "source": "https://koroteev.site/text/os00-1/",
+      "basis": "reference-and-lab",
+      "id": "FOUNDATION-04"
+    },
+    {
+      "q": "Файл лежит в ~/project/report.txt, а текущий каталог — ~/project. Какой относительный путь указывает на него?",
+      "options": [
+        "~/report.txt",
+        "report.txt",
+        "/report.txt",
+        "../report.txt"
+      ],
+      "answer": 1,
+      "explain": "Относительное имя report.txt разрешается относительно текущего каталога.",
+      "topic": "LX1 · Пути",
+      "review": "../labs/lx1.html#practice-basic",
+      "skill": "application",
+      "source": "https://koroteev.site/text/os11-1/",
+      "basis": "reference-and-lab",
+      "id": "FOUNDATION-05"
+    },
+    {
+      "q": "Команда ls -l | less показывает длинный список постранично. Что связывает две программы?",
+      "options": [
+        "Автоматическая запись списка в домашний каталог",
+        "Передача имени созданного ls файла в less",
+        "Объединение stdout и stderr без дополнительных перенаправлений",
+        "Канал стандартного вывода первой программы на ввод второй"
+      ],
+      "answer": 3,
+      "explain": "Оболочка соединяет текстовые потоки; каждая программа выполняет свою часть задачи.",
+      "topic": "LX1 · Каналы",
+      "review": "../labs/lx1.html#redirection",
+      "skill": "application",
+      "source": "https://koroteev.site/text/os11-2/",
+      "basis": "reference-and-lab",
+      "id": "FOUNDATION-08"
+    },
+    {
+      "q": "После SSH-входа вы выполнили mkdir ~/test. Где появился каталог?",
+      "options": [
+        "На клиенте, потому что там находится окно терминала",
+        "На обеих машинах одновременно за счёт SSH",
+        "На удалённой машине в домашнем каталоге вошедшего пользователя",
+        "В домашнем каталоге владельца Windows независимо от Linux-логина"
+      ],
+      "answer": 2,
+      "explain": "SSH-оболочка исполняет команды на удалённой машине. Whoami и hostname помогают проверить контекст.",
+      "topic": "LX2 · Удалённый контекст",
+      "review": "../labs/lx2.html#ssh-connect",
+      "skill": "application",
+      "source": "https://koroteev.site/text/os12-1/",
+      "basis": "reference-and-lab",
+      "id": "FOUNDATION-09"
+    },
+    {
+      "q": "SSH сообщает Permission denied (publickey). Что разумно проверить в первую очередь?",
+      "options": [
+        "Только RAM гостя, не проверяя ключ",
+        "Только права на ещё не передаваемый файл",
+        "Имя пользователя, выбранный ключ и authorized_keys на сервере",
+        "Только историю команд клиента"
+      ],
+      "answer": 2,
+      "explain": "Ошибка относится к аутентификации. Она отличается от невозможности установить сетевое соединение.",
+      "topic": "LX2 · Аутентификация",
+      "review": "../labs/lx2.html#ssh-config",
+      "skill": "application",
+      "source": "https://koroteev.site/text/os12-1/",
+      "basis": "reference-and-lab",
+      "id": "FOUNDATION-10"
+    },
+    {
+      "q": "Какую часть пары SSH-ключей обычно добавляют в authorized_keys на сервере?",
+      "options": [
+        "Содержимое known_hosts",
+        "Закрытый ключ",
+        "Passphrase закрытого ключа",
+        "Открытый ключ"
+      ],
+      "answer": 3,
+      "explain": "Закрытый ключ остаётся у владельца; сервер использует открытый ключ для проверки аутентификации.",
+      "topic": "LX2 · Ключи",
+      "review": "../labs/lx2.html#ssh-keys",
+      "skill": "application",
+      "source": "https://koroteev.site/text/os12-1/",
+      "basis": "reference-and-lab",
+      "id": "FOUNDATION-11"
+    },
+    {
+      "q": "Длительная задача запущена в tmux. Вы отсоединились от сеанса и закрыли SSH. Что ожидать, если сервер продолжает работать?",
+      "options": [
+        "Все процессы сеанса обязательно завершаются вместе с SSH",
+        "Задача автоматически переносится на локальный клиент",
+        "Именованный сеанс сохранится даже после перезагрузки сервера",
+        "Задача может продолжить работу; к сеансу можно подключиться снова"
+      ],
+      "answer": 3,
+      "explain": "Tmux отделяет срок жизни сеанса от конкретного клиентского подключения. Перезагрузку сервера он не переживает как работающий процесс.",
+      "topic": "LX2 · Устойчивый сеанс",
+      "review": "../labs/lx2.html#practice-tmux",
+      "skill": "application",
+      "source": "https://koroteev.site/text/os12-2/",
+      "basis": "reference-and-lab",
+      "id": "FOUNDATION-12"
+    },
+    {
+      "q": "Обычный файл имеет 640, путь к нему доступен, дополнительных ACL нет. Что разрешают эти биты обычному члену группы файла, который не является владельцем?",
+      "options": [
+        "Чтение и запись",
+        "Только чтение",
+        "Чтение и выполнение",
+        "Никаких действий"
+      ],
+      "answer": 1,
+      "explain": "6 — права владельца rw-, 4 — права группы r--, 0 — отсутствие прав для остальных.",
+      "topic": "LX3 · Права файла",
+      "review": "../labs/lx3.html#practice-permissions",
+      "skill": "application",
+      "source": "https://koroteev.site/text/os13-2/",
+      "basis": "reference-and-lab",
+      "id": "FOUNDATION-13"
+    },
+    {
+      "q": "Пользователю не хватает доступа к общему каталогу проекта. Какой подход лучше, чем chmod -R 777?",
+      "options": [
+        "Поменять только имя каталога без проверки прав",
+        "Всегда запускать приложение от root",
+        "Выдать право записи всем пользователям рекурсивно",
+        "Проверить владельца, группу и минимально необходимые права"
+      ],
+      "answer": 3,
+      "explain": "Сначала определяют требуемый доступ и его причину, затем меняют только нужные владельцев, группы или права.",
+      "topic": "LX3 · Диагностика доступа",
+      "review": "../labs/lx3.html#access-check",
+      "skill": "application",
+      "source": "https://koroteev.site/text/os13-2/",
+      "basis": "reference-and-lab",
+      "id": "FOUNDATION-15"
+    },
+    {
+      "q": "Как лучше доказать, что группа получила нужные права на общий каталог?",
+      "options": [
+        "Выполнить разрешённое и запрещённое действия от обычных пользователей нужных групп",
+        "Проверить разрешённое чтение, но не ограничение записи",
+        "Проверить все действия от root",
+        "Показать только chmod без выполнения операций"
+      ],
+      "answer": 0,
+      "explain": "Проверка должна отражать реальный сценарий доступа. Администратор может обходить многие ограничения и не заменяет такую проверку.",
+      "topic": "LX3 · Проверка доступа",
+      "review": "../labs/lx3.html#access-check",
+      "skill": "application",
+      "source": "https://koroteev.site/text/os13-2/",
+      "basis": "reference-and-lab",
+      "id": "FOUNDATION-20"
+    }
+  ],
+  "lx4": [
+    {
+      "q": "Что делает sudo apt update?",
+      "options": [
+        "Обновляет все установленные программы до новых версий",
+        "Обновляет локальную информацию о доступных пакетах из настроенных источников",
+        "Удаляет старые пакеты из системы",
+        "Переустанавливает пакетный менеджер"
+      ],
+      "answer": 1,
+      "explain": "apt update получает актуальную информацию о пакетах из настроенных sources. Само по себе это не означает upgrade установленных пакетов.",
+      "topic": "APT · индекс пакетов",
+      "review": "#packages-environment",
+      "skill": "understanding",
+      "source": "https://manpages.ubuntu.com/manpages/noble/man8/apt.8.html",
+      "basis": "official-and-lab",
+      "id": "LX4-01"
+    },
+    {
+      "q": "Почему в лабораторной apt удобен для интерактивной установки, а apt-get -s — для явной симуляции?",
+      "options": [
+        "apt предназначен только для графических программ",
+        "apt — удобный high-level интерфейс для пользователя, а apt-get имеет более стабильный интерфейс для сценариев и поддерживает simulation",
+        "apt-get не умеет работать с зависимостями",
+        "apt автоматически делает upgrade всей системы"
+      ],
+      "answer": 1,
+      "explain": "Документация APT описывает apt как end-user interface; специализированные APT tools предпочтительнее там, где важна стабильность поведения для сценариев. apt-get -s моделирует действия без изменения системы.",
+      "topic": "APT · инструменты",
+      "review": "#packages-install",
+      "skill": "application",
+      "source": "https://manpages.ubuntu.com/manpages/noble/man8/apt.8.html",
+      "basis": "official-and-lab",
+      "id": "LX4-02"
+    },
+    {
+      "q": "Как точнее описать связь apt и dpkg?",
+      "options": [
+        "Это два независимых формата файлов",
+        "dpkg управляет Debian-пакетами на более низком уровне, а APT предоставляет более удобный верхний уровень с repositories и разрешением зависимостей",
+        "dpkg работает только с процессами",
+        "apt работает только если dpkg удалён"
+      ],
+      "answer": 1,
+      "explain": "dpkg — medium-level Debian package tool. APT является более удобным фронтендом и работает с источниками пакетов и зависимостями.",
+      "topic": "APT и dpkg",
+      "review": "#packages-install",
+      "skill": "understanding",
+      "source": "https://manpages.ubuntu.com/manpages/noble/man1/dpkg.1.html",
+      "basis": "official-and-lab",
+      "id": "LX4-03"
+    },
+    {
+      "q": "Перед реальной установкой htop вы хотите увидеть план без изменения системы. Какой вариант подходит?",
+      "options": [
+        "apt-get -s install htop",
+        "sudo apt purge htop",
+        "dpkg-query -L htop",
+        "kill -0 htop"
+      ],
+      "answer": 0,
+      "explain": "Опция apt-get -s/--simulate выполняет симуляцию и не выполняет реальные dpkg-действия.",
+      "topic": "Безопасное изменение",
+      "review": "#packages-install",
+      "skill": "application",
+      "source": "https://manpages.ubuntu.com/manpages/noble/man8/apt-get.8.html",
+      "basis": "official-and-lab",
+      "id": "LX4-04"
+    },
+    {
+      "q": "Чем purge отличается от remove в APT?",
+      "options": [
+        "Purge только останавливает работающий процесс",
+        "Remove удаляет пакет, а purge дополнительно удаляет его системные configuration files",
+        "Purge всегда удаляет домашний каталог пользователя",
+        "Remove обновляет пакет, а purge устанавливает его заново"
+      ],
+      "answer": 1,
+      "explain": "APT определяет purge как remove плюс удаление configuration files пакета. Пользовательские данные в home — отдельная категория.",
+      "topic": "Удаление пакетов",
+      "review": "#packages-install",
+      "skill": "understanding",
+      "source": "https://manpages.ubuntu.com/manpages/noble/man8/apt-get.8.html",
+      "basis": "official-and-lab",
+      "id": "LX4-05"
+    },
+    {
+      "q": "Вы завершили процесс htop или sleep. Почему программу можно запустить снова?",
+      "options": [
+        "Процесс автоматически переустанавливает пакет",
+        "Исполняемые файлы остаются установленными; завершился только конкретный работающий экземпляр",
+        "PID сохраняет копию всей программы навсегда",
+        "SIGTERM превращает процесс обратно в .deb"
+      ],
+      "answer": 1,
+      "explain": "Пакет/файлы программы и работающий процесс — разные уровни. Завершение процесса освобождает ресурсы запуска, но не удаляет установленные файлы.",
+      "topic": "Пакет и процесс",
+      "review": "#process-observe",
+      "skill": "conceptual-transfer",
+      "source": "https://koroteev.site/os/1/4-processes/",
+      "basis": "reference-and-lab",
+      "id": "LX4-06"
+    },
+    {
+      "q": "Какое утверждение о ps и top/htop верно?",
+      "options": [
+        "ps обычно показывает снимок процессов, а top/htop обновляют представление повторно",
+        "ps изменяет priority процесса, а top устанавливает пакеты",
+        "top показывает только процессы текущей shell",
+        "htop является системным daemon"
+      ],
+      "answer": 0,
+      "explain": "ps сообщает snapshot выбранных процессов. Для повторяющегося обновления состояния документация ps рекомендует top; htop предоставляет интерактивный процесс-viewer.",
+      "topic": "Наблюдение за процессами",
+      "review": "#process-observe",
+      "skill": "interpretation",
+      "source": "https://man7.org/linux/man-pages/man1/ps.1.html",
+      "basis": "official-and-lab",
+      "id": "LX4-07"
+    },
+    {
+      "q": "В выводе процесса PID=4200 и PPID=3100. Что это означает?",
+      "options": [
+        "4200 — идентификатор процесса, а 3100 — идентификатор его родительского процесса",
+        "4200 — nice value, а 3100 — номер TTY",
+        "Оба числа — версии пакетов",
+        "PPID всегда равен UID пользователя"
+      ],
+      "answer": 0,
+      "explain": "PID идентифицирует конкретный процесс, PPID — его родителя. /proc/<PID>/status также содержит поля Pid и PPid для живого процесса.",
+      "topic": "PID и PPID",
+      "review": "#process-observe",
+      "skill": "interpretation",
+      "source": "https://man7.org/linux/man-pages/man5/proc_pid_status.5.html",
+      "basis": "official-and-lab",
+      "id": "LX4-08"
+    },
+    {
+      "q": "После kill -STOP \"$PID\" процесс показал STAT с T. Какое следующее действие соответствует эксперименту?",
+      "options": [
+        "Удалить пакет процесса",
+        "Послать SIGCONT, чтобы разрешить продолжение",
+        "Сразу перезагрузить VM",
+        "Изменить /proc/PID/status текстовым редактором"
+      ],
+      "answer": 1,
+      "explain": "SIGSTOP останавливает процесс, а SIGCONT позволяет ему продолжить. Состояние T в ps соответствует stopped/traced state.",
+      "topic": "Состояния и сигналы",
+      "review": "#process-control",
+      "skill": "application",
+      "source": "https://www.gnu.org/software/bash/manual/bash.html#Job-Control-Basics",
+      "basis": "official-and-lab",
+      "id": "LX4-09"
+    },
+    {
+      "q": "Почему SIGTERM обычно разумнее попробовать до SIGKILL?",
+      "options": [
+        "SIGTERM всегда сильнее KILL",
+        "SIGTERM может быть обработан программой для orderly cleanup, а SIGKILL нельзя перехватить или обработать",
+        "SIGKILL работает только с пакетами",
+        "SIGTERM не является сигналом"
+      ],
+      "answer": 1,
+      "explain": "kill(1) рекомендует TERM как обычный первый сигнал завершения: приложение может обработать его и выполнить cleanup. KILL не даёт такой возможности.",
+      "topic": "Корректное завершение",
+      "review": "#process-control",
+      "skill": "judgment",
+      "source": "https://man7.org/linux/man-pages/man1/kill.1.html",
+      "basis": "official-and-lab",
+      "id": "LX4-10"
+    },
+    {
+      "q": "Вы изменили nice value своего тестового процесса с 10 на 15. Что это означает для обычного CPU scheduling?",
+      "options": [
+        "Процесс получает более благоприятный priority",
+        "Процесс становится root",
+        "Процесс получает менее благоприятный scheduling priority; он «уступает» больше",
+        "Процесс автоматически останавливается"
+      ],
+      "answer": 2,
+      "explain": "Диапазон nice обычно -20…19: -20 наиболее благоприятно процессу, 19 — наименее. Поэтому увеличение 10→15 уменьшает его scheduling favorability.",
+      "topic": "Nice",
+      "review": "#process-control",
+      "skill": "interpretation",
+      "source": "https://man7.org/linux/man-pages/man1/nice.1.html",
+      "basis": "official-and-lab",
+      "id": "LX4-11"
+    },
+    {
+      "q": "Что точнее всего означает команда sleep 7200 & в интерактивной Bash?",
+      "options": [
+        "Она автоматически создаёт systemd service",
+        "Она удаляет controlling terminal у процесса навсегда",
+        "Она запускает shell job асинхронно в background; это ещё не делает процесс daemon или системной службой",
+        "Она запускает процесс без PID"
+      ],
+      "answer": 2,
+      "explain": "Bash job control различает foreground/background jobs. Асинхронный запуск через & создаёт background job этой shell, но не эквивалентен созданию системной службы.",
+      "topic": "Job control",
+      "review": "#process-control",
+      "skill": "conceptual-transfer",
+      "source": "https://www.gnu.org/software/bash/manual/bash.html#Job-Control-Basics",
+      "basis": "official-and-lab",
+      "id": "LX4-12"
+    }
+  ],
+  "lx5": [
+    {
+      "id": "LX5-01",
+      "q": "Что точнее всего описывает роль default.target в systemd?",
+      "options": [
+        "Это файл с паролями пользователей",
+        "Это основная цель загрузки, зависимости которой systemd активирует при обычном старте",
+        "Это PID первого пользовательского процесса",
+        "Это журнал предыдущей загрузки"
+      ],
+      "answer": 1,
+      "explain": "При загрузке systemd активирует default.target и рекурсивно необходимые зависимости. Обычно default.target является alias на graphical.target или multi-user.target.",
+      "topic": "Загрузка · default.target",
+      "review": "#boot-observe",
+      "skill": "understanding",
+      "source": "https://man7.org/linux/man-pages/man7/bootup.7.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX5-02",
+      "q": "Что показывает systemctl get-default?",
+      "options": [
+        "Текущую версию kernel",
+        "Unit/target, выбранную как default target для обычной загрузки",
+        "Все failed services",
+        "Только службы текущего пользователя"
+      ],
+      "answer": 1,
+      "explain": "get-default сообщает default target system manager. Это помогает понять, к какой основной цели система стремится при обычной загрузке.",
+      "topic": "Targets",
+      "review": "#boot-observe",
+      "skill": "interpretation",
+      "source": "https://man7.org/linux/man-pages/man1/systemctl.1.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX5-03",
+      "q": "Почему результат systemd-analyze time нельзя трактовать как точное время до полной готовности абсолютно всех приложений?",
+      "options": [
+        "Потому что команда показывает только размер диска",
+        "Потому что она измеряет этапы загрузки systemd до запуска необходимых system services, но не гарантирует завершение всей внутренней инициализации приложений",
+        "Потому что она всегда возвращает случайное число",
+        "Потому что systemd-analyze работает только в Windows"
+      ],
+      "answer": 1,
+      "explain": "Документация systemd-analyze предупреждает: измерение отражает время до запуска необходимых system services, а не обязательно до завершения всей их внутренней инициализации.",
+      "topic": "Диагностика загрузки",
+      "review": "#boot-observe",
+      "skill": "critical-reading",
+      "source": "https://man7.org/linux/man-pages/man1/systemd-analyze.1.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX5-04",
+      "q": "Какую роль выполняют секции [Unit], [Service] и [Install] в service unit?",
+      "options": [
+        "[Unit] хранит пароли, [Service] IP-адрес, [Install] kernel modules",
+        "[Unit] задаёт общие свойства/зависимости, [Service] описывает процесс службы, [Install] определяет правила enable/disable",
+        "Все три секции полностью взаимозаменяемы",
+        "[Install] запускает программу при каждом systemctl status"
+      ],
+      "answer": 1,
+      "explain": "[Unit] содержит общие свойства и зависимости, [Service] — параметры запуска/процесса, а [Install] используется systemctl enable/disable для создания нужных связей.",
+      "topic": "Unit file",
+      "review": "#unit-create",
+      "skill": "understanding",
+      "source": "https://man7.org/linux/man-pages/man5/systemd.unit.5.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX5-05",
+      "q": "Почему в LX5 для длительной учебной службы выбран Type=exec, а не Type=simple?",
+      "options": [
+        "Type=exec автоматически запускает службу от root",
+        "Type=exec позволяет systemd считать запуск успешным только после успешного exec основного binary, поэтому ошибки executable/user обнаруживаются точнее",
+        "Type=exec означает выполнить программу один раз и выйти",
+        "Type=simple запрещён в современных Linux"
+      ],
+      "answer": 1,
+      "explain": "Type=simple остаётся допустимым. Но документация systemd отмечает, что Type=exec часто лучше для long-running services, потому что systemctl start может сообщить об ошибке, если exec или подготовка пользователя не удались.",
+      "topic": "Type=exec",
+      "review": "#unit-create",
+      "skill": "reasoning",
+      "source": "https://man7.org/linux/man-pages/man5/systemd.service.5.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX5-06",
+      "q": "Вы изменили файл /etc/systemd/system/lx5-heartbeat.service. Какая команда нужна, чтобы systemd перечитал unit-файлы?",
+      "options": [
+        "systemctl reload lx5-heartbeat.service",
+        "systemctl daemon-reload",
+        "journalctl --rotate",
+        "systemctl get-default"
+      ],
+      "answer": 1,
+      "explain": "daemon-reload перечитывает unit configuration system manager. systemctl reload просит конкретную работающую службу перечитать её собственную конфигурацию и работает только если она это поддерживает.",
+      "topic": "daemon-reload",
+      "review": "#unit-create",
+      "skill": "application",
+      "source": "https://man7.org/linux/man-pages/man1/systemctl.1.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX5-07",
+      "q": "Что произошло в LX5 после systemctl enable lx5-heartbeat.service, но до systemctl start?",
+      "options": [
+        "Служба обязательно уже стала active",
+        "Была настроена связь автозапуска, но служба могла оставаться inactive",
+        "Unit была удалена",
+        "systemd автоматически перезагрузил VM"
+      ],
+      "answer": 1,
+      "explain": "enable создаёт symlinks согласно [Install] и не обязан запускать unit. Для enable + немедленный start существует --now, но в лабораторной действия разделены специально.",
+      "topic": "enable vs start",
+      "review": "#service-lifecycle",
+      "skill": "observation",
+      "source": "https://man7.org/linux/man-pages/man1/systemctl.1.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX5-08",
+      "q": "Что делает WantedBy=multi-user.target в [Install] после systemctl enable?",
+      "options": [
+        "Меняет PID процесса на multi-user",
+        "Помогает создать symlink в multi-user.target.wants, чтобы target мог подтянуть unit при загрузке",
+        "Принудительно запускает unit прямо во время чтения файла",
+        "Запрещает ручной start"
+      ],
+      "answer": 1,
+      "explain": "WantedBy в [Install] используется при enable: systemctl создаёт соответствующую ссылку в .wants/ target. Секция [Install] сама по себе не исполняется во время runtime.",
+      "topic": "Autostart · WantedBy",
+      "review": "#service-lifecycle",
+      "skill": "understanding",
+      "source": "https://man7.org/linux/man-pages/man5/systemd.unit.5.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX5-09",
+      "q": "Служба не стартует. Какой первый диагностический цикл наиболее разумен?",
+      "options": [
+        "Сразу перезагрузить VM несколько раз",
+        "status → journalctl -u → systemctl cat; после изменения unit — verify и daemon-reload",
+        "Удалить /etc/systemd целиком",
+        "Выполнить chmod 777 для всех файлов"
+      ],
+      "answer": 1,
+      "explain": "Сначала наблюдают состояние, журнал и фактическую unit-конфигурацию. После правки unit полезно выполнить systemd-analyze verify и daemon-reload.",
+      "topic": "Диагностика службы",
+      "review": "#service-lifecycle",
+      "skill": "troubleshooting",
+      "source": "https://man7.org/linux/man-pages/man1/journalctl.1.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX5-10",
+      "q": "Что точнее всего делает journalctl -u lx5-heartbeat.service?",
+      "options": [
+        "Редактирует unit-файл",
+        "Показывает journal messages, связанные с указанной systemd unit",
+        "Включает службу в автозапуск",
+        "Меняет default target"
+      ],
+      "answer": 1,
+      "explain": "Опция -u/--unit фильтрует journal по systemd unit и включает сообщения самой unit и связанные сообщения systemd.",
+      "topic": "Journal",
+      "review": "#service-lifecycle",
+      "skill": "application",
+      "source": "https://man7.org/linux/man-pages/man1/journalctl.1.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX5-11",
+      "q": "Как ведёт себя Restart=on-failure, если администратор выполняет systemctl stop lx5-heartbeat.service?",
+      "options": [
+        "Служба обязательно мгновенно стартует снова",
+        "Обычная остановка через systemctl не считается причиной автоматического restart",
+        "systemctl stop меняет Restart= на no навсегда",
+        "Служба автоматически удаляет unit-файл"
+      ],
+      "answer": 1,
+      "explain": "systemd не выполняет автоматический restart, когда завершение является результатом операции systemd, например systemctl stop/restart. on-failure предназначен для восстановления после фактических сбоев.",
+      "topic": "Restart policy",
+      "review": "#service-lifecycle",
+      "skill": "reasoning",
+      "source": "https://man7.org/linux/man-pages/man5/systemd.service.5.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX5-12",
+      "q": "Почему в учебной unit полезно сочетание User=обычный_пользователь и NoNewPrivileges=yes?",
+      "options": [
+        "Чтобы процесс автоматически получил root после запуска",
+        "Чтобы уменьшить привилегии службы и запретить ей получать новые привилегии через execve()",
+        "Чтобы отключить journal",
+        "Чтобы разрешить службу только при graphical.target"
+      ],
+      "answer": 1,
+      "explain": "Запуск от непривилегированного пользователя уменьшает последствия ошибки, а NoNewPrivileges запрещает процессу и потомкам повышать привилегии через execve() (например, setuid/capabilities).",
+      "topic": "Безопасность службы",
+      "review": "#unit-create",
+      "skill": "security-reasoning",
+      "source": "https://man7.org/linux/man-pages/man5/systemd.exec.5.html",
+      "basis": "official-and-lab"
+    }
+  ],
+  "lx6": [
+    {
+      "id": "LX6-01",
+      "q": "Что точнее всего показывает df для указанного пути?",
+      "options": [
+        "Размер только одного файла",
+        "Ёмкость и доступное место файловой системы, в которой находится путь",
+        "Количество процессов, открывших файл",
+        "Только размер домашнего каталога"
+      ],
+      "answer": 1,
+      "explain": "df сообщает filesystem-level использование и свободное место. Для размера конкретного дерева файлов используют du.",
+      "topic": "df vs du",
+      "review": "#storage-map",
+      "skill": "understanding",
+      "source": "https://man7.org/linux/man-pages/man1/df.1p.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX6-02",
+      "q": "Что делает loop device в LX6?",
+      "options": [
+        "Физически добавляет новый SSD в VM",
+        "Отображает обычный image-файл как блочное устройство, с которым можно работать как с диском",
+        "Шифрует домашний каталог",
+        "Создаёт сетевой NFS-сервер"
+      ],
+      "answer": 1,
+      "explain": "Loop device связывает блоки виртуального block device с обычным файлом. Поэтому filesystem image можно форматировать и монтировать без отдельного физического диска.",
+      "topic": "Loop device",
+      "review": "#loop-image",
+      "skill": "understanding",
+      "source": "https://man7.org/linux/man-pages/man4/loop.4.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX6-03",
+      "q": "Почему перед mkfs.ext4 в LX6 обязательно проверяется backing file loop-устройства?",
+      "options": [
+        "Чтобы увеличить скорость сети",
+        "Чтобы подтвердить, что форматируется именно учебный image, а не другое устройство",
+        "Чтобы изменить hostname",
+        "Чтобы включить swap"
+      ],
+      "answer": 1,
+      "explain": "mkfs изменяет структуру выбранного устройства. Проверка /dev/loopN и backing file уменьшает риск форматирования неправильного устройства.",
+      "topic": "Безопасность mkfs",
+      "review": "#loop-image",
+      "skill": "safety",
+      "source": "https://man7.org/linux/man-pages/man8/losetup.8.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX6-04",
+      "q": "Что происходит с файлом underlay.txt, когда другая файловая система монтируется поверх его каталога?",
+      "options": [
+        "Файл автоматически удаляется",
+        "Он временно становится невидим через эту pathname, пока mount активен",
+        "Он переносится в новую файловую систему",
+        "Он превращается в symbolic link"
+      ],
+      "answer": 1,
+      "explain": "mount присоединяет новую filesystem к каталогу. Прежнее содержимое mount point становится невидимым через этот путь и снова появляется после umount.",
+      "topic": "Mount point",
+      "review": "#mount-persist",
+      "skill": "interpretation",
+      "source": "https://man7.org/linux/man-pages/man8/mount.8.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX6-05",
+      "q": "Что доказал PERSIST_AFTER_REMOUNT=YES?",
+      "options": [
+        "umount удаляет все файлы",
+        "Файл, записанный внутрь ext4, сохранился в файловой системе и снова доступен после повторного mount",
+        "Файл хранится только в shell history",
+        "Loop device всегда является read-only"
+      ],
+      "answer": 1,
+      "explain": "umount отсоединяет filesystem от mount point, но не стирает её данные. Повторный mount снова делает persistent.txt доступным.",
+      "topic": "umount и данные",
+      "review": "#mount-persist",
+      "skill": "interpretation",
+      "source": "https://man7.org/linux/man-pages/man8/umount.8.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX6-06",
+      "q": "Почему для постоянной записи в fstab часто используют UUID вместо /dev/sdb1?",
+      "options": [
+        "UUID всегда короче",
+        "Имя /dev/sdX может измениться при другом порядке обнаружения устройств, а UUID идентифицирует файловую систему устойчивее",
+        "UUID автоматически шифрует данные",
+        "/dev/sdX нельзя использовать с ext4"
+      ],
+      "answer": 1,
+      "explain": "Документация fstab/mount рекомендует UUID или LABEL, потому что device names могут зависеть от порядка обнаружения оборудования.",
+      "topic": "UUID и fstab",
+      "review": "#fstab-safe",
+      "skill": "reasoning",
+      "source": "https://man7.org/linux/man-pages/man5/fstab.5.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX6-07",
+      "q": "Зачем в LX6 используется findmnt --verify --tab-file fstab.lab?",
+      "options": [
+        "Чтобы переформатировать root filesystem",
+        "Чтобы проверить синтаксис и пригодность отдельной учебной mount table до изменения системного /etc/fstab",
+        "Чтобы удалить UUID",
+        "Чтобы запустить NFS server"
+      ],
+      "answer": 1,
+      "explain": "findmnt умеет проверять альтернативную таблицу через --tab-file. Это позволяет безопасно учиться на отдельном fstab.lab.",
+      "topic": "Проверка fstab",
+      "review": "#fstab-safe",
+      "skill": "safety",
+      "source": "https://man7.org/linux/man-pages/man8/findmnt.8.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX6-08",
+      "q": "Как интерпретировать READONLY_WRITE_BLOCKED=YES после remount,ro?",
+      "options": [
+        "Как ошибку лабораторной",
+        "Как ожидаемое подтверждение, что файловая система действительно read-only",
+        "Как признак удаления ext4",
+        "Как необходимость chmod 777"
+      ],
+      "answer": 1,
+      "explain": "При read-only mount запись должна быть отклонена. Ожидаемый отказ здесь является успешной проверкой mount option.",
+      "topic": "Mount options",
+      "review": "#fstab-safe",
+      "skill": "diagnosis",
+      "source": "https://man7.org/linux/man-pages/man8/mount.8.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX6-09",
+      "q": "Что точнее всего делает lsblk -f?",
+      "options": [
+        "Показывает только процессы",
+        "Показывает block devices и информацию о найденных файловых системах, включая FSTYPE/LABEL/UUID/MOUNTPOINTS",
+        "Редактирует /etc/fstab",
+        "Форматирует все диски"
+      ],
+      "answer": 1,
+      "explain": "lsblk отображает block devices; -f добавляет filesystem information. Для scripts документация рекомендует явно задавать нужные columns.",
+      "topic": "lsblk",
+      "review": "#storage-map",
+      "skill": "tool-choice",
+      "source": "https://man7.org/linux/man-pages/man8/lsblk.8.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX6-10",
+      "q": "Почему команда dd особенно опасна при ошибке в параметре of=?",
+      "options": [
+        "of= задаёт output; если указать реальное block device, dd может перезаписать его данные",
+        "of= только меняет цвет терминала",
+        "dd никогда не пишет данные",
+        "of= задаёт DNS server"
+      ],
+      "answer": 0,
+      "explain": "dd копирует блоки в указанный output. Поэтому в LX6 он используется только с обычным файлом внутри учебной папки и никогда с /dev/sdX.",
+      "topic": "Безопасность dd",
+      "review": "#storage-map",
+      "skill": "safety",
+      "source": "https://koroteev.site/os/2/2-filesystems/",
+      "basis": "source-and-lab"
+    },
+    {
+      "id": "LX6-11",
+      "q": "Как выглядит типичный источник NFS при монтировании?",
+      "options": [
+        "/dev/loop3:ext4",
+        "server:/export/path",
+        "PID:1234",
+        "UUID:/proc"
+      ],
+      "answer": 1,
+      "explain": "Для NFS источник обычно задаётся как server:/export/path, а на клиенте он монтируется в обычную локальную точку дерева каталогов.",
+      "topic": "NFS",
+      "review": "#network-cleanup",
+      "skill": "understanding",
+      "source": "https://man7.org/linux/man-pages/man5/nfs.5.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX6-12",
+      "q": "Какое утверждение о filesystem и partition наиболее корректно?",
+      "options": [
+        "Это всегда одно и то же",
+        "Partition задаёт область диска, а filesystem организует данные; filesystem может находиться и на другом block device, например loop/LVM",
+        "Filesystem существует только на USB",
+        "Partition является каталогом в /home"
+      ],
+      "answer": 1,
+      "explain": "Раздел — один из способов выделить block storage. Файловая система — отдельный уровень организации данных и может быть создана на разных типах block devices.",
+      "topic": "Модель хранилища",
+      "review": "#storage-map",
+      "skill": "conceptual-model",
+      "source": "https://man7.org/linux/man-pages/man8/mount.8.html",
+      "basis": "official-and-lab"
+    }
+  ],
+  "lx7": [
+    {
+      "id": "LX7-01",
+      "q": "Что делает shebang в первой строке исполняемого Bash-сценария?",
+      "options": [
+        "Задаёт пароль для script",
+        "Подсказывает ядру, какой интерпретатор использовать при прямом запуске файла",
+        "Автоматически добавляет файл в PATH",
+        "Делает файл доступным root"
+      ],
+      "answer": 1,
+      "explain": "Shebang вида #!/usr/bin/env bash задаёт интерпретатор для прямого запуска исполняемого файла. При запуске bash script.sh интерпретатор уже выбран явно командой bash.",
+      "topic": "shebang",
+      "review": "#first-script",
+      "skill": "understanding",
+      "source": "https://www.gnu.org/software/bash/manual/html_node/Shell-Scripts.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX7-02",
+      "q": "Почему после chmod +x ./hello.sh может запускаться, а команда hello.sh всё ещё не находиться?",
+      "options": [
+        "chmod удаляет PATH",
+        "Текущий каталог автоматически не обязан входить в PATH; Bash ищет команду по каталогам PATH",
+        "Расширение .sh запрещает поиск",
+        "Bash запускает только файлы из /usr/bin"
+      ],
+      "answer": 1,
+      "explain": "Если в имени команды нет slash, Bash ищет функции, builtins и затем executable files в каталогах PATH. ./hello.sh содержит slash и обращается к файлу напрямую.",
+      "topic": "PATH",
+      "review": "#first-script",
+      "skill": "reasoning",
+      "source": "https://www.gnu.org/software/bash/manual/html_node/Command-Search-and-Execution.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX7-03",
+      "q": "Зачем писать \"$name\", а не $name, когда значение передаётся как один аргумент?",
+      "options": [
+        "Кавычки делают текст root-only",
+        "Двойные кавычки сохраняют результат expansion как один аргумент и предотвращают нежелательное word splitting/globbing",
+        "Кавычки отключают переменные",
+        "Без кавычек Bash всегда завершится с кодом 2"
+      ],
+      "answer": 1,
+      "explain": "Двойные кавычки позволяют expansion переменной, но сохраняют её как единый аргумент. Это особенно важно для значений с пробелами и wildcard-символами.",
+      "topic": "quoting",
+      "review": "#first-script",
+      "skill": "application",
+      "source": "https://www.gnu.org/software/bash/manual/bash.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX7-04",
+      "q": "Что проверяет bash -n script.sh?",
+      "options": [
+        "Выполняет все команды с правами root",
+        "Проверяет синтаксис, не выполняя обычные команды сценария",
+        "Проверяет только права доступа",
+        "Запускает сценарий из cron"
+      ],
+      "answer": 1,
+      "explain": "Опция -n читает команды и проверяет синтаксис без их выполнения. Это полезная ранняя проверка, но она не гарантирует отсутствие логических ошибок.",
+      "topic": "syntax check",
+      "review": "#logic-exit",
+      "skill": "understanding",
+      "source": "https://www.gnu.org/software/bash/manual/html_node/Invoking-Bash.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX7-05",
+      "q": "Как обычно интерпретируется exit status 0 в Unix/Linux?",
+      "options": [
+        "Синтаксическая ошибка",
+        "Успешное завершение",
+        "Процесс обязательно стал daemon",
+        "Файл был изменён"
+      ],
+      "answer": 1,
+      "explain": "По соглашению 0 означает успех, а ненулевое значение сообщает вызывающей стороне об ошибке или особом результате. Конкретные ненулевые коды определяет программа.",
+      "topic": "exit status",
+      "review": "#logic-exit",
+      "skill": "understanding",
+      "source": "https://www.gnu.org/software/bash/manual/html_node/Bourne-Shell-Builtins.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX7-06",
+      "q": "Почему INVALID_EXIT=2 полезнее, чем просто печать строки «неверный режим»?",
+      "options": [
+        "Код 2 увеличивает скорость Bash",
+        "Другой сценарий или cron может машинно проверить ненулевой status, не анализируя человеческий текст",
+        "Код 2 автоматически исправляет параметр",
+        "Он добавляет script в PATH"
+      ],
+      "answer": 1,
+      "explain": "Текст удобен человеку, а exit status — простой машинно-читаемый сигнал. Поэтому автоматизация может ветвиться по успеху/ошибке без разбора текста.",
+      "topic": "automation contracts",
+      "review": "#logic-exit",
+      "skill": "reasoning",
+      "source": "https://www.gnu.org/software/bash/manual/html_node/Bourne-Shell-Builtins.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX7-07",
+      "q": "Что показывает успешный sha256sum -c baseline.sha256?",
+      "options": [
+        "Файл обязательно получен от доверенного автора",
+        "Текущие байты файла совпадают с digest, записанным в baseline-файле",
+        "Файл никогда не менялся в прошлом",
+        "Файл зашифрован"
+      ],
+      "answer": 1,
+      "explain": "Проверка подтверждает соответствие текущего содержимого сохранённому digest. Если злоумышленник может изменить и файл, и baseline, одной checksum недостаточно для доказательства подлинности.",
+      "topic": "SHA-256",
+      "review": "#checksum",
+      "skill": "reasoning",
+      "source": "https://www.gnu.org/software/coreutils/manual/html_node/sha2-utilities.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX7-08",
+      "q": "Почему в локальной LX7 вместо исходного примера MD5 используется SHA-256?",
+      "options": [
+        "MD5 не умеет читать файлы",
+        "Для современной демонстрации integrity SHA-256 имеет значительно более подходящие криптографические свойства; MD5 не следует использовать для защиты от намеренной подделки",
+        "SHA-256 автоматически подписывает файл",
+        "MD5 работает только в Windows"
+      ],
+      "answer": 1,
+      "explain": "MD5 имеет известные collision weaknesses. Для современного учебного примера целостности лучше SHA-256, при этом даже SHA-256 без доверенной baseline или подписи не доказывает происхождение.",
+      "topic": "hash choice",
+      "review": "#checksum",
+      "skill": "security judgment",
+      "source": "https://www.gnu.org/software/coreutils/manual/html_node/sha2-utilities.html",
+      "basis": "official-modernization"
+    },
+    {
+      "id": "LX7-09",
+      "q": "Сколько полей времени стоит перед командой в пользовательской строке crontab?",
+      "options": [
+        "3",
+        "5",
+        "6, потому что обязательно указывается имя пользователя",
+        "8"
+      ],
+      "answer": 1,
+      "explain": "Пользовательский crontab использует пять time/date fields, затем команду. Имя пользователя добавляется в системных crontab-файлах другого формата.",
+      "topic": "cron syntax",
+      "review": "#cron-safe",
+      "skill": "understanding",
+      "source": "https://man7.org/linux/man-pages/man5/crontab.5.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX7-10",
+      "q": "Почему script, который работает вручную, может не сработать из cron?",
+      "options": [
+        "Cron запрещает Bash",
+        "У cron может отличаться окружение/PATH, поэтому полезны абсолютные пути и явное окружение",
+        "Cron удаляет execute bit",
+        "Cron всегда запускает команды от root"
+      ],
+      "answer": 1,
+      "explain": "Cron запускает команды не из вашей интерактивной shell-сессии. Не стоит полагаться на aliases, текущий каталог или интерактивно изменённый PATH.",
+      "topic": "cron environment",
+      "review": "#cron-safe",
+      "skill": "diagnosis",
+      "source": "https://man7.org/linux/man-pages/man5/crontab.5.html",
+      "basis": "official-and-lab"
+    },
+    {
+      "id": "LX7-11",
+      "q": "Почему LX7 добавляет cron-запись между маркерами NSA-LX7-BEGIN/END вместо crontab -r?",
+      "options": [
+        "Маркеры ускоряют cron",
+        "Так можно удалить только учебный блок и сохранить другие пользовательские задания",
+        "Без маркеров cron не запускается",
+        "Маркеры дают root-права"
+      ],
+      "answer": 1,
+      "explain": "crontab -r удаляет весь пользовательский crontab. Маркированный блок позволяет автоматизировать cleanup только ресурсов LX7, не затрагивая существующие задания студента.",
+      "topic": "safe cron management",
+      "review": "#cron-safe",
+      "skill": "safety",
+      "source": "https://man7.org/linux/man-pages/man5/crontab.5.html",
+      "basis": "lab-safety"
+    },
+    {
+      "id": "LX7-12",
+      "q": "Какой вывод лучше всего описывает цель LX7?",
+      "options": [
+        "Запомнить как можно больше однострочных команд",
+        "Научиться превращать ручные действия в повторяемый сценарий с проверяемыми входами, status-кодами, целостностью и безопасным расписанием",
+        "Запускать все scripts через sudo",
+        "Заменить Python на Bash во всех задачах"
+      ],
+      "answer": 1,
+      "explain": "Bash особенно полезен как glue/automation language для системных операций. Ключевой навык — делать небольшие повторяемые процедуры понятными, проверяемыми и безопасно автоматизируемыми.",
+      "topic": "automation model",
+      "review": "#first-script",
+      "skill": "synthesis",
+      "source": "https://www.gnu.org/software/bash/manual/html_node/Shell-Scripts.html",
+      "basis": "official-and-lab"
+    }
+  ]
+}
